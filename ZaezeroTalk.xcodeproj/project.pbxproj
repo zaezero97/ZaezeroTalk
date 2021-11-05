@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9246C22B2E7730D9A60DD731 /* Pods_ZaezeroTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD08845DD055F9BA0FA4ADE2 /* Pods_ZaezeroTalk.framework */; };
 		AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */; };
 		AEB97CF527351C0D00DCDF77 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF427351C0D00DCDF77 /* SceneDelegate.swift */; };
 		AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF627351C0D00DCDF77 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		964E854CFB229A889FFE6908 /* Pods-ZaezeroTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZaezeroTalk.release.xcconfig"; path = "Target Support Files/Pods-ZaezeroTalk/Pods-ZaezeroTalk.release.xcconfig"; sourceTree = "<group>"; };
 		AEB97CEF27351C0D00DCDF77 /* ZaezeroTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZaezeroTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEB97CF427351C0D00DCDF77 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +26,8 @@
 		AEB97CFB27351C0E00DCDF77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AEB97CFE27351C0E00DCDF77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AEB97D0027351C0E00DCDF77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD08845DD055F9BA0FA4ADE2 /* Pods_ZaezeroTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZaezeroTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF96CFFCC2CE85DC4CA2735A /* Pods-ZaezeroTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZaezeroTalk.debug.xcconfig"; path = "Target Support Files/Pods-ZaezeroTalk/Pods-ZaezeroTalk.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9246C22B2E7730D9A60DD731 /* Pods_ZaezeroTalk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AE5D70FA70C4A62EA68D7DF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD08845DD055F9BA0FA4ADE2 /* Pods_ZaezeroTalk.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2D060D9B4FEC74E0A358A0A8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DF96CFFCC2CE85DC4CA2735A /* Pods-ZaezeroTalk.debug.xcconfig */,
+				964E854CFB229A889FFE6908 /* Pods-ZaezeroTalk.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		AEB97CE627351C0D00DCDF77 = {
 			isa = PBXGroup;
 			children = (
 				AEB97CF127351C0D00DCDF77 /* ZaezeroTalk */,
 				AEB97CF027351C0D00DCDF77 /* Products */,
+				2D060D9B4FEC74E0A358A0A8 /* Pods */,
+				0AE5D70FA70C4A62EA68D7DF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AEB97D0327351C0E00DCDF77 /* Build configuration list for PBXNativeTarget "ZaezeroTalk" */;
 			buildPhases = (
+				1DA3D6C7B4D1A61BD2B93D22 /* [CP] Check Pods Manifest.lock */,
 				AEB97CEB27351C0D00DCDF77 /* Sources */,
 				AEB97CEC27351C0D00DCDF77 /* Frameworks */,
 				AEB97CED27351C0D00DCDF77 /* Resources */,
+				0CF56731F2FFEB2ADBEEE832 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0CF56731F2FFEB2ADBEEE832 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZaezeroTalk/Pods-ZaezeroTalk-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZaezeroTalk/Pods-ZaezeroTalk-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZaezeroTalk/Pods-ZaezeroTalk-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1DA3D6C7B4D1A61BD2B93D22 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZaezeroTalk-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AEB97CEB27351C0D00DCDF77 /* Sources */ = {
@@ -284,6 +353,7 @@
 		};
 		AEB97D0427351C0E00DCDF77 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF96CFFCC2CE85DC4CA2735A /* Pods-ZaezeroTalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -312,6 +382,7 @@
 		};
 		AEB97D0527351C0E00DCDF77 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 964E854CFB229A889FFE6908 /* Pods-ZaezeroTalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
