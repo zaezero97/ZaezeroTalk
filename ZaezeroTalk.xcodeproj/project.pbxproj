@@ -10,6 +10,8 @@
 		9246C22B2E7730D9A60DD731 /* Pods_ZaezeroTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD08845DD055F9BA0FA4ADE2 /* Pods_ZaezeroTalk.framework */; };
 		AE524A10273528F60017F770 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE524A0F273528F60017F770 /* UIColor.swift */; };
 		AE6BB5D5273634E600D99462 /* remotConfigDefault.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE6BB5D4273634E600D99462 /* remotConfigDefault.plist */; };
+		AEB1D4E12736DEEB00E1BD4F /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB1D4E02736DEEB00E1BD4F /* LoginViewController.storyboard */; };
+		AEB1D4E32736DEFF00E1BD4F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB1D4E22736DEFF00E1BD4F /* LoginViewController.swift */; };
 		AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */; };
 		AEB97CF527351C0D00DCDF77 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF427351C0D00DCDF77 /* SceneDelegate.swift */; };
 		AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF627351C0D00DCDF77 /* ViewController.swift */; };
@@ -23,6 +25,8 @@
 		964E854CFB229A889FFE6908 /* Pods-ZaezeroTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZaezeroTalk.release.xcconfig"; path = "Target Support Files/Pods-ZaezeroTalk/Pods-ZaezeroTalk.release.xcconfig"; sourceTree = "<group>"; };
 		AE524A0F273528F60017F770 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		AE6BB5D4273634E600D99462 /* remotConfigDefault.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = remotConfigDefault.plist; sourceTree = "<group>"; };
+		AEB1D4E02736DEEB00E1BD4F /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
+		AEB1D4E22736DEFF00E1BD4F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AEB97CEF27351C0D00DCDF77 /* ZaezeroTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZaezeroTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEB97CF427351C0D00DCDF77 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +77,24 @@
 			path = extension;
 			sourceTree = "<group>";
 		};
+		AEB1D4DE2736DEC200E1BD4F /* storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				AEB97CF827351C0D00DCDF77 /* Main.storyboard */,
+				AEB1D4E02736DEEB00E1BD4F /* LoginViewController.storyboard */,
+			);
+			path = storyboard;
+			sourceTree = "<group>";
+		};
+		AEB1D4DF2736DECF00E1BD4F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AEB97CF627351C0D00DCDF77 /* ViewController.swift */,
+				AEB1D4E22736DEFF00E1BD4F /* LoginViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
 		AEB97CE627351C0D00DCDF77 = {
 			isa = PBXGroup;
 			children = (
@@ -94,12 +116,12 @@
 		AEB97CF127351C0D00DCDF77 /* ZaezeroTalk */ = {
 			isa = PBXGroup;
 			children = (
+				AEB1D4DF2736DECF00E1BD4F /* ViewController */,
+				AEB1D4DE2736DEC200E1BD4F /* storyboard */,
 				AE524A0E273528E10017F770 /* extension */,
 				AEB97D0627351F9A00DCDF77 /* GoogleService-Info.plist */,
 				AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */,
 				AEB97CF427351C0D00DCDF77 /* SceneDelegate.swift */,
-				AEB97CF627351C0D00DCDF77 /* ViewController.swift */,
-				AEB97CF827351C0D00DCDF77 /* Main.storyboard */,
 				AEB97CFB27351C0E00DCDF77 /* Assets.xcassets */,
 				AEB97CFD27351C0E00DCDF77 /* LaunchScreen.storyboard */,
 				AEB97D0027351C0E00DCDF77 /* Info.plist */,
@@ -172,6 +194,7 @@
 				AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */,
 				AEB97CFC27351C0E00DCDF77 /* Assets.xcassets in Resources */,
 				AE6BB5D5273634E600D99462 /* remotConfigDefault.plist in Resources */,
+				AEB1D4E12736DEEB00E1BD4F /* LoginViewController.storyboard in Resources */,
 				AEB97CFA27351C0D00DCDF77 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,6 +251,7 @@
 				AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */,
 				AE524A10273528F60017F770 /* UIColor.swift in Sources */,
 				AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */,
+				AEB1D4E32736DEFF00E1BD4F /* LoginViewController.swift in Sources */,
 				AEB97CF527351C0D00DCDF77 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
