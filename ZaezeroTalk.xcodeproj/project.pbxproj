@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9246C22B2E7730D9A60DD731 /* Pods_ZaezeroTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD08845DD055F9BA0FA4ADE2 /* Pods_ZaezeroTalk.framework */; };
-		AE524A0D273523270017F770 /* 8010442_messenger_message_chat_conversation_social media_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE524A0C273523270017F770 /* 8010442_messenger_message_chat_conversation_social media_icon.png */; };
 		AE524A10273528F60017F770 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE524A0F273528F60017F770 /* UIColor.swift */; };
+		AE6BB5D5273634E600D99462 /* remotConfigDefault.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE6BB5D4273634E600D99462 /* remotConfigDefault.plist */; };
 		AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */; };
 		AEB97CF527351C0D00DCDF77 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF427351C0D00DCDF77 /* SceneDelegate.swift */; };
 		AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF627351C0D00DCDF77 /* ViewController.swift */; };
@@ -21,8 +21,8 @@
 
 /* Begin PBXFileReference section */
 		964E854CFB229A889FFE6908 /* Pods-ZaezeroTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZaezeroTalk.release.xcconfig"; path = "Target Support Files/Pods-ZaezeroTalk/Pods-ZaezeroTalk.release.xcconfig"; sourceTree = "<group>"; };
-		AE524A0C273523270017F770 /* 8010442_messenger_message_chat_conversation_social media_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "8010442_messenger_message_chat_conversation_social media_icon.png"; path = "../../../../Downloads/8010442_messenger_message_chat_conversation_social media_icon.png"; sourceTree = "<group>"; };
 		AE524A0F273528F60017F770 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		AE6BB5D4273634E600D99462 /* remotConfigDefault.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = remotConfigDefault.plist; sourceTree = "<group>"; };
 		AEB97CEF27351C0D00DCDF77 /* ZaezeroTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZaezeroTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEB97CF427351C0D00DCDF77 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,9 +101,9 @@
 				AEB97CF627351C0D00DCDF77 /* ViewController.swift */,
 				AEB97CF827351C0D00DCDF77 /* Main.storyboard */,
 				AEB97CFB27351C0E00DCDF77 /* Assets.xcassets */,
-				AE524A0C273523270017F770 /* 8010442_messenger_message_chat_conversation_social media_icon.png */,
 				AEB97CFD27351C0E00DCDF77 /* LaunchScreen.storyboard */,
 				AEB97D0027351C0E00DCDF77 /* Info.plist */,
+				AE6BB5D4273634E600D99462 /* remotConfigDefault.plist */,
 			);
 			path = ZaezeroTalk;
 			sourceTree = "<group>";
@@ -168,10 +168,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE524A0D273523270017F770 /* 8010442_messenger_message_chat_conversation_social media_icon.png in Resources */,
 				AEB97CFF27351C0E00DCDF77 /* LaunchScreen.storyboard in Resources */,
 				AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */,
 				AEB97CFC27351C0E00DCDF77 /* Assets.xcassets in Resources */,
+				AE6BB5D5273634E600D99462 /* remotConfigDefault.plist in Resources */,
 				AEB97CFA27351C0D00DCDF77 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
