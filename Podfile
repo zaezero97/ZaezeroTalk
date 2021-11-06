@@ -9,4 +9,5 @@ target 'ZaezeroTalk' do
 	pod 'SnapKit', '~> 5.0.0'
 	# firebase
 	pod 'Firebase/Analytics'
+  	pod 'Firebase/RemoteConfig'
 end
