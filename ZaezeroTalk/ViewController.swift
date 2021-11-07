@@ -28,9 +28,17 @@ class ViewController: UIViewController {
                 print("Config not fetched")
                 print("Error: \(error?.localizedDescription ?? "No error available.")")
             }
-            print(remoteConfig["app_color"].stringValue)
+            self.becomeWelcome()
         }
        
+    }
+    func becomeWelcome(){
+        
+        let storyboard = UIStoryboard(name: "LoginViewController", bundle: nil)
+        let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
+        
+        loginVC.modalPresentationStyle = .fullScreen
+        self.present(loginVC, animated: true, completion: nil)
     }
 }
 
