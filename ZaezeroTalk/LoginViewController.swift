@@ -31,15 +31,13 @@ class LoginViewController: UIViewController {
         pwdErrorLabelHeight = pwdErrorLabel.heightAnchor.constraint(equalToConstant: 0)
         emailErrorLabelHeight.isActive = true
         pwdErrorLabelHeight.isActive = true
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
         if let color = remoteConfig["app_color"].stringValue{
             loginButton.backgroundColor = UIColor(hex: color)
             signUpButton.backgroundColor = UIColor(hex: color)
         }
     }
+
     @IBAction func clickSignUp(_ sender: Any) {
         let storyboard = UIStoryboard(name: "SignUpViewController", bundle: nil)
         let signUpVC = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
