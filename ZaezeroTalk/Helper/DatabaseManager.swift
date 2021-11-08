@@ -7,11 +7,15 @@
 
 import Foundation
 import FirebaseDatabase
-
-final class DataManager{
-    static let shared = DataManager()
+import FirebaseAuth
+final class DatabaseManager{
+    static let shared = DatabaseManager()
     private let ref = Database.database().reference()
     private init(){
         
+    }
+    
+    func insertUser(user : User){
+        ref.child("Users").child(user.uid).setValue(["name":user.displayName,"email":user.email])
     }
 }

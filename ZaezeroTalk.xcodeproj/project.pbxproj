@@ -22,6 +22,8 @@
 		AEB97CFC27351C0E00DCDF77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEB97CFB27351C0E00DCDF77 /* Assets.xcassets */; };
 		AEB97CFF27351C0E00DCDF77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB97CFD27351C0E00DCDF77 /* LaunchScreen.storyboard */; };
 		AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEB97D0627351F9A00DCDF77 /* GoogleService-Info.plist */; };
+		AEFC6FF3273963C70092E037 /* TabbarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */; };
+		AEFC6FF5273963E80092E037 /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFC6FF4273963E80092E037 /* TabbarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		AEB97CFE27351C0E00DCDF77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AEB97D0027351C0E00DCDF77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEB97D0627351F9A00DCDF77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabbarViewController.storyboard; sourceTree = "<group>"; };
+		AEFC6FF4273963E80092E037 /* TabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		CD08845DD055F9BA0FA4ADE2 /* Pods_ZaezeroTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZaezeroTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF96CFFCC2CE85DC4CA2735A /* Pods-ZaezeroTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZaezeroTalk.debug.xcconfig"; path = "Target Support Files/Pods-ZaezeroTalk/Pods-ZaezeroTalk.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +101,7 @@
 				AEB97CF827351C0D00DCDF77 /* Main.storyboard */,
 				AEB1D4E02736DEEB00E1BD4F /* LoginViewController.storyboard */,
 				AE44D06E2738A7CF007A567A /* SignUpViewController.storyboard */,
+				AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";
@@ -107,6 +112,7 @@
 				AEB97CF627351C0D00DCDF77 /* ViewController.swift */,
 				AEB1D4E22736DEFF00E1BD4F /* LoginViewController.swift */,
 				AE44D06C2738A7B3007A567A /* SignUpViewController.swift */,
+				AEFC6FF4273963E80092E037 /* TabbarViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -208,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEB97CFF27351C0E00DCDF77 /* LaunchScreen.storyboard in Resources */,
+				AEFC6FF3273963C70092E037 /* TabbarViewController.storyboard in Resources */,
 				AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */,
 				AEB97CFC27351C0E00DCDF77 /* Assets.xcassets in Resources */,
 				AE6BB5D5273634E600D99462 /* remotConfigDefault.plist in Resources */,
@@ -266,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEFC6FF5273963E80092E037 /* TabbarViewController.swift in Sources */,
 				AE44D06D2738A7B3007A567A /* SignUpViewController.swift in Sources */,
 				AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */,
 				AE524A10273528F60017F770 /* UIColor.swift in Sources */,

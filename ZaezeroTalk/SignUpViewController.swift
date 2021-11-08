@@ -58,7 +58,7 @@ class SignUpViewController: UIViewController {
         }
         Auth.auth().createUser(withEmail: emailTextField.text!, password: pwdTextField.text!) {
             (result,error) in
-            guard let _ = result , error == nil else {
+            guard let result = result , error == nil else {
                 if let errorCode : AuthErrorCode = AuthErrorCode(rawValue: error!._code){
                     print("-> errorCode -> \(errorCode.rawValue)")
                     if AuthErrorCode.emailAlreadyInUse.rawValue == errorCode.rawValue{
@@ -71,6 +71,16 @@ class SignUpViewController: UIViewController {
                 }
                 return
             }
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+            changeRequest?.displayName = self.nameTextField.text
+            changeRequest?.commitChanges {
+                error in
+                if error != nil {
+                    print("user createProfileChangeRequest error !! \(String(describing: error))")
+                }
+                DatabaseManager.shared.insertUser(user: result.user)
+            }
+    
             self.dismiss(animated: true, completion: nil)
         }
         
@@ -116,7 +126,7 @@ extension SignUpViewController{
     }
     func isMatchedPwd(with checkPassword : String?) -> ValidType{
         guard let checkPassword = checkPassword else { return .invalid }
-
+        
         if checkPassword.isEmpty {
             return .empty
         }

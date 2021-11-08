@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import FirebaseRemoteConfig
+import Firebase
 
 class LoginViewController: UIViewController {
 
@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        try! Auth.auth().signOut()
         
         emailTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
         pwdTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
@@ -41,6 +42,19 @@ class LoginViewController: UIViewController {
         }
     }
 
+    @IBAction func clicklLoginButton(_ sender: Any) {
+        guard let email = emailTextField.text , let password = pwdTextField.text else {
+            return
+        }
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            print(result?.user.email)
+            print(error)
+            let storyboard = UIStoryboard(name: "TabbarViewController", bundle: nil)
+            let TabbarVC = storyboard.instantiateViewController(withIdentifier: "TabbarViewController")
+            TabbarVC.modalPresentationStyle = .fullScreen
+            self.present(TabbarVC, animated: true, completion: nil)
+        }
+    }
     @IBAction func clickSignUp(_ sender: Any) {
         let storyboard = UIStoryboard(name: "SignUpViewController", bundle: nil)
         let signUpVC = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
