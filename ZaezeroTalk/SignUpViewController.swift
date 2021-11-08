@@ -18,19 +18,19 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var pwdErrorLabel: UILabel!
     @IBOutlet weak var pwdCheckErrorLabel: UILabel!
     
-    var heightConstraints = [UILabel : NSLayoutConstraint]()
+    var labelHeightConstraints = [UILabel : NSLayoutConstraint]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        heightConstraints[emailErrorLabel] = emailErrorLabel.heightAnchor.constraint(equalToConstant: 0)
-        heightConstraints[nameErrorLabel] = nameErrorLabel.heightAnchor.constraint(equalToConstant: 0)
-        heightConstraints[pwdErrorLabel] = pwdErrorLabel.heightAnchor.constraint(equalToConstant: 0)
-        heightConstraints[pwdCheckErrorLabel] = pwdCheckErrorLabel.heightAnchor.constraint(equalToConstant: 0)
+        labelHeightConstraints[emailErrorLabel] = emailErrorLabel.heightAnchor.constraint(equalToConstant: 0)
+        labelHeightConstraints[nameErrorLabel] = nameErrorLabel.heightAnchor.constraint(equalToConstant: 0)
+        labelHeightConstraints[pwdErrorLabel] = pwdErrorLabel.heightAnchor.constraint(equalToConstant: 0)
+        labelHeightConstraints[pwdCheckErrorLabel] = pwdCheckErrorLabel.heightAnchor.constraint(equalToConstant: 0)
         
-        heightConstraints[emailErrorLabel]?.isActive = true
-        heightConstraints[nameErrorLabel]?.isActive = true
-        heightConstraints[pwdErrorLabel]?.isActive = true
-        heightConstraints[pwdCheckErrorLabel]?.isActive = true
+        labelHeightConstraints[emailErrorLabel]?.isActive = true
+        labelHeightConstraints[nameErrorLabel]?.isActive = true
+        labelHeightConstraints[pwdErrorLabel]?.isActive = true
+        labelHeightConstraints[pwdCheckErrorLabel]?.isActive = true
         
         confirmButton.layer.cornerRadius = confirmButton.bounds.height / 2
     }
@@ -39,24 +39,24 @@ class SignUpViewController: UIViewController {
     }
     @IBAction func touchConfirmButton(_ sender: Any) {
         if isValidEmail(email: emailTextField.text){
-            heightConstraints[emailErrorLabel]?.isActive = true
+            labelHeightConstraints[emailErrorLabel]?.isActive = true
         }else{
-            heightConstraints[emailErrorLabel]?.isActive = false
+            labelHeightConstraints[emailErrorLabel]?.isActive = false
         }
         if isValidName(name: nameTextField.text){
-            heightConstraints[nameErrorLabel]?.isActive = true
+            labelHeightConstraints[nameErrorLabel]?.isActive = true
         }else{
-            heightConstraints[nameErrorLabel]?.isActive = false
+            labelHeightConstraints[nameErrorLabel]?.isActive = false
         }
         if isValidPassword(password: pwdTextField.text){
-            heightConstraints[pwdErrorLabel]?.isActive = true
+            labelHeightConstraints[pwdErrorLabel]?.isActive = true
         }else{
-            heightConstraints[pwdErrorLabel]?.isActive = false
+            labelHeightConstraints[pwdErrorLabel]?.isActive = false
         }
         if isEqualPassword(with: pwdCheckTextField.text){
-            heightConstraints[pwdCheckErrorLabel]?.isActive = true
+            labelHeightConstraints[pwdCheckErrorLabel]?.isActive = true
         }else{
-            heightConstraints[pwdCheckErrorLabel]?.isActive = false
+            labelHeightConstraints[pwdCheckErrorLabel]?.isActive = false
         }
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()

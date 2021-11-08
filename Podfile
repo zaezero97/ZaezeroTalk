@@ -10,6 +10,7 @@ target 'ZaezeroTalk' do
 	# firebase
 	pod 'Firebase/Analytics'
   	pod 'Firebase/RemoteConfig'
+	pod 'Firebase/Auth'	
 
 	#TextFieldEffects
 	pod 'TextFieldEffects'
