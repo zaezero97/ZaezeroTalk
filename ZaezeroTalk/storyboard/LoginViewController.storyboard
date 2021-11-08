@@ -25,11 +25,11 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HWq-Bi-odE" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="294" width="374" height="45"/>
+                                <rect key="frame" x="20" y="294" width="374" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="TiU-MK-Sd3"/>
+                                    <constraint firstAttribute="height" constant="60" id="TiU-MK-Sd3"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
@@ -41,11 +41,11 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MMn-lh-9Ny" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="393.5" width="374" height="45"/>
+                                <rect key="frame" x="20" y="408.5" width="374" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="Vps-qw-gE9"/>
+                                    <constraint firstAttribute="height" constant="60" id="Vps-qw-gE9"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
@@ -57,26 +57,26 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid email Address." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8j-78-v0f">
-                                <rect key="frame" x="20" y="359" width="374" height="14.5"/>
+                                <rect key="frame" x="20" y="374" width="374" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimum 4 Characters." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24d-Id-xbb">
-                                <rect key="frame" x="20" y="458.5" width="374" height="14.5"/>
+                                <rect key="frame" x="20" y="488.5" width="374" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9y-1n-l9d">
-                                <rect key="frame" x="20" y="493" width="374" height="31"/>
+                                <rect key="frame" x="20" y="523" width="374" height="31"/>
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Login"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hD4-fa-Hkh">
-                                <rect key="frame" x="20" y="544" width="374" height="31"/>
+                                <rect key="frame" x="20" y="574" width="374" height="31"/>
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
@@ -127,10 +127,10 @@
     </scenes>
     <designables>
         <designable name="HWq-Bi-odE">
-            <size key="intrinsicContentSize" width="47" height="25.5"/>
+            <size key="intrinsicContentSize" width="43" height="23"/>
         </designable>
         <designable name="MMn-lh-9Ny">
-            <size key="intrinsicContentSize" width="85" height="25.5"/>
+            <size key="intrinsicContentSize" width="77.5" height="23"/>
         </designable>
     </designables>
     <resources>

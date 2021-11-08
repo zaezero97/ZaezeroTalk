@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
@@ -18,8 +19,9 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var pwdErrorLabel: UILabel!
     @IBOutlet weak var pwdCheckErrorLabel: UILabel!
     
-    var labelHeightConstraints = [UILabel : NSLayoutConstraint]()
-    
+    private var labelHeightConstraints = [UILabel : NSLayoutConstraint]()
+    private var isAllValid = false
+    private let pwdMinLength = 6
     override func viewDidLoad() {
         super.viewDidLoad()
         labelHeightConstraints[emailErrorLabel] = emailErrorLabel.heightAnchor.constraint(equalToConstant: 0)
@@ -33,33 +35,53 @@ class SignUpViewController: UIViewController {
         labelHeightConstraints[pwdCheckErrorLabel]?.isActive = true
         
         confirmButton.layer.cornerRadius = confirmButton.bounds.height / 2
+        
+        emailTextField.delegate = self
+        pwdTextField.delegate = self
+        nameTextField.delegate = self
+        pwdCheckTextField.delegate = self
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true) // 외부 뷰 클릭 시 키보드 내리기
+    }
     @IBAction func touchConfirmButton(_ sender: Any) {
+        isAllValid = true
         if isValidEmail(email: emailTextField.text){
             labelHeightConstraints[emailErrorLabel]?.isActive = true
         }else{
             labelHeightConstraints[emailErrorLabel]?.isActive = false
+            isAllValid = false
         }
         if isValidName(name: nameTextField.text){
             labelHeightConstraints[nameErrorLabel]?.isActive = true
         }else{
             labelHeightConstraints[nameErrorLabel]?.isActive = false
+            isAllValid = false
         }
         if isValidPassword(password: pwdTextField.text){
             labelHeightConstraints[pwdErrorLabel]?.isActive = true
         }else{
             labelHeightConstraints[pwdErrorLabel]?.isActive = false
+            isAllValid = false
         }
         if isEqualPassword(with: pwdCheckTextField.text){
             labelHeightConstraints[pwdCheckErrorLabel]?.isActive = true
         }else{
             labelHeightConstraints[pwdCheckErrorLabel]?.isActive = false
+            isAllValid = false
         }
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
+        }
+        if isAllValid{
+            Auth.auth().createUser(withEmail: emailTextField.text!, password: pwdTextField.text!) {
+                (result,error) in
+                print(result?.user.uid)
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
 }
@@ -75,7 +97,7 @@ extension SignUpViewController{
     }
     func isValidPassword(password: String?) -> Bool{
         if let hasPassword = password {
-            if hasPassword.count < 4 {
+            if hasPassword.count < pwdMinLength {
                 return false
             }
         }
@@ -99,3 +121,10 @@ extension SignUpViewController{
     }
 }
 
+// MARK: - TextField delegate : return 키를 누를 시에 키보드 내리기
+extension SignUpViewController : UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // textField의 현재상태를 포기한다 즉 올라와 있는 상태를 포기 한다.
+        return true
+    }
+}

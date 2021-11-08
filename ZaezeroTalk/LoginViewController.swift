@@ -27,6 +27,9 @@ class LoginViewController: UIViewController {
         emailTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
         pwdTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
         
+        emailTextField.delegate = self
+        pwdTextField.delegate = self
+        
         emailErrorLabelHeight  = emailErrorLabel.heightAnchor.constraint(equalToConstant: 0)
         pwdErrorLabelHeight = pwdErrorLabel.heightAnchor.constraint(equalToConstant: 0)
         emailErrorLabelHeight.isActive = true
