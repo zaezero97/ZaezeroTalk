@@ -24,8 +24,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailTextField.addTarget(self, action: #selector(editTextField), for: .editingChanged)
-        pwdTextField.addTarget(self, action: #selector(editTextField), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
+        pwdTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
         
         emailErrorLabelHeight  = emailErrorLabel.heightAnchor.constraint(equalToConstant: 0)
         pwdErrorLabelHeight = pwdErrorLabel.heightAnchor.constraint(equalToConstant: 0)
@@ -40,10 +40,18 @@ class LoginViewController: UIViewController {
             signUpButton.backgroundColor = UIColor(hex: color)
         }
     }
+    @IBAction func clickSignUp(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "SignUpViewController", bundle: nil)
+        let signUpVC = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
+        present(signUpVC, animated: true, completion: nil)
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true) // 외부 뷰 클릭 시 키보드 내리기
+    }
 }
 // MARK: - textField func
 extension LoginViewController{
-    @objc func editTextField(sender : UITextField){
+    @objc func checkValidText(sender : UITextField){
         if sender == emailTextField{
             if isValidEmail(email: sender.text)
             {
@@ -79,3 +87,12 @@ extension LoginViewController{
         return true
     }
 }
+
+// MARK: - TextField delegate : return 키를 누를 시에 키보드 내리기
+extension LoginViewController : UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // textField의 현재상태를 포기한다 즉 올라와 있는 상태를 포기 한다.
+        return true
+    }
+}
+

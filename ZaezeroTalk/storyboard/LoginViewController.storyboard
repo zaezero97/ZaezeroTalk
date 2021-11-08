@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="loginVC" id="Y6W-OH-hqX" customClass="LoginViewController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="Y6W-OH-hqX" customClass="LoginViewController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,63 +24,60 @@
                                     <constraint firstAttribute="height" constant="100" id="Jr5-f2-JeK"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HWq-Bi-odE" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="294" width="374" height="40"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HWq-Bi-odE" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="20" y="294" width="374" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="TiU-MK-Sd3"/>
+                                    <constraint firstAttribute="height" constant="45" id="TiU-MK-Sd3"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                         <color key="value" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" systemColor="systemRedColor"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MMn-lh-9Ny" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="388.5" width="374" height="40"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MMn-lh-9Ny" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="20" y="393.5" width="374" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Vps-qw-gE9"/>
+                                    <constraint firstAttribute="height" constant="45" id="Vps-qw-gE9"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                         <color key="value" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" systemColor="systemRedColor"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid email Address." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8j-78-v0f">
-                                <rect key="frame" x="20" y="354" width="374" height="14.5"/>
+                                <rect key="frame" x="20" y="359" width="374" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimum 4 Characters." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24d-Id-xbb">
-                                <rect key="frame" x="20" y="448.5" width="374" height="14.5"/>
+                                <rect key="frame" x="20" y="458.5" width="374" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9y-1n-l9d">
-                                <rect key="frame" x="20" y="483" width="374" height="31"/>
+                                <rect key="frame" x="20" y="493" width="374" height="31"/>
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Login"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hD4-fa-Hkh">
-                                <rect key="frame" x="20" y="534" width="374" height="31"/>
+                                <rect key="frame" x="20" y="544" width="374" height="31"/>
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Sign Up"/>
+                                <connections>
+                                    <action selector="clickSignUp:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="bvh-WK-0lf"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -122,6 +119,14 @@
             <point key="canvasLocation" x="131.8840579710145" y="45.535714285714285"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="HWq-Bi-odE">
+            <size key="intrinsicContentSize" width="47" height="25.5"/>
+        </designable>
+        <designable name="MMn-lh-9Ny">
+            <size key="intrinsicContentSize" width="85" height="25.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="splashImage" width="4096" height="4096"/>
         <systemColor name="labelColor">
