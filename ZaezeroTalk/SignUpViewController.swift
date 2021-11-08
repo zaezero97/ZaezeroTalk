@@ -29,8 +29,10 @@ class SignUpViewController: UIViewController {
     private var labelHeightConstraints = [UILabel : NSLayoutConstraint]()
     private let pwdMinLength = 6
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         labelHeightConstraints[emailErrorLabel] = emailErrorLabel.heightAnchor.constraint(equalToConstant: 0)
         labelHeightConstraints[nameErrorLabel] = nameErrorLabel.heightAnchor.constraint(equalToConstant: 0)
         labelHeightConstraints[pwdErrorLabel] = pwdErrorLabel.heightAnchor.constraint(equalToConstant: 0)
@@ -49,6 +51,7 @@ class SignUpViewController: UIViewController {
         labelHeightConstraints[pwdCheckErrorLabel]?.isActive = true
         
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true) // 외부 뷰 클릭 시 키보드 내리기
     }

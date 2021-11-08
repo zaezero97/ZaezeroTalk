@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 class LoginViewController: UIViewController {
-
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var pwdTextField: UITextField!
     @IBOutlet weak var pwdErrorLabel: UILabel!
@@ -41,7 +41,17 @@ class LoginViewController: UIViewController {
             signUpButton.backgroundColor = UIColor(hex: color)
         }
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Auth.auth().addStateDidChangeListener{ (auth, user) in
+            if user != nil{
+                let storyboard = UIStoryboard(name: "TabbarViewController", bundle: nil)
+                let TabbarVC = storyboard.instantiateViewController(withIdentifier: "TabbarViewController")
+                TabbarVC.modalPresentationStyle = .fullScreen
+                self.present(TabbarVC, animated: true, completion: nil)
+            }
+        }
+    }
     @IBAction func clicklLoginButton(_ sender: Any) {
         guard let email = emailTextField.text , let password = pwdTextField.text else {
             return
@@ -49,10 +59,6 @@ class LoginViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             print(result?.user.email)
             print(error)
-            let storyboard = UIStoryboard(name: "TabbarViewController", bundle: nil)
-            let TabbarVC = storyboard.instantiateViewController(withIdentifier: "TabbarViewController")
-            TabbarVC.modalPresentationStyle = .fullScreen
-            self.present(TabbarVC, animated: true, completion: nil)
         }
     }
     @IBAction func clickSignUp(_ sender: Any) {
