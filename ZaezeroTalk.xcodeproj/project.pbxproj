@@ -25,6 +25,8 @@
 		AEBE6BFB2739F61B008B0B61 /* FriendListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEBE6BFA2739F61B008B0B61 /* FriendListViewController.storyboard */; };
 		AEBE6BFD2739F630008B0B61 /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE6BFC2739F630008B0B61 /* FriendListViewController.swift */; };
 		AEBE6C002739FCC9008B0B61 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE6BFF2739FCC9008B0B61 /* UserModel.swift */; };
+		AEBE6C04273A4AED008B0B61 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE6C02273A4AED008B0B61 /* ProfileCell.swift */; };
+		AEBE6C05273A4AED008B0B61 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEBE6C03273A4AED008B0B61 /* ProfileCell.xib */; };
 		AEFC6FF3273963C70092E037 /* TabbarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */; };
 		AEFC6FF5273963E80092E037 /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFC6FF4273963E80092E037 /* TabbarViewController.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +52,8 @@
 		AEBE6BFA2739F61B008B0B61 /* FriendListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FriendListViewController.storyboard; sourceTree = "<group>"; };
 		AEBE6BFC2739F630008B0B61 /* FriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
 		AEBE6BFF2739FCC9008B0B61 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		AEBE6C02273A4AED008B0B61 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		AEBE6C03273A4AED008B0B61 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
 		AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabbarViewController.storyboard; sourceTree = "<group>"; };
 		AEFC6FF4273963E80092E037 /* TabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		CD08845DD055F9BA0FA4ADE2 /* Pods_ZaezeroTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZaezeroTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,6 +150,7 @@
 		AEB97CF127351C0D00DCDF77 /* ZaezeroTalk */ = {
 			isa = PBXGroup;
 			children = (
+				AEBE6C01273A4AB4008B0B61 /* View */,
 				AEBE6BFE2739FCBE008B0B61 /* Model */,
 				AE15B7272738E801008AD434 /* Helper */,
 				AEB1D4DF2736DECF00E1BD4F /* ViewController */,
@@ -168,6 +173,15 @@
 				AEBE6BFF2739FCC9008B0B61 /* UserModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		AEBE6C01273A4AB4008B0B61 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AEBE6C02273A4AED008B0B61 /* ProfileCell.swift */,
+				AEBE6C03273A4AED008B0B61 /* ProfileCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +253,7 @@
 				AE44D06F2738A7CF007A567A /* SignUpViewController.storyboard in Resources */,
 				AEB1D4E12736DEEB00E1BD4F /* LoginViewController.storyboard in Resources */,
 				AEB97CFA27351C0D00DCDF77 /* Main.storyboard in Resources */,
+				AEBE6C05273A4AED008B0B61 /* ProfileCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +309,7 @@
 				AEFC6FF5273963E80092E037 /* TabbarViewController.swift in Sources */,
 				AE44D06D2738A7B3007A567A /* SignUpViewController.swift in Sources */,
 				AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */,
+				AEBE6C04273A4AED008B0B61 /* ProfileCell.swift in Sources */,
 				AE524A10273528F60017F770 /* UIColor.swift in Sources */,
 				AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */,
 				AEB1D4E32736DEFF00E1BD4F /* LoginViewController.swift in Sources */,
