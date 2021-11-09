@@ -17,23 +17,24 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sfn-uF-iJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1080" y="-133"/>
+            <point key="canvasLocation" x="1066" y="-129"/>
         </scene>
-        <!--sdfas-->
+        <!--12312312-->
         <scene sceneID="UdL-An-K0I">
             <objects>
-                <viewController id="Wb3-Ms-cnn" sceneMemberID="viewController">
+                <viewController id="Wb3-Ms-cnn" customClass="aViewController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rkJ-Fa-pKV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="924-Y4-Oaa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="sdfas" id="MkH-W6-tUn"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="Yxt-c3-sSK"/>
+                    <navigationItem key="navigationItem" title="12312312" largeTitleDisplayMode="always" id="Sde-fs-nA2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5l-Pp-lD0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1236" y="432"/>
+            <point key="canvasLocation" x="1486" y="444"/>
         </scene>
         <!--Tabbar View Controller-->
         <scene sceneID="tcg-hn-1uN">
@@ -48,7 +49,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="LCr-EN-9Uw" kind="relationship" relationship="viewControllers" id="SL0-wa-Owo"/>
-                        <segue destination="Wb3-Ms-cnn" kind="relationship" relationship="viewControllers" id="Zml-P6-TGN"/>
+                        <segue destination="Wb3-Ms-cnn" kind="relationship" relationship="viewControllers" id="nf5-jl-a7u"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2E-ct-vta" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

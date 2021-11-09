@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 class FriendListViewController: UIViewController {
 
+    
     @IBOutlet weak var friendListTableView: UITableView!
     var Friends = [UserModel]()
     var userInfo : UserModel?
@@ -16,7 +17,6 @@ class FriendListViewController: UIViewController {
         super.viewDidLoad()
         
         friendListTableView.register(UINib(nibName: "ProfileCell", bundle: nil), forCellReuseIdentifier: "ProfileCell")
-        
         
         friendListTableView.dataSource = self
         friendListTableView.delegate = self
