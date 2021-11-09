@@ -57,13 +57,13 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid email Address." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8j-78-v0f">
-                                <rect key="frame" x="20" y="374" width="374" height="14.5"/>
+                                <rect key="frame" x="40" y="374" width="334" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimum 6 Characters." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24d-Id-xbb">
-                                <rect key="frame" x="20" y="488.5" width="374" height="15"/>
+                                <rect key="frame" x="40" y="488.5" width="334" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
@@ -96,20 +96,20 @@
                             <constraint firstItem="hD4-fa-Hkh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="2w2-Uf-0wW"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="MMn-lh-9Ny" secondAttribute="trailing" constant="40" id="5zR-wq-7Lp"/>
                             <constraint firstItem="Bpf-ct-IoC" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="9ch-UV-lcT"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Z8j-78-v0f" secondAttribute="trailing" constant="20" id="AXk-uq-t7M"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Z8j-78-v0f" secondAttribute="trailing" constant="40" id="AXk-uq-t7M"/>
                             <constraint firstItem="MMn-lh-9Ny" firstAttribute="top" secondItem="Z8j-78-v0f" secondAttribute="bottom" constant="20" id="EWs-BG-qin"/>
                             <constraint firstItem="Bpf-ct-IoC" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="100" id="GUR-Sw-j0i"/>
                             <constraint firstItem="24d-Id-xbb" firstAttribute="top" secondItem="MMn-lh-9Ny" secondAttribute="bottom" constant="20" id="HMH-CL-LTj"/>
                             <constraint firstItem="hD4-fa-Hkh" firstAttribute="top" secondItem="G9y-1n-l9d" secondAttribute="bottom" constant="20" id="Nfe-r1-dOo"/>
-                            <constraint firstItem="Z8j-78-v0f" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="QLa-Hh-uUc"/>
+                            <constraint firstItem="Z8j-78-v0f" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="QLa-Hh-uUc"/>
                             <constraint firstItem="HWq-Bi-odE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="QQJ-Rl-7Z0"/>
                             <constraint firstItem="MMn-lh-9Ny" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="ab5-JF-S5h"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="G9y-1n-l9d" secondAttribute="trailing" constant="40" id="keR-lR-Ute"/>
                             <constraint firstItem="G9y-1n-l9d" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="lEw-tC-527"/>
                             <constraint firstItem="Z8j-78-v0f" firstAttribute="top" secondItem="HWq-Bi-odE" secondAttribute="bottom" constant="20" id="lLK-T5-8yb"/>
-                            <constraint firstItem="24d-Id-xbb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="q9E-J1-KhU"/>
+                            <constraint firstItem="24d-Id-xbb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="q9E-J1-KhU"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hD4-fa-Hkh" secondAttribute="trailing" constant="40" id="tB9-Oo-RKa"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="24d-Id-xbb" secondAttribute="trailing" constant="20" id="uwz-lo-Cs7"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="24d-Id-xbb" secondAttribute="trailing" constant="40" id="uwz-lo-Cs7"/>
                             <constraint firstItem="HWq-Bi-odE" firstAttribute="top" secondItem="Bpf-ct-IoC" secondAttribute="bottom" constant="50" id="xWq-sl-S6q"/>
                             <constraint firstItem="G9y-1n-l9d" firstAttribute="top" secondItem="24d-Id-xbb" secondAttribute="bottom" constant="20" id="zP2-vo-bGb"/>
                         </constraints>
