@@ -9,42 +9,46 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
-        <scene sceneID="s0d-6b-0kx">
+        <!--FriendListViewController-->
+        <scene sceneID="bQW-4q-Wk5">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                <viewControllerPlaceholder storyboardName="FriendListViewController" referencedIdentifier="FriendListViewController" id="LCr-EN-9Uw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" id="TF6-Tq-mLC"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sfn-uF-iJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1080" y="-133"/>
+        </scene>
+        <!--sdfas-->
+        <scene sceneID="UdL-An-K0I">
+            <objects>
+                <viewController id="Wb3-Ms-cnn" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rkJ-Fa-pKV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="메인 화면" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMk-JJ-REm">
-                                <rect key="frame" x="141" y="257" width="133" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <viewLayoutGuide key="safeArea" id="924-Y4-Oaa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="HCE-pz-cGP"/>
+                    <tabBarItem key="tabBarItem" title="sdfas" id="MkH-W6-tUn"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i5l-Pp-lD0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.0289855072465" y="62.946428571428569"/>
+            <point key="canvasLocation" x="1236" y="432"/>
         </scene>
         <!--Tabbar View Controller-->
         <scene sceneID="tcg-hn-1uN">
             <objects>
                 <tabBarController storyboardIdentifier="TabbarViewController" automaticallyAdjustsScrollViewInsets="NO" id="MIj-l0-2Av" customClass="TabbarViewController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Jz-VG-Rqe">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="viewControllers" id="yvL-o2-ks0"/>
+                        <segue destination="LCr-EN-9Uw" kind="relationship" relationship="viewControllers" id="SL0-wa-Owo"/>
+                        <segue destination="Wb3-Ms-cnn" kind="relationship" relationship="viewControllers" id="Zml-P6-TGN"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2E-ct-vta" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -22,6 +22,9 @@
 		AEB97CFC27351C0E00DCDF77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEB97CFB27351C0E00DCDF77 /* Assets.xcassets */; };
 		AEB97CFF27351C0E00DCDF77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB97CFD27351C0E00DCDF77 /* LaunchScreen.storyboard */; };
 		AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEB97D0627351F9A00DCDF77 /* GoogleService-Info.plist */; };
+		AEBE6BFB2739F61B008B0B61 /* FriendListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEBE6BFA2739F61B008B0B61 /* FriendListViewController.storyboard */; };
+		AEBE6BFD2739F630008B0B61 /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE6BFC2739F630008B0B61 /* FriendListViewController.swift */; };
+		AEBE6C002739FCC9008B0B61 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE6BFF2739FCC9008B0B61 /* UserModel.swift */; };
 		AEFC6FF3273963C70092E037 /* TabbarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */; };
 		AEFC6FF5273963E80092E037 /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFC6FF4273963E80092E037 /* TabbarViewController.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +47,9 @@
 		AEB97CFE27351C0E00DCDF77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AEB97D0027351C0E00DCDF77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEB97D0627351F9A00DCDF77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AEBE6BFA2739F61B008B0B61 /* FriendListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FriendListViewController.storyboard; sourceTree = "<group>"; };
+		AEBE6BFC2739F630008B0B61 /* FriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
+		AEBE6BFF2739FCC9008B0B61 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabbarViewController.storyboard; sourceTree = "<group>"; };
 		AEFC6FF4273963E80092E037 /* TabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		CD08845DD055F9BA0FA4ADE2 /* Pods_ZaezeroTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZaezeroTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +108,7 @@
 				AEB1D4E02736DEEB00E1BD4F /* LoginViewController.storyboard */,
 				AE44D06E2738A7CF007A567A /* SignUpViewController.storyboard */,
 				AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */,
+				AEBE6BFA2739F61B008B0B61 /* FriendListViewController.storyboard */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";
@@ -113,6 +120,7 @@
 				AEB1D4E22736DEFF00E1BD4F /* LoginViewController.swift */,
 				AE44D06C2738A7B3007A567A /* SignUpViewController.swift */,
 				AEFC6FF4273963E80092E037 /* TabbarViewController.swift */,
+				AEBE6BFC2739F630008B0B61 /* FriendListViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -138,6 +146,7 @@
 		AEB97CF127351C0D00DCDF77 /* ZaezeroTalk */ = {
 			isa = PBXGroup;
 			children = (
+				AEBE6BFE2739FCBE008B0B61 /* Model */,
 				AE15B7272738E801008AD434 /* Helper */,
 				AEB1D4DF2736DECF00E1BD4F /* ViewController */,
 				AEB1D4DE2736DEC200E1BD4F /* storyboard */,
@@ -151,6 +160,14 @@
 				AE6BB5D4273634E600D99462 /* remotConfigDefault.plist */,
 			);
 			path = ZaezeroTalk;
+			sourceTree = "<group>";
+		};
+		AEBE6BFE2739FCBE008B0B61 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AEBE6BFF2739FCC9008B0B61 /* UserModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,6 +233,7 @@
 				AEB97CFF27351C0E00DCDF77 /* LaunchScreen.storyboard in Resources */,
 				AEFC6FF3273963C70092E037 /* TabbarViewController.storyboard in Resources */,
 				AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */,
+				AEBE6BFB2739F61B008B0B61 /* FriendListViewController.storyboard in Resources */,
 				AEB97CFC27351C0E00DCDF77 /* Assets.xcassets in Resources */,
 				AE6BB5D5273634E600D99462 /* remotConfigDefault.plist in Resources */,
 				AE44D06F2738A7CF007A567A /* SignUpViewController.storyboard in Resources */,
@@ -279,7 +297,9 @@
 				AE524A10273528F60017F770 /* UIColor.swift in Sources */,
 				AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */,
 				AEB1D4E32736DEFF00E1BD4F /* LoginViewController.swift in Sources */,
+				AEBE6BFD2739F630008B0B61 /* FriendListViewController.swift in Sources */,
 				AEB97CF527351C0D00DCDF77 /* SceneDelegate.swift in Sources */,
+				AEBE6C002739FCC9008B0B61 /* UserModel.swift in Sources */,
 				AE15B7292738E815008AD434 /* DatabaseManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

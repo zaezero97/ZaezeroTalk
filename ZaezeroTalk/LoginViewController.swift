@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        try! Auth.auth().signOut()
+        try! Auth.auth().signOut() //test 코드 실제에선 자동 로그인으로 구현할 생각
         
         emailTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
         pwdTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
@@ -92,8 +92,8 @@ extension LoginViewController{
         }
     }
     
-    func isValidEmail(email:String?)->Bool{
-        guard email != nil else { return false}
+    func isValidEmail(email:String?) -> Bool{
+        guard email != nil else { return false }
         
         let regEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let pred = NSPredicate(format: "SELF MATCHES %@", regEx)
