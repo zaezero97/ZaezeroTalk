@@ -29,7 +29,11 @@ class DatabaseManager{
         })
     }
     func fetchCurrentUserInfo(uid: String ,with completion : @escaping (DataSnapshot) -> Void) {
-        
         ref.child("Users/\(uid)").observeSingleEvent(of: .value, with: completion)
+    }
+    
+    func fetchUserInfoByEmail(email : String ,completion : @escaping (DataSnapshot) -> Void){
+        let query = ref.child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email)
+        query.observeSingleEvent(of: .value,with: completion)
     }
 }

@@ -19,24 +19,41 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvK-iS-Nbt">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <navigationItem id="3dQ-ei-0J4"/>
+                                    <navigationItem id="3dQ-ei-0J4">
+                                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="SWX-VM-1rb">
+                                            <connections>
+                                                <action selector="clickXButton:" destination="Y6W-OH-hqX" id="EVQ-IM-eeM"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
+                                <navigationBarAppearance key="standardAppearance">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </navigationBarAppearance>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZXP-Ah-vkg">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ZXP-Ah-vkg" secondAttribute="trailing" id="Eld-RH-Q5h"/>
+                            <constraint firstItem="ZXP-Ah-vkg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Go8-7y-0HJ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ZXP-Ah-vkg" secondAttribute="bottom" id="Oo0-4O-CIs"/>
                             <constraint firstItem="LvK-iS-Nbt" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="XUT-63-Sn5"/>
                             <constraint firstItem="LvK-iS-Nbt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="lKM-hu-UzV"/>
                             <constraint firstItem="LvK-iS-Nbt" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="pOh-jo-4ft"/>
+                            <constraint firstItem="ZXP-Ah-vkg" firstAttribute="top" secondItem="LvK-iS-Nbt" secondAttribute="bottom" id="tG5-q1-Yt1"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="customNavigationBar" destination="LvK-iS-Nbt" id="ggs-zi-SLm"/>
                         <outlet property="customNavigationItem" destination="3dQ-ei-0J4" id="3lH-tN-evu"/>
+                        <outlet property="textFieldTableView" destination="ZXP-Ah-vkg" id="2Pl-x7-QUS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -45,6 +62,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

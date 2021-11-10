@@ -57,8 +57,8 @@ class LoginViewController: UIViewController {
             return
         }
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-            print(result?.user.email)
-            print(error)
+            print("Login :", result?.user.email)
+            print("Login :", error)
         }
     }
     @IBAction func clickSignUp(_ sender: Any) {
