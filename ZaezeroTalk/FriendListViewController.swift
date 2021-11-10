@@ -12,7 +12,14 @@ class FriendListViewController: UIViewController {
     
     @IBOutlet weak var friendListTableView: UITableView!
     var Friends = [UserModel]()
-    var userInfo : UserModel?
+    var userInfo: UserModel?
+    lazy var titleLabel: UILabel = {
+       let label = UILabel()
+        label.text = "친구"
+        label.font = .systemFont(ofSize: 25, weight: .bold)
+        label.textAlignment = .left
+        return label
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +27,7 @@ class FriendListViewController: UIViewController {
         
         friendListTableView.dataSource = self
         friendListTableView.delegate = self
-        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         
         if let currentUser = Auth.auth().currentUser  {
             let userInfo = DatabaseManager.shared.fetchCurrentUserInfo(uid: currentUser.uid, with: {
@@ -48,6 +55,13 @@ class FriendListViewController: UIViewController {
         }
         
         
+    }
+    @IBAction func clickAddFriendButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "AddFriendViewController", bundle: nil)
+        let addFriendVC = storyboard.instantiateViewController(withIdentifier: "AddFriendViewController") as! AddFriendViewController
+        
+        addFriendVC.myEmail = userInfo?.email ?? ""
+        navigationController?.pushViewController(addFriendVC, animated: true)
     }
 }
 

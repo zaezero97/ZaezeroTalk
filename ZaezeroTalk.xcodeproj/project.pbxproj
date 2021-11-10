@@ -13,6 +13,8 @@
 		AE44D06F2738A7CF007A567A /* SignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE44D06E2738A7CF007A567A /* SignUpViewController.storyboard */; };
 		AE524A10273528F60017F770 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE524A0F273528F60017F770 /* UIColor.swift */; };
 		AE6BB5D5273634E600D99462 /* remotConfigDefault.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE6BB5D4273634E600D99462 /* remotConfigDefault.plist */; };
+		AEAF93FD273B530900BE2FF1 /* AddFriendViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAF93FC273B530900BE2FF1 /* AddFriendViewController.storyboard */; };
+		AEAF93FF273B531700BE2FF1 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */; };
 		AEB1D4E12736DEEB00E1BD4F /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB1D4E02736DEEB00E1BD4F /* LoginViewController.storyboard */; };
 		AEB1D4E32736DEFF00E1BD4F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB1D4E22736DEFF00E1BD4F /* LoginViewController.swift */; };
 		AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */; };
@@ -38,6 +40,8 @@
 		AE44D06E2738A7CF007A567A /* SignUpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUpViewController.storyboard; sourceTree = "<group>"; };
 		AE524A0F273528F60017F770 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		AE6BB5D4273634E600D99462 /* remotConfigDefault.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = remotConfigDefault.plist; sourceTree = "<group>"; };
+		AEAF93FC273B530900BE2FF1 /* AddFriendViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddFriendViewController.storyboard; sourceTree = "<group>"; };
+		AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		AEB1D4E02736DEEB00E1BD4F /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
 		AEB1D4E22736DEFF00E1BD4F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AEB97CEF27351C0D00DCDF77 /* ZaezeroTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZaezeroTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +117,7 @@
 				AE44D06E2738A7CF007A567A /* SignUpViewController.storyboard */,
 				AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */,
 				AEBE6BFA2739F61B008B0B61 /* FriendListViewController.storyboard */,
+				AEAF93FC273B530900BE2FF1 /* AddFriendViewController.storyboard */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 				AE44D06C2738A7B3007A567A /* SignUpViewController.swift */,
 				AEFC6FF4273963E80092E037 /* TabbarViewController.swift */,
 				AEBE6BFC2739F630008B0B61 /* FriendListViewController.swift */,
+				AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -249,6 +255,7 @@
 				AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */,
 				AEBE6BFB2739F61B008B0B61 /* FriendListViewController.storyboard in Resources */,
 				AEB97CFC27351C0E00DCDF77 /* Assets.xcassets in Resources */,
+				AEAF93FD273B530900BE2FF1 /* AddFriendViewController.storyboard in Resources */,
 				AE6BB5D5273634E600D99462 /* remotConfigDefault.plist in Resources */,
 				AE44D06F2738A7CF007A567A /* SignUpViewController.storyboard in Resources */,
 				AEB1D4E12736DEEB00E1BD4F /* LoginViewController.storyboard in Resources */,
@@ -306,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEAF93FF273B531700BE2FF1 /* AddFriendViewController.swift in Sources */,
 				AEFC6FF5273963E80092E037 /* TabbarViewController.swift in Sources */,
 				AE44D06D2738A7B3007A567A /* SignUpViewController.swift in Sources */,
 				AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */,
