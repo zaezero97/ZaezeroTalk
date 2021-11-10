@@ -10,6 +10,8 @@ import Firebase
 class FriendListViewController: UIViewController {
 
     
+    @IBOutlet weak var customNavigationBar: UINavigationBar!
+    @IBOutlet weak var customNavigationItem: UINavigationItem!
     @IBOutlet weak var friendListTableView: UITableView!
     var Friends = [UserModel]()
     var userInfo: UserModel?
@@ -27,7 +29,8 @@ class FriendListViewController: UIViewController {
         
         friendListTableView.dataSource = self
         friendListTableView.delegate = self
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
+        customNavigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
+        
         
         if let currentUser = Auth.auth().currentUser  {
             let userInfo = DatabaseManager.shared.fetchCurrentUserInfo(uid: currentUser.uid, with: {
@@ -61,7 +64,8 @@ class FriendListViewController: UIViewController {
         let addFriendVC = storyboard.instantiateViewController(withIdentifier: "AddFriendViewController") as! AddFriendViewController
         
         addFriendVC.myEmail = userInfo?.email ?? ""
-        navigationController?.pushViewController(addFriendVC, animated: true)
+        addFriendVC.modalPresentationStyle = .fullScreen
+        present(addFriendVC, animated: true, completion: nil)
     }
 }
 
@@ -90,4 +94,14 @@ extension FriendListViewController: UITableViewDataSource{
 }
 extension FriendListViewController: UITableViewDelegate{
     
+}
+
+extension FriendListViewController{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 0 {
+            customNavigationBar.standardAppearance.shadowColor = .gray
+        }else{
+            customNavigationBar.standardAppearance.shadowColor = .white
+        }
+    }
 }

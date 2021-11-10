@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--FriendListNaviViewController-->
+        <!--FriendListViewController-->
         <scene sceneID="bQW-4q-Wk5">
             <objects>
-                <viewControllerPlaceholder storyboardName="FriendListViewController" referencedIdentifier="FriendListNaviViewController" id="LCr-EN-9Uw" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="FriendListViewController" referencedIdentifier="FriendListViewController" id="LCr-EN-9Uw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="TF6-Tq-mLC"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sfn-uF-iJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

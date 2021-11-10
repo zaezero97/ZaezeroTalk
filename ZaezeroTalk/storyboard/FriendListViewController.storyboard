@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jvn-as-ySa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -18,33 +18,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIO-VR-quF">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <sections/>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7It-Hd-sPc">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem id="ehs-li-chB">
+                                        <rightBarButtonItems>
+                                            <barButtonItem image="gear.circle" catalog="system" id="B88-ct-76f"/>
+                                            <barButtonItem image="person.crop.circle.badge.plus.fill" catalog="system" id="zj0-ND-Ne9">
+                                                <connections>
+                                                    <action selector="clickAddFriendButton:" destination="Y6W-OH-hqX" id="pun-tW-QHC"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem image="magnifyingglass" catalog="system" id="yqB-eD-VsZ"/>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="standardAppearance">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </navigationBarAppearance>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="7It-Hd-sPc" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="3h4-YC-ajd"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="RIO-VR-quF" secondAttribute="trailing" id="Jy6-ZT-dAG"/>
                             <constraint firstItem="RIO-VR-quF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Muj-kd-hwb"/>
-                            <constraint firstItem="RIO-VR-quF" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="xbw-jU-cej"/>
+                            <constraint firstItem="7It-Hd-sPc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="X3u-J2-lsx"/>
+                            <constraint firstAttribute="trailing" secondItem="7It-Hd-sPc" secondAttribute="trailing" id="nxt-Ze-xdl"/>
+                            <constraint firstItem="RIO-VR-quF" firstAttribute="top" secondItem="7It-Hd-sPc" secondAttribute="bottom" id="xbw-jU-cej"/>
                             <constraint firstItem="RIO-VR-quF" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="z0k-Sd-wOA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="CEz-WY-2js">
-                        <rightBarButtonItems>
-                            <barButtonItem image="gear.circle" catalog="system" id="I5I-4h-V6k"/>
-                            <barButtonItem image="person.badge.plus.fill" catalog="system" id="z7Y-gR-Vg1">
-                                <connections>
-                                    <action selector="clickAddFriendButton:" destination="Y6W-OH-hqX" id="zx5-PA-4og"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="magnifyingglass" catalog="system" id="2vz-zI-qC9"/>
-                        </rightBarButtonItems>
-                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="customNavigationBar" destination="7It-Hd-sPc" id="0Ld-wL-nrz"/>
+                        <outlet property="customNavigationItem" destination="ehs-li-chB" id="c7d-p2-GAf"/>
                         <outlet property="friendListTableView" destination="RIO-VR-quF" id="dxH-6f-QP7"/>
                     </connections>
                 </viewController>
@@ -52,29 +66,11 @@
             </objects>
             <point key="canvasLocation" x="2968.115942028986" y="91.741071428571431"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="pYj-AR-bHt">
-            <objects>
-                <navigationController storyboardIdentifier="FriendListNaviViewController" automaticallyAdjustsScrollViewInsets="NO" id="jvn-as-ySa" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n6k-3W-T8w">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="MG7-vv-dct"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hqR-ss-1Ps" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2057.971014492754" y="91.741071428571431"/>
-        </scene>
     </scenes>
     <resources>
         <image name="gear.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="person.badge.plus.fill" catalog="system" width="128" height="124"/>
+        <image name="person.crop.circle.badge.plus.fill" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

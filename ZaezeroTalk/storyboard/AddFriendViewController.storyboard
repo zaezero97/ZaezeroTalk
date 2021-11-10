@@ -16,9 +16,28 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvK-iS-Nbt">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem id="3dQ-ei-0J4"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="LvK-iS-Nbt" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="XUT-63-Sn5"/>
+                            <constraint firstItem="LvK-iS-Nbt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="lKM-hu-UzV"/>
+                            <constraint firstItem="LvK-iS-Nbt" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="pOh-jo-4ft"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="customNavigationBar" destination="LvK-iS-Nbt" id="ggs-zi-SLm"/>
+                        <outlet property="customNavigationItem" destination="3dQ-ei-0J4" id="3lH-tN-evu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
