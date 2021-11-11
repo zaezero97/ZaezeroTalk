@@ -7,55 +7,61 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var pwdTextField: UITextField!
-    @IBOutlet weak var pwdErrorLabel: UILabel!
-    @IBOutlet weak var emailErrorLabel: UILabel!
+    @IBOutlet weak var emailTextField: UITextField! {
+        didSet {
+            emailTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
+            emailTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var pwdTextField: UITextField! {
+        didSet {
+            pwdTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
+            pwdTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var pwdErrorLabel: UILabel! {
+        didSet {
+            pwdErrorLabelHeight = pwdErrorLabel.heightAnchor.constraint(equalToConstant: 0)
+            pwdErrorLabelHeight.isActive = true
+        }
+    }
+    @IBOutlet weak var emailErrorLabel: UILabel! {
+        didSet {
+            emailErrorLabelHeight  = emailErrorLabel.heightAnchor.constraint(equalToConstant: 0)
+            emailErrorLabelHeight.isActive = true
+        }
+    }
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
     let remoteConfig = RemoteConfig.remoteConfig()
     var emailErrorLabelHeight : NSLayoutConstraint!
     var pwdErrorLabelHeight : NSLayoutConstraint!
-    
+    lazy var indicator: NVActivityIndicatorView = {
+        let indicator = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 75, height: 75),
+                                                type: .ballRotateChase,
+                                            color: .black,
+                                            padding: 0)
+        self.view.addSubview(indicator)
+        indicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        return indicator
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         try! Auth.auth().signOut() //test 코드 실제에선 자동 로그인으로 구현할 생각
-        
-        emailTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
-        pwdTextField.addTarget(self, action: #selector(checkValidText), for: .editingChanged)
-        
-        emailTextField.delegate = self
-        pwdTextField.delegate = self
-        
-        emailErrorLabelHeight  = emailErrorLabel.heightAnchor.constraint(equalToConstant: 0)
-        pwdErrorLabelHeight = pwdErrorLabel.heightAnchor.constraint(equalToConstant: 0)
-        emailErrorLabelHeight.isActive = true
-        pwdErrorLabelHeight.isActive = true
-        
+     
         if let color = remoteConfig["app_color"].stringValue{
             loginButton.backgroundColor = UIColor(hex: color)
             signUpButton.backgroundColor = UIColor(hex: color)
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-//        Auth.auth().addStateDidChangeListener{ (auth, user) in
-//            if user != nil{
-//
-//                let storyboard = UIStoryboard(name: "TabbarViewController", bundle: nil)
-//                let TabbarVC = storyboard.instantiateViewController(withIdentifier: "TabbarViewController")
-//                TabbarVC.modalPresentationStyle = .fullScreen
-//                self.present(TabbarVC, animated: true, completion: nil)
-//            }
-//        }
     }
-    
     @IBAction func clicklLoginButton(_ sender: Any) {
         guard let email = emailTextField.text , let password = pwdTextField.text else {
             return
@@ -63,19 +69,26 @@ class LoginViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             print("Login :", result?.user.email)
             print("Login :", error)
+            self.indicator.startAnimating()
             if error != nil { //로그인 실패
+                self.indicator.stopAnimating()
                 let alert = UIAlertController(title: "로그인 에러!!!", message: error?.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             } else { // 로그인 성공
                 guard let result = result else { return }
-                
+                DatabaseManager.shared.fetchUserInfoByUid(uid: result.user.uid, completion: {
+                    DispatchQueue.main.async {
+                        self.indicator.stopAnimating()
+                        let storyboard = UIStoryboard(name: "TabbarViewController", bundle: nil)
+                        let TabbarVC = storyboard.instantiateViewController(withIdentifier: "TabbarViewController")
+                        TabbarVC.modalPresentationStyle = .fullScreen
+                        self.present(TabbarVC, animated: true, completion: nil)
+                    }
+                })
                 DatabaseManager.shared.registerUserInfoObserver(forUid: result.user.uid) // 로그인 성공시 유저의 정보가 변경될 때 마다 비동기적으로 가져올 수 있는 옵저버 등록
                 DatabaseManager.shared.registerFriendsOfUserObserver(forUid: result.user.uid)
-                let storyboard = UIStoryboard(name: "TabbarViewController", bundle: nil)
-                let TabbarVC = storyboard.instantiateViewController(withIdentifier: "TabbarViewController")
-                TabbarVC.modalPresentationStyle = .fullScreen
-                self.present(TabbarVC, animated: true, completion: nil)
+                
             }
         }
     }
