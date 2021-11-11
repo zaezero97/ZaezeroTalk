@@ -13,7 +13,7 @@
         <scene sceneID="bQW-4q-Wk5">
             <objects>
                 <viewControllerPlaceholder storyboardName="FriendListViewController" referencedIdentifier="FriendListViewController" id="LCr-EN-9Uw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="TF6-Tq-mLC"/>
+                    <tabBarItem key="tabBarItem" title="" image="person.fill" catalog="system" id="TF6-Tq-mLC"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sfn-uF-iJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -29,7 +29,7 @@
                         <viewLayoutGuide key="safeArea" id="924-Y4-Oaa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Yxt-c3-sSK"/>
+                    <tabBarItem key="tabBarItem" title="" image="bubble.left.and.bubble.right.fill" catalog="system" id="Yxt-c3-sSK"/>
                     <navigationItem key="navigationItem" title="12312312" largeTitleDisplayMode="always" id="Sde-fs-nA2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5l-Pp-lD0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -58,6 +58,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="97"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

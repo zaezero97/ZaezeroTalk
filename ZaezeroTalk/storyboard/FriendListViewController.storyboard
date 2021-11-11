@@ -54,6 +54,7 @@
                             <constraint firstItem="RIO-VR-quF" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="z0k-Sd-wOA"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="person.fill" catalog="system" id="1zv-mW-KSk"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="customNavigationBar" destination="7It-Hd-sPc" id="0Ld-wL-nrz"/>
@@ -70,6 +71,7 @@
         <image name="gear.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.crop.circle.badge.plus.fill" catalog="system" width="128" height="113"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
