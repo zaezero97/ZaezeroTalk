@@ -23,6 +23,7 @@ class AddFriendViewController: UIViewController {
             make.centerY.equalToSuperview().offset(-100)
         }
         view.isHidden = true
+        view.addFriendButton.addTarget(self, action: #selector(addFriend), for: .touchUpInside)
         return view
     }()
     lazy var searchByEmailResultLabel : UILabel = {
@@ -102,5 +103,11 @@ extension AddFriendViewController{
         }else{
             customNavigationBar.standardAppearance.shadowColor = .white
         }
+    }
+}
+// MARK: - email로 사람 검색 후 친구 추가 버튼 클릭 이벤트 함수
+extension AddFriendViewController{
+    @objc func addFriend(sender : UIButton){
+        
     }
 }

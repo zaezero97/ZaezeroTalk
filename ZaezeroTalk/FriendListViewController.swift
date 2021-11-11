@@ -33,7 +33,7 @@ class FriendListViewController: UIViewController {
         
         
         if let currentUser = Auth.auth().currentUser  {
-            let userInfo = DatabaseManager.shared.fetchCurrentUserInfo(uid: currentUser.uid, with: {
+            let userInfo = DatabaseManager.shared.fetchUserInfoByUid(uid: currentUser.uid, with: {
                 (snapshot) in
                 let fetchedUserInfo = snapshot.value as? NSDictionary
                 let userName = fetchedUserInfo?["name"] as? String ?? ""

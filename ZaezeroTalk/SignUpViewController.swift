@@ -59,6 +59,7 @@ class SignUpViewController: UIViewController {
         if isShownErrorLabel() == true {
             return
         }
+        // 회원 가입
         Auth.auth().createUser(withEmail: emailTextField.text!, password: pwdTextField.text!) {
             (result,error) in
             guard let result = result , error == nil else {
@@ -74,16 +75,19 @@ class SignUpViewController: UIViewController {
                 }
                 return
             }
-            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-            changeRequest?.displayName = self.nameTextField.text
-            changeRequest?.commitChanges {
+            let joinUser = result.user
+            guard let email = joinUser.email, let name = self.nameTextField.text else { return }
+            let userInfo = [ "email": email, "name": name]
+            DatabaseManager.shared.insert(userInfo, forPath: "Users/\(joinUser.uid)/UserInfo")
+            DatabaseManager.shared.insert(["friendCount" : 0], forPath: "Users/\(joinUser.uid)/Friends")
+            let changeRequest = joinUser.createProfileChangeRequest()
+            changeRequest.displayName = self.nameTextField.text
+            changeRequest.commitChanges {
                 error in
                 if error != nil {
                     print("user createProfileChangeRequest error !! \(String(describing: error))")
                 }
-                DatabaseManager.shared.insertUser(user: result.user)
             }
-    
             self.dismiss(animated: true, completion: nil)
         }
         
