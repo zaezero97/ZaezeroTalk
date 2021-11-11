@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" id="Y6W-OH-hqX" customClass="ProfileViewController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wio-59-xmi">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem id="hqG-dO-yr1">
+                                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="6jp-Lo-Uzx">
+                                            <connections>
+                                                <action selector="clickXButton:" destination="Y6W-OH-hqX" id="LmB-cI-wc6"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="standardAppearance">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </navigationBarAppearance>
+                            </navigationBar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbI-dO-Epl">
+                                <rect key="frame" x="0.0" y="746" width="414" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="RPF-iI-tn6"/>
+                                </constraints>
+                                <items/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </toolbar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zC0-vL-cnT">
+                                <rect key="frame" x="157" y="545.5" width="100" height="99"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="We7-oU-etg"/>
+                                    <constraint firstAttribute="height" constant="100" id="a5l-O7-eF2"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glQ-4e-eom">
+                                <rect key="frame" x="186" y="650" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Wio-59-xmi" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="0qe-0G-bzD"/>
+                            <constraint firstItem="zC0-vL-cnT" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="4LR-t6-BdV"/>
+                            <constraint firstItem="fbI-dO-Epl" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="CfT-TW-CyY"/>
+                            <constraint firstItem="fbI-dO-Epl" firstAttribute="top" secondItem="glQ-4e-eom" secondAttribute="bottom" constant="75" id="Iiq-bB-Gkx"/>
+                            <constraint firstAttribute="trailing" secondItem="Wio-59-xmi" secondAttribute="trailing" id="LKL-I9-DVI"/>
+                            <constraint firstItem="glQ-4e-eom" firstAttribute="top" secondItem="zC0-vL-cnT" secondAttribute="bottom" constant="5" id="buu-qt-KsT"/>
+                            <constraint firstItem="fbI-dO-Epl" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hYb-wc-iaX"/>
+                            <constraint firstItem="glQ-4e-eom" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hd1-Ke-6dD"/>
+                            <constraint firstAttribute="bottom" secondItem="fbI-dO-Epl" secondAttribute="bottom" id="p2J-pI-8lH"/>
+                            <constraint firstItem="Wio-59-xmi" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="yDA-Rb-o0k"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="customNavigationBar" destination="Wio-59-xmi" id="IU7-Xm-2Ga"/>
+                        <outlet property="profileImageView" destination="zC0-vL-cnT" id="Mnw-Qz-Ekr"/>
+                        <outlet property="profileNameLabel" destination="glQ-4e-eom" id="Xxw-4J-44q"/>
+                        <outlet property="toolBar" destination="fbI-dO-Epl" id="Nxb-s3-gxK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="48" y="40"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
+</document>

@@ -86,7 +86,13 @@ extension FriendListViewController: UITableViewDataSource{
     
 }
 extension FriendListViewController: UITableViewDelegate{
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
+        
+        present(profileVC, animated: true, completion: nil)
+    }
 }
 
 extension FriendListViewController{

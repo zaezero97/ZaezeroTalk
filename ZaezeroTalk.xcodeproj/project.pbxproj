@@ -19,6 +19,10 @@
 		AE5FA775273B7B1F00F211CE /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FA773273B7B1F00F211CE /* TextFieldCell.swift */; };
 		AE5FA776273B7B1F00F211CE /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE5FA774273B7B1F00F211CE /* TextFieldCell.xib */; };
 		AE6BB5D5273634E600D99462 /* remoteConfigDefault.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE6BB5D4273634E600D99462 /* remoteConfigDefault.plist */; };
+		AE998F9B273D5A4400F6767B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE998F9A273D5A4400F6767B /* ProfileViewController.swift */; };
+		AE998F9D273D5A5600F6767B /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */; };
+		AE998F9F273D5FB900F6767B /* ProfileToolBarItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE998F9E273D5FB900F6767B /* ProfileToolBarItemView.xib */; };
+		AE998FA1273D603E00F6767B /* ProfileToolBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE998FA0273D603E00F6767B /* ProfileToolBarItemView.swift */; };
 		AEAF93FD273B530900BE2FF1 /* AddFriendViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAF93FC273B530900BE2FF1 /* AddFriendViewController.storyboard */; };
 		AEAF93FF273B531700BE2FF1 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */; };
 		AEB1D4E12736DEEB00E1BD4F /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB1D4E02736DEEB00E1BD4F /* LoginViewController.storyboard */; };
@@ -52,6 +56,10 @@
 		AE5FA773273B7B1F00F211CE /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		AE5FA774273B7B1F00F211CE /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		AE6BB5D4273634E600D99462 /* remoteConfigDefault.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = remoteConfigDefault.plist; sourceTree = "<group>"; };
+		AE998F9A273D5A4400F6767B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
+		AE998F9E273D5FB900F6767B /* ProfileToolBarItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileToolBarItemView.xib; sourceTree = "<group>"; };
+		AE998FA0273D603E00F6767B /* ProfileToolBarItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileToolBarItemView.swift; sourceTree = "<group>"; };
 		AEAA8BFD273CA7FF00400EDD /* memo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = memo.md; sourceTree = "<group>"; };
 		AEAF93FC273B530900BE2FF1 /* AddFriendViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddFriendViewController.storyboard; sourceTree = "<group>"; };
 		AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +141,7 @@
 				AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */,
 				AEBE6BFA2739F61B008B0B61 /* FriendListViewController.storyboard */,
 				AEAF93FC273B530900BE2FF1 /* AddFriendViewController.storyboard */,
+				AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";
@@ -146,7 +155,7 @@
 				AEFC6FF4273963E80092E037 /* TabbarViewController.swift */,
 				AEBE6BFC2739F630008B0B61 /* FriendListViewController.swift */,
 				AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */,
-				AEB1D4DE2736DEC200E1BD4F /* storyboard */,
+				AE998F9A273D5A4400F6767B /* ProfileViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -176,6 +185,7 @@
 				AEBE6BFE2739FCBE008B0B61 /* Model */,
 				AE15B7272738E801008AD434 /* Helper */,
 				AEB1D4DF2736DECF00E1BD4F /* ViewController */,
+				AEB1D4DE2736DEC200E1BD4F /* storyboard */,
 				AE524A0E273528E10017F770 /* extension */,
 				AEB97D0627351F9A00DCDF77 /* GoogleService-Info.plist */,
 				AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */,
@@ -206,6 +216,8 @@
 				AE5FA774273B7B1F00F211CE /* TextFieldCell.xib */,
 				AE30D6FC273B99660058F06B /* SearchByEmailResultView.xib */,
 				AE30D700273BA02C0058F06B /* SearchByEmailResultView.swift */,
+				AE998F9E273D5FB900F6767B /* ProfileToolBarItemView.xib */,
+				AE998FA0273D603E00F6767B /* ProfileToolBarItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -271,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEB97CFF27351C0E00DCDF77 /* LaunchScreen.storyboard in Resources */,
+				AE998F9F273D5FB900F6767B /* ProfileToolBarItemView.xib in Resources */,
 				AEFC6FF3273963C70092E037 /* TabbarViewController.storyboard in Resources */,
 				AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */,
 				AEBE6BFB2739F61B008B0B61 /* FriendListViewController.storyboard in Resources */,
@@ -278,6 +291,7 @@
 				AEAF93FD273B530900BE2FF1 /* AddFriendViewController.storyboard in Resources */,
 				AE30D6FD273B99660058F06B /* SearchByEmailResultView.xib in Resources */,
 				AE6BB5D5273634E600D99462 /* remoteConfigDefault.plist in Resources */,
+				AE998F9D273D5A5600F6767B /* ProfileViewController.storyboard in Resources */,
 				AE5FA776273B7B1F00F211CE /* TextFieldCell.xib in Resources */,
 				AE44D06F2738A7CF007A567A /* SignUpViewController.storyboard in Resources */,
 				AEB1D4E12736DEEB00E1BD4F /* LoginViewController.storyboard in Resources */,
@@ -342,6 +356,8 @@
 				AE5FA775273B7B1F00F211CE /* TextFieldCell.swift in Sources */,
 				AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */,
 				AEBE6C04273A4AED008B0B61 /* ProfileCell.swift in Sources */,
+				AE998FA1273D603E00F6767B /* ProfileToolBarItemView.swift in Sources */,
+				AE998F9B273D5A4400F6767B /* ProfileViewController.swift in Sources */,
 				AE524A10273528F60017F770 /* UIColor.swift in Sources */,
 				AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */,
 				AEB1D4E32736DEFF00E1BD4F /* LoginViewController.swift in Sources */,
