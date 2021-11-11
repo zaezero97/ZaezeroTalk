@@ -70,8 +70,8 @@ class LoginViewController: UIViewController {
             } else { // 로그인 성공
                 guard let result = result else { return }
                 
-                DatabaseManager.shared.registerUserInfoOberver(forUid: result.user.uid) // 로그인 성공시 유저의 정보가 변경될 때 마다 비동기적으로 가져올 수 있는 옵저버 등록
-                
+                DatabaseManager.shared.registerUserInfoObserver(forUid: result.user.uid) // 로그인 성공시 유저의 정보가 변경될 때 마다 비동기적으로 가져올 수 있는 옵저버 등록
+                DatabaseManager.shared.registerFriendsOfUserObserver(forUid: result.user.uid)
                 let storyboard = UIStoryboard(name: "TabbarViewController", bundle: nil)
                 let TabbarVC = storyboard.instantiateViewController(withIdentifier: "TabbarViewController")
                 TabbarVC.modalPresentationStyle = .fullScreen

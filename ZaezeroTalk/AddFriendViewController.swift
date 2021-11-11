@@ -12,9 +12,18 @@ import Firebase
 class AddFriendViewController: UIViewController {
 
     @IBOutlet weak var customNavigationBar: UINavigationBar!
-    @IBOutlet weak var customNavigationItem: UINavigationItem!
-    @IBOutlet weak var textFieldTableView: UITableView!
-    var myEmail = ""
+    @IBOutlet weak var customNavigationItem: UINavigationItem! {
+        didSet {
+            customNavigationItem.title = "Email로 추가"
+        }
+    }
+    @IBOutlet weak var textFieldTableView: UITableView! {
+        didSet {
+            textFieldTableView.register(UINib(nibName: "TextFieldCell", bundle: nil), forCellReuseIdentifier: "TextFieldCell")
+            textFieldTableView.dataSource = self
+        }
+    }
+    
     lazy var searchByEmailResultView : SearchByEmailResultView = {
         let view = UIView.loadViewFromNib(nib: "SearchByEmailResultView") as! SearchByEmailResultView
         self.textFieldTableView.addSubview(view)
@@ -26,6 +35,7 @@ class AddFriendViewController: UIViewController {
         view.addFriendButton.addTarget(self, action: #selector(addFriend), for: .touchUpInside)
         return view
     }()
+    
     lazy var searchByEmailResultLabel : UILabel = {
         let label = UILabel()
         label.text = "검색된 결과가 없습니다."
@@ -38,13 +48,11 @@ class AddFriendViewController: UIViewController {
         label.isHidden = true
         return label
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        customNavigationItem.title = "Email로 추가"
-        textFieldTableView.register(UINib(nibName: "TextFieldCell", bundle: nil), forCellReuseIdentifier: "TextFieldCell")
-        
-        textFieldTableView.dataSource = self
     }
+    
     @IBAction func clickXButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
