@@ -12,16 +12,10 @@ struct UserModel {
     var email: String
     var name: String
     //var profilePhoto: URL
-    var friendCount: Int?
     
     init(email: String, name: String) {
         self.email = email
         self.name = name
     }
     
-    init(email: String, name: String, friendCount: Int) {
-        self.email = email
-        self.name = name
-        self.friendCount = friendCount
-    }
 }

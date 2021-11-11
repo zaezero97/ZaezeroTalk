@@ -11,6 +11,7 @@ class ConnectedUser {
     static let shared = ConnectedUser()
     var Info : UserModel?
     var friends : [UserModel]?
+    var friendCount  = 0
     private init() {
         
     }
