@@ -77,7 +77,10 @@ class LoginViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             } else { // 로그인 성공
                 guard let result = result else { return }
+                ConnectedUser.shared.uid = result.user.uid
                 DatabaseManager.shared.fetchUserInfoByUid(uid: result.user.uid, completion: {
+                    userInfo in
+                    DatabaseManager.shared.saveUserInfo(userInfo:userInfo)
                     DispatchQueue.main.async {
                         self.indicator.stopAnimating()
                         let storyboard = UIStoryboard(name: "TabbarViewController", bundle: nil)
@@ -86,6 +89,7 @@ class LoginViewController: UIViewController {
                         self.present(TabbarVC, animated: true, completion: nil)
                     }
                 })
+              
                 DatabaseManager.shared.registerUserInfoObserver(forUid: result.user.uid) // 로그인 성공시 유저의 정보가 변경될 때 마다 비동기적으로 가져올 수 있는 옵저버 등록
                 DatabaseManager.shared.registerFriendsOfUserObserver(forUid: result.user.uid)
                 

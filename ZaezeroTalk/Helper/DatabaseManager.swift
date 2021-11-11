@@ -14,57 +14,94 @@ class DatabaseManager{
     private init(){
         
     }
-    func saveUserInfo(info: Any?){
-        let UserInfo = info as? NSDictionary
-        let userName = UserInfo?["name"] as? String ?? ""
-        let email = UserInfo?["email"] as? String ?? ""
+    func saveUserInfo(userInfo: [String: Any]?){
+        
+        let userName = userInfo?["name"] as? String ?? ""
+        let email = userInfo?["email"] as? String ?? ""
         ConnectedUser.shared.Info = UserModel(email: email, name: userName)
     }
-    func insert(_ value: [String: Any], forPath path: String){
+    func setValue(_ value: [String: Any], forPath path: String){
         ref.child(path).setValue(value)
     }
     
-    func fetchUserInfoByEmail(email : String ,completion : @escaping (DataSnapshot) -> Void){
-        let query = ref.child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email)
-        query.observeSingleEvent(of: .value,with: completion)
+    func updateChildValues(_ value: [String: Any], forPath path: String){
+        ref.child(path).updateChildValues(value)
     }
-    func fetchUserInfoByUid(uid: String, completion : @escaping () -> Void){
+    func updateChildValues(_ value: [String: Any], forPath path: String, completion: @escaping (Error?,DatabaseReference)-> Void){
+        ref.child(path).updateChildValues(value,withCompletionBlock: completion)
+    }
+    func fetchUserInfoWithUidByEmail(email : String ,completion : @escaping ([String: Any]?,String) -> Void){
+        ref.child("Users").observeSingleEvent(of: .value,with: {
+            snapshot in
+            for child in snapshot.children
+            {
+                let child = child as! DataSnapshot
+                let user = child.value as? [String: Any]
+                let userInfo = user?["UserInfo"] as? [String: Any]
+                if email == userInfo?["email"] as? String ?? "" {
+                    completion(userInfo,child.key)
+                    return
+                }
+            }
+            completion(nil,"")
+        })
+    }
+    
+    func fetchUserByUid(uid: String, completion : @escaping ([String: Any]?) -> Void) {
+        ref.child("Users/\(uid)").observeSingleEvent(of: .value, with: {
+            snapshot in
+            let user = snapshot.value as? [String: Any]
+            completion(user)
+        })
+    }
+    func fetchUserInfoByUid(uid: String, completion : @escaping ([String: Any]?) -> Void){
         ref.child("Users/\(uid)/UserInfo").observeSingleEvent(of: .value, with: {
             snapshot in
-            let fetchedUserInfo = snapshot.value as? NSDictionary
-            let userName = fetchedUserInfo?["name"] as? String ?? ""
-            let email = fetchedUserInfo?["email"] as? String ?? ""
-            ConnectedUser.shared.Info = UserModel(email: email, name: userName)
-            completion()
+            let userInfo = snapshot.value as? [String: Any]
+            completion(userInfo)
         })
     }
     func registerUserInfoObserver(forUid uid: String){
         ref.child("Users/\(uid)/UserInfo").observe(.value, with: {
             snapshot in
-            let fetchedUserInfo = snapshot.value as? NSDictionary
-            let userName = fetchedUserInfo?["name"] as? String ?? ""
-            let email = fetchedUserInfo?["email"] as? String ?? ""
-            ConnectedUser.shared.Info = UserModel(email: email, name: userName)
+            let userInfo = snapshot.value as? [String: Any]
+            self.saveUserInfo(userInfo: userInfo)
         })
     }
     func registerFriendsOfUserObserver(forUid uid: String){
         ref.child("Users/\(uid)/Friends").observe(.value, with: {
             snapshot in
-            let fetchedFriends = snapshot.value as? NSDictionary
+            let fetchedFriends = snapshot.value as? [String: Any]
             let friendCount = fetchedFriends?["friendCount"] as? Int ?? 0
             ConnectedUser.shared.friendCount = friendCount
-            print(fetchedFriends)
-            if let keys = fetchedFriends?.allKeys {
-                if keys.count > 1 {
-                    for key in keys {
-                        let friendInfo = fetchedFriends?[key] as? NSDictionary
-                        let friendName = friendInfo?["name"] as? String ?? ""
-                        let email = friendInfo?["email"] as? String ?? ""
-                        ConnectedUser.shared.friends?.append(UserModel(email: email, name: friendName))
+            
+            guard let fetchedFriends = fetchedFriends else { return }
+            let keys = fetchedFriends.keys
+            if keys.count > 1 {
+                for key in keys {
+                    if key == "friendCount" {
+                        continue
                     }
+                    let friendInfo = fetchedFriends[key] as! [String: Any]
+                    let friendName = friendInfo["name"] as! String
+                    let email = friendInfo["email"] as! String
+                    print("friend:",friendName)
+                    ConnectedUser.shared.friends.append(UserModel(email: email, name: friendName))
                 }
             }
             
+        })
+    }
+    func findFriend(by FriendUid: String, completion: @escaping (Bool) -> Void) {
+       
+        ref.child("Users/\(ConnectedUser.shared.uid)/Friends/\(FriendUid)").observeSingleEvent(of: .value, with: {
+            (snapshot) in
+            print(snapshot.value)
+            if snapshot.exists() {
+                completion(true)
+            } else {
+                completion(false)
+            }
         })
     }
 }

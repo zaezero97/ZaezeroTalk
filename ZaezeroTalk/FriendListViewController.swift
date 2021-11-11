@@ -33,33 +33,10 @@ class FriendListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-//        if let currentUser = Auth.auth().currentUser  {
-//            let userInfo = DatabaseManager.shared.fetchUserInfoByUid(uid: currentUser.uid, with: {
-//                (snapshot) in
-//                let fetchedUserInfo = snapshot.value as? NSDictionary
-//                let userName = fetchedUserInfo?["name"] as? String ?? ""
-//                let email = fetchedUserInfo?["email"] as? String ?? ""
-//                self.userInfo = UserModel(email: email, name: userName)
-//
-//                self.friendListTableView.reloadData()
-//            })
-//
-//            DatabaseManager.shared.registerFriendsOberver(of: currentUser.uid, completion: {
-//                (snapshot) in
-//                for child in snapshot.children {
-//                    let friend = child as! DataSnapshot
-//                    let friendInfo = friend.value as? NSDictionary
-//                    let friendName = friendInfo?["name"] as? String ?? ""
-//                    let friendEmail = friendInfo?["email"] as? String ?? ""
-//
-//                    self.Friends.append(UserModel(email: friendEmail, name: friendName))
-//                }
-//            })
-//        }
-        
-        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        friendListTableView.reloadData()
     }
     @IBAction func clickAddFriendButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "AddFriendViewController", bundle: nil)
@@ -73,19 +50,35 @@ class FriendListViewController: UIViewController {
 
 // MARK: - TableView Datasoruce , Delegate
 extension FriendListViewController: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
     }
-    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "나의 프로필"
+        } else {
+            return "친구 " + String(ConnectedUser.shared.friendCount)
+        }
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return 1
+        } else {
+            return ConnectedUser.shared.friendCount
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        print("Cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
-        print(ConnectedUser.shared.Info?.name)
-        cell.nameLabel.text = ConnectedUser.shared.Info?.name
+        if indexPath.section == 0 {
+            cell.nameLabel.text = ConnectedUser.shared.Info?.name
+        } else {
+            cell.nameLabel.text = ConnectedUser.shared.friends[indexPath.row].name
+        }
         
         return cell
     }

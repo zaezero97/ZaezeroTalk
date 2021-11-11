@@ -18,20 +18,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.rectangle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="M7B-I4-yNX">
-                        <rect key="frame" x="0.0" y="99" width="50" height="47.5"/>
+                        <rect key="frame" x="0.0" y="11" width="60" height="57.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="Ay6-iD-v8g"/>
-                            <constraint firstAttribute="width" constant="50" id="LoG-Di-8X6"/>
+                            <constraint firstAttribute="height" constant="60" id="Ay6-iD-v8g"/>
+                            <constraint firstAttribute="width" constant="60" id="LoG-Di-8X6"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFg-gi-yAO">
-                        <rect key="frame" x="60" y="113" width="30" height="20.5"/>
+                        <rect key="frame" x="70" y="30" width="30" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="상태메시지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zym-Et-YPj">
-                        <rect key="frame" x="442" y="113" width="74" height="20.5"/>
+                        <rect key="frame" x="442" y="30" width="74" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -39,11 +39,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="M7B-I4-yNX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7lk-z4-a3M"/>
+                    <constraint firstAttribute="bottom" secondItem="M7B-I4-yNX" secondAttribute="bottom" constant="10" id="BFV-3E-yGE"/>
                     <constraint firstItem="nFg-gi-yAO" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LUC-6C-duj"/>
                     <constraint firstAttribute="trailing" secondItem="Zym-Et-YPj" secondAttribute="trailing" constant="10" id="QS6-cg-w5r"/>
                     <constraint firstItem="Zym-Et-YPj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UWT-iX-sbt"/>
                     <constraint firstItem="nFg-gi-yAO" firstAttribute="leading" secondItem="M7B-I4-yNX" secondAttribute="trailing" constant="10" id="Zz5-UG-LbF"/>
                     <constraint firstItem="M7B-I4-yNX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="e8k-4l-tOJ"/>
+                    <constraint firstItem="M7B-I4-yNX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="zwd-35-P04"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
