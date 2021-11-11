@@ -15,4 +15,7 @@ target 'ZaezeroTalk' do
 
 	#TextFieldEffects
 	pod 'TextFieldEffects'
+
+	#ActivityIndicator
+	pod 'NVActivityIndicatorView'
 end
