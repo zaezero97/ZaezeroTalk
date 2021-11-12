@@ -72,7 +72,6 @@ extension FriendListViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
         if indexPath.section == 0 {
             cell.nameLabel.text = ConnectedUser.shared.Info?.name
