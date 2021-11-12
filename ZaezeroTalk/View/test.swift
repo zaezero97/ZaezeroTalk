@@ -1,16 +1,14 @@
 //
-//  ProfileToolBarItemView.swift
+//  test.swift
 //  ZaezeroTalk
 //
-//  Created by 재영신 on 2021/11/11.
+//  Created by 재영신 on 2021/11/12.
 //
 
 import UIKit
 
-class ProfileToolBarItemView: UIView {
+class test: UIButton {
 
-    @IBOutlet weak var button: UIButton!
-    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

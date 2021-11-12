@@ -25,9 +25,6 @@ class ProfileViewController: UIViewController {
     }
     @IBOutlet weak var toolBar: UIToolbar! {
         didSet {
-           
-            toolBar.setItems([UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),chatButton,UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),editProfileButton,UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)], animated: true)
-        
         }
     }
     @IBOutlet weak var customNavigationBar: UINavigationBar! {
@@ -35,27 +32,7 @@ class ProfileViewController: UIViewController {
             customNavigationBar.standardAppearance.shadowColor = .white
         }
     }
-    lazy var chatButton: UIBarButtonItem = {
-        let chatButtonView = UIView.loadViewFromNib(nib: "ProfileToolBarItemView") as! ProfileToolBarItemView
-        chatButtonView.imageView.image = UIImage(systemName: "bubble.right.fill")
-        chatButtonView.label.text = "1:1 채팅"
-        let chatButton = UIBarButtonItem(customView: chatButtonView)
-        chatButton.target = self
-        chatButton.action = #selector(clickChatButton)
-        
-        return chatButton
-    }()
-    
-    lazy var editProfileButton: UIBarButtonItem = {
-        let editProfileView = UIView.loadViewFromNib(nib: "ProfileToolBarItemView") as! ProfileToolBarItemView
-        editProfileView.imageView.image = UIImage(systemName: "pencil")
-        editProfileView.label.text = "프로필 편집"
-        let editProfileButton = UIBarButtonItem(customView: editProfileView)
-        editProfileButton.target = self
-        //editProfileButton.action = #selector(<#T##@objc method#>)
-        
-        return editProfileButton
-    }()
+   
     
     var selectedFriend: Friend?
     
@@ -67,17 +44,17 @@ class ProfileViewController: UIViewController {
     @IBAction func clickXButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    @IBAction func clickChatButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "ChatingRoomViewController", bundle: nil)
+        let ChatingRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
+        
+        ChatingRoomVC.modalPresentationStyle = .fullScreen
+        present(ChatingRoomVC, animated: true, completion: nil)
+    }
+    @IBAction func clickEditProfileButton(_ sender: Any) {
+    }
 }
 
 // MARK: - Bar Button action func
 extension ProfileViewController {
-    @objc func clickChatButton(){
-        let storyboard = UIStoryboard(name: "ChatingRoomViewController", bundle: nil)
-        let ChatingRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
-        
-        present(ChatingRoomVC, animated: true, completion: nil)
-    }
-    @objc func clickEditProfileButton(){
-        
-    }
 }

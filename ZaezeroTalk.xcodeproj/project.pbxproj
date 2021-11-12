@@ -21,8 +21,6 @@
 		AE6BB5D5273634E600D99462 /* remoteConfigDefault.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE6BB5D4273634E600D99462 /* remoteConfigDefault.plist */; };
 		AE998F9B273D5A4400F6767B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE998F9A273D5A4400F6767B /* ProfileViewController.swift */; };
 		AE998F9D273D5A5600F6767B /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */; };
-		AE998F9F273D5FB900F6767B /* ProfileToolBarItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE998F9E273D5FB900F6767B /* ProfileToolBarItemView.xib */; };
-		AE998FA1273D603E00F6767B /* ProfileToolBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE998FA0273D603E00F6767B /* ProfileToolBarItemView.swift */; };
 		AEAE17C9273DE9BC00A44737 /* ChatingRoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17C8273DE9BC00A44737 /* ChatingRoomListViewController.swift */; };
 		AEAE17CB273DE9C800A44737 /* ChatingRoomListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAE17CA273DE9C800A44737 /* ChatingRoomListViewController.storyboard */; };
 		AEAE17D0273DEBCC00A44737 /* ChatingRoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17CE273DEBCC00A44737 /* ChatingRoomCell.swift */; };
@@ -68,8 +66,6 @@
 		AE6BB5D4273634E600D99462 /* remoteConfigDefault.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = remoteConfigDefault.plist; sourceTree = "<group>"; };
 		AE998F9A273D5A4400F6767B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
-		AE998F9E273D5FB900F6767B /* ProfileToolBarItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileToolBarItemView.xib; sourceTree = "<group>"; };
-		AE998FA0273D603E00F6767B /* ProfileToolBarItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileToolBarItemView.swift; sourceTree = "<group>"; };
 		AEAA8BFD273CA7FF00400EDD /* memo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = memo.md; sourceTree = "<group>"; };
 		AEAE17C8273DE9BC00A44737 /* ChatingRoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatingRoomListViewController.swift; sourceTree = "<group>"; };
 		AEAE17CA273DE9C800A44737 /* ChatingRoomListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatingRoomListViewController.storyboard; sourceTree = "<group>"; };
@@ -178,8 +174,8 @@
 				AEBE6BFC2739F630008B0B61 /* FriendListViewController.swift */,
 				AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */,
 				AE998F9A273D5A4400F6767B /* ProfileViewController.swift */,
-				AEAE17C8273DE9BC00A44737 /* ChatingRoomListViewController.swift */,
 				AEB3A9DC273E3671008E7031 /* ChatingRoomViewController.swift */,
+				AEAE17C8273DE9BC00A44737 /* ChatingRoomListViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -244,8 +240,6 @@
 				AE5FA774273B7B1F00F211CE /* TextFieldCell.xib */,
 				AE30D6FC273B99660058F06B /* SearchByEmailResultView.xib */,
 				AE30D700273BA02C0058F06B /* SearchByEmailResultView.swift */,
-				AE998F9E273D5FB900F6767B /* ProfileToolBarItemView.xib */,
-				AE998FA0273D603E00F6767B /* ProfileToolBarItemView.swift */,
 				AEAE17CE273DEBCC00A44737 /* ChatingRoomCell.swift */,
 				AEAE17CF273DEBCC00A44737 /* ChatingRoomCell.xib */,
 			);
@@ -313,7 +307,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEB97CFF27351C0E00DCDF77 /* LaunchScreen.storyboard in Resources */,
-				AE998F9F273D5FB900F6767B /* ProfileToolBarItemView.xib in Resources */,
 				AEFC6FF3273963C70092E037 /* TabbarViewController.storyboard in Resources */,
 				AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */,
 				AEBE6BFB2739F61B008B0B61 /* FriendListViewController.storyboard in Resources */,
@@ -395,7 +388,6 @@
 				AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */,
 				AEAE17D0273DEBCC00A44737 /* ChatingRoomCell.swift in Sources */,
 				AEBE6C04273A4AED008B0B61 /* ProfileCell.swift in Sources */,
-				AE998FA1273D603E00F6767B /* ProfileToolBarItemView.swift in Sources */,
 				AE998F9B273D5A4400F6767B /* ProfileViewController.swift in Sources */,
 				AE524A10273528F60017F770 /* UIColor.swift in Sources */,
 				AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */,

@@ -50,6 +50,9 @@ class FriendListViewController: UIViewController {
 
 // MARK: - TableView Datasoruce
 extension FriendListViewController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
     }

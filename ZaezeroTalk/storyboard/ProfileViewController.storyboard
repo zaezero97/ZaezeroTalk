@@ -36,7 +36,33 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="RPF-iI-tn6"/>
                                 </constraints>
-                                <items/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="dre-Rs-8n8"/>
+                                    <barButtonItem style="plain" id="zTR-xb-pfK">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="q2I-Yw-dJq">
+                                            <rect key="frame" x="65.5" y="43" width="115" height="64.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="message.fill" catalog="system" imagePlacement="top" title="1대1 채팅" imagePadding="10"/>
+                                            <connections>
+                                                <action selector="clickChatButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="rr9-ck-QV1"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="9yE-pk-zpZ"/>
+                                    <barButtonItem style="plain" id="FKg-OX-7rq">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="28d-BE-pmQ">
+                                            <rect key="frame" x="246.5" y="43" width="102" height="64.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system" imagePlacement="top" title="프로필 편집" imagePadding="10"/>
+                                            <connections>
+                                                <action selector="clickEditProfileButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="C5A-NH-EaF"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="JI2-ze-g70"/>
+                                </items>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zC0-vL-cnT">
@@ -81,6 +107,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="message.fill" catalog="system" width="128" height="113"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>

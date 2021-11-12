@@ -9,46 +9,36 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileToolBarItemView" customModule="ZaezeroTalk" customModuleProvider="target">
+            <connections>
+                <outlet property="button" destination="KGX-V6-wdU" id="4ls-Bl-zkG"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ProfileToolBarItemView" customModule="ZaezeroTalk" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="95" height="212"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Z9y-oP-H8A">
-                    <rect key="frame" x="32.5" y="48" width="30" height="31"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="7SV-Ue-zCi"/>
-                        <constraint firstAttribute="height" constant="30" id="GyJ-Gj-exc"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBD-Nq-85X">
-                    <rect key="frame" x="5" y="84" width="85" height="123"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGX-V6-wdU">
+                    <rect key="frame" x="30" y="74" width="35" height="108"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up.circle.fill" catalog="system" imagePlacement="top" title="Button" imagePadding="5"/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="SBD-Nq-85X" firstAttribute="centerX" secondItem="Z9y-oP-H8A" secondAttribute="centerX" id="3T8-t5-yA2"/>
-                <constraint firstItem="SBD-Nq-85X" firstAttribute="top" secondItem="Z9y-oP-H8A" secondAttribute="bottom" constant="5" id="G1U-OC-gVL"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SBD-Nq-85X" secondAttribute="trailing" constant="5" id="IEk-Gf-7Tr"/>
-                <constraint firstItem="Z9y-oP-H8A" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="imu-21-p4x"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="SBD-Nq-85X" secondAttribute="bottom" constant="5" id="nse-AM-iK1"/>
-                <constraint firstItem="SBD-Nq-85X" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="qpz-2S-CHL"/>
+                <constraint firstItem="KGX-V6-wdU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="5gO-ZT-fAn"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="KGX-V6-wdU" secondAttribute="bottom" constant="30" id="B1k-4F-5pb"/>
+                <constraint firstItem="KGX-V6-wdU" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="cbr-V1-UYe"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="KGX-V6-wdU" secondAttribute="trailing" constant="30" id="t4w-v0-hlU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="imageView" destination="Z9y-oP-H8A" id="Mm9-Lc-UDa"/>
-                <outlet property="label" destination="SBD-Nq-85X" id="ZYI-bx-vN8"/>
-            </connections>
             <point key="canvasLocation" x="-99.275362318840592" y="-173.4375"/>
         </view>
     </objects>
     <resources>
-        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="square.and.arrow.up.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
