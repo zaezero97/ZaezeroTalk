@@ -9,10 +9,7 @@ import Foundation
 
 class ConnectedUser {
     static let shared = ConnectedUser()
-    var Info : UserModel? 
-    var friends = [UserModel]()
-    var friendCount  = 0
-    var uid : String = ""
+    var user : User!
     private init() {
         
     }

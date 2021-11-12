@@ -25,10 +25,18 @@
 		AE998FA1273D603E00F6767B /* ProfileToolBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE998FA0273D603E00F6767B /* ProfileToolBarItemView.swift */; };
 		AEAE17C9273DE9BC00A44737 /* ChatingRoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17C8273DE9BC00A44737 /* ChatingRoomListViewController.swift */; };
 		AEAE17CB273DE9C800A44737 /* ChatingRoomListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAE17CA273DE9C800A44737 /* ChatingRoomListViewController.storyboard */; };
+		AEAE17D0273DEBCC00A44737 /* ChatingRoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17CE273DEBCC00A44737 /* ChatingRoomCell.swift */; };
+		AEAE17D1273DEBCC00A44737 /* ChatingRoomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEAE17CF273DEBCC00A44737 /* ChatingRoomCell.xib */; };
+		AEAE17D3273DEF2E00A44737 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17D2273DEF2E00A44737 /* Message.swift */; };
+		AEAE17D5273DEF3900A44737 /* ChatingRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17D4273DEF3900A44737 /* ChatingRoom.swift */; };
+		AEAE17D7273E070700A44737 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17D6273E070700A44737 /* UserInfo.swift */; };
+		AEAE17D9273E07B800A44737 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17D8273E07B800A44737 /* Friend.swift */; };
 		AEAF93FD273B530900BE2FF1 /* AddFriendViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAF93FC273B530900BE2FF1 /* AddFriendViewController.storyboard */; };
 		AEAF93FF273B531700BE2FF1 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */; };
 		AEB1D4E12736DEEB00E1BD4F /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB1D4E02736DEEB00E1BD4F /* LoginViewController.storyboard */; };
 		AEB1D4E32736DEFF00E1BD4F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB1D4E22736DEFF00E1BD4F /* LoginViewController.swift */; };
+		AEB3A9DD273E3671008E7031 /* ChatingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3A9DC273E3671008E7031 /* ChatingRoomViewController.swift */; };
+		AEB3A9DF273E368D008E7031 /* ChatingRoomViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB3A9DE273E368D008E7031 /* ChatingRoomViewController.storyboard */; };
 		AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */; };
 		AEB97CF527351C0D00DCDF77 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF427351C0D00DCDF77 /* SceneDelegate.swift */; };
 		AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF627351C0D00DCDF77 /* ViewController.swift */; };
@@ -38,7 +46,7 @@
 		AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEB97D0627351F9A00DCDF77 /* GoogleService-Info.plist */; };
 		AEBE6BFB2739F61B008B0B61 /* FriendListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEBE6BFA2739F61B008B0B61 /* FriendListViewController.storyboard */; };
 		AEBE6BFD2739F630008B0B61 /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE6BFC2739F630008B0B61 /* FriendListViewController.swift */; };
-		AEBE6C002739FCC9008B0B61 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE6BFF2739FCC9008B0B61 /* UserModel.swift */; };
+		AEBE6C002739FCC9008B0B61 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE6BFF2739FCC9008B0B61 /* User.swift */; };
 		AEBE6C04273A4AED008B0B61 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE6C02273A4AED008B0B61 /* ProfileCell.swift */; };
 		AEBE6C05273A4AED008B0B61 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEBE6C03273A4AED008B0B61 /* ProfileCell.xib */; };
 		AEFC6FF3273963C70092E037 /* TabbarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */; };
@@ -65,10 +73,18 @@
 		AEAA8BFD273CA7FF00400EDD /* memo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = memo.md; sourceTree = "<group>"; };
 		AEAE17C8273DE9BC00A44737 /* ChatingRoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatingRoomListViewController.swift; sourceTree = "<group>"; };
 		AEAE17CA273DE9C800A44737 /* ChatingRoomListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatingRoomListViewController.storyboard; sourceTree = "<group>"; };
+		AEAE17CE273DEBCC00A44737 /* ChatingRoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatingRoomCell.swift; sourceTree = "<group>"; };
+		AEAE17CF273DEBCC00A44737 /* ChatingRoomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatingRoomCell.xib; sourceTree = "<group>"; };
+		AEAE17D2273DEF2E00A44737 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		AEAE17D4273DEF3900A44737 /* ChatingRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatingRoom.swift; sourceTree = "<group>"; };
+		AEAE17D6273E070700A44737 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		AEAE17D8273E07B800A44737 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		AEAF93FC273B530900BE2FF1 /* AddFriendViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddFriendViewController.storyboard; sourceTree = "<group>"; };
 		AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		AEB1D4E02736DEEB00E1BD4F /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
 		AEB1D4E22736DEFF00E1BD4F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AEB3A9DC273E3671008E7031 /* ChatingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatingRoomViewController.swift; sourceTree = "<group>"; };
+		AEB3A9DE273E368D008E7031 /* ChatingRoomViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatingRoomViewController.storyboard; sourceTree = "<group>"; };
 		AEB97CEF27351C0D00DCDF77 /* ZaezeroTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZaezeroTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEB97CF427351C0D00DCDF77 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,7 +96,7 @@
 		AEB97D0627351F9A00DCDF77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AEBE6BFA2739F61B008B0B61 /* FriendListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FriendListViewController.storyboard; sourceTree = "<group>"; };
 		AEBE6BFC2739F630008B0B61 /* FriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
-		AEBE6BFF2739FCC9008B0B61 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		AEBE6BFF2739FCC9008B0B61 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AEBE6C02273A4AED008B0B61 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		AEBE6C03273A4AED008B0B61 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
 		AEFC6FF2273963C70092E037 /* TabbarViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabbarViewController.storyboard; sourceTree = "<group>"; };
@@ -147,6 +163,7 @@
 				AEAF93FC273B530900BE2FF1 /* AddFriendViewController.storyboard */,
 				AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */,
 				AEAE17CA273DE9C800A44737 /* ChatingRoomListViewController.storyboard */,
+				AEB3A9DE273E368D008E7031 /* ChatingRoomViewController.storyboard */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";
@@ -162,6 +179,7 @@
 				AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */,
 				AE998F9A273D5A4400F6767B /* ProfileViewController.swift */,
 				AEAE17C8273DE9BC00A44737 /* ChatingRoomListViewController.swift */,
+				AEB3A9DC273E3671008E7031 /* ChatingRoomViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -208,7 +226,11 @@
 		AEBE6BFE2739FCBE008B0B61 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AEBE6BFF2739FCC9008B0B61 /* UserModel.swift */,
+				AEAE17D2273DEF2E00A44737 /* Message.swift */,
+				AEAE17D4273DEF3900A44737 /* ChatingRoom.swift */,
+				AEBE6BFF2739FCC9008B0B61 /* User.swift */,
+				AEAE17D6273E070700A44737 /* UserInfo.swift */,
+				AEAE17D8273E07B800A44737 /* Friend.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -224,6 +246,8 @@
 				AE30D700273BA02C0058F06B /* SearchByEmailResultView.swift */,
 				AE998F9E273D5FB900F6767B /* ProfileToolBarItemView.xib */,
 				AE998FA0273D603E00F6767B /* ProfileToolBarItemView.swift */,
+				AEAE17CE273DEBCC00A44737 /* ChatingRoomCell.swift */,
+				AEAE17CF273DEBCC00A44737 /* ChatingRoomCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -295,8 +319,10 @@
 				AEBE6BFB2739F61B008B0B61 /* FriendListViewController.storyboard in Resources */,
 				AEAE17CB273DE9C800A44737 /* ChatingRoomListViewController.storyboard in Resources */,
 				AEB97CFC27351C0E00DCDF77 /* Assets.xcassets in Resources */,
+				AEB3A9DF273E368D008E7031 /* ChatingRoomViewController.storyboard in Resources */,
 				AEAF93FD273B530900BE2FF1 /* AddFriendViewController.storyboard in Resources */,
 				AE30D6FD273B99660058F06B /* SearchByEmailResultView.xib in Resources */,
+				AEAE17D1273DEBCC00A44737 /* ChatingRoomCell.xib in Resources */,
 				AE6BB5D5273634E600D99462 /* remoteConfigDefault.plist in Resources */,
 				AE998F9D273D5A5600F6767B /* ProfileViewController.storyboard in Resources */,
 				AE5FA776273B7B1F00F211CE /* TextFieldCell.xib in Resources */,
@@ -356,13 +382,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEB3A9DD273E3671008E7031 /* ChatingRoomViewController.swift in Sources */,
 				AEAF93FF273B531700BE2FF1 /* AddFriendViewController.swift in Sources */,
 				AEFC6FF5273963E80092E037 /* TabbarViewController.swift in Sources */,
 				AE30D701273BA02C0058F06B /* SearchByEmailResultView.swift in Sources */,
 				AEAE17C9273DE9BC00A44737 /* ChatingRoomListViewController.swift in Sources */,
 				AE44D06D2738A7B3007A567A /* SignUpViewController.swift in Sources */,
+				AEAE17D5273DEF3900A44737 /* ChatingRoom.swift in Sources */,
+				AEAE17D7273E070700A44737 /* UserInfo.swift in Sources */,
 				AE5FA775273B7B1F00F211CE /* TextFieldCell.swift in Sources */,
+				AEAE17D3273DEF2E00A44737 /* Message.swift in Sources */,
 				AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */,
+				AEAE17D0273DEBCC00A44737 /* ChatingRoomCell.swift in Sources */,
 				AEBE6C04273A4AED008B0B61 /* ProfileCell.swift in Sources */,
 				AE998FA1273D603E00F6767B /* ProfileToolBarItemView.swift in Sources */,
 				AE998F9B273D5A4400F6767B /* ProfileViewController.swift in Sources */,
@@ -371,8 +402,9 @@
 				AEB1D4E32736DEFF00E1BD4F /* LoginViewController.swift in Sources */,
 				AEBE6BFD2739F630008B0B61 /* FriendListViewController.swift in Sources */,
 				AE30D6FF273B9D5A0058F06B /* UIView.swift in Sources */,
+				AEAE17D9273E07B800A44737 /* Friend.swift in Sources */,
 				AEB97CF527351C0D00DCDF77 /* SceneDelegate.swift in Sources */,
-				AEBE6C002739FCC9008B0B61 /* UserModel.swift in Sources */,
+				AEBE6C002739FCC9008B0B61 /* User.swift in Sources */,
 				AE30D703273BB3AF0058F06B /* ConnectedUser.swift in Sources */,
 				AE15B7292738E815008AD434 /* DatabaseManager.swift in Sources */,
 			);

@@ -79,7 +79,6 @@ class SignUpViewController: UIViewController {
             guard let email = joinUser.email, let name = self.nameTextField.text else { return }
             let userInfo = [ "email": email, "name": name]
             DatabaseManager.shared.setValue(userInfo, forPath: "Users/\(joinUser.uid)/UserInfo")
-            DatabaseManager.shared.setValue(["friendCount" : 0], forPath: "Users/\(joinUser.uid)/Friends")
             let changeRequest = joinUser.createProfileChangeRequest()
             changeRequest.displayName = self.nameTextField.text
             changeRequest.commitChanges {

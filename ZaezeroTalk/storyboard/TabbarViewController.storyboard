@@ -4,8 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,23 +16,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sfn-uF-iJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1066" y="-129"/>
-        </scene>
-        <!--12312312-->
-        <scene sceneID="UdL-An-K0I">
-            <objects>
-                <viewController id="Wb3-Ms-cnn" customClass="aViewController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rkJ-Fa-pKV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="924-Y4-Oaa"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="bubble.left.and.bubble.right.fill" catalog="system" id="Yxt-c3-sSK"/>
-                    <navigationItem key="navigationItem" title="12312312" largeTitleDisplayMode="always" id="Sde-fs-nA2"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i5l-Pp-lD0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1486" y="444"/>
         </scene>
         <!--Tabbar View Controller-->
         <scene sceneID="tcg-hn-1uN">
@@ -49,19 +30,25 @@
                     </tabBar>
                     <connections>
                         <segue destination="LCr-EN-9Uw" kind="relationship" relationship="viewControllers" id="SL0-wa-Owo"/>
-                        <segue destination="Wb3-Ms-cnn" kind="relationship" relationship="viewControllers" id="nf5-jl-a7u"/>
+                        <segue destination="WHk-9J-SHp" kind="relationship" relationship="viewControllers" id="6zu-2Y-97Q"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2E-ct-vta" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="62.946428571428569"/>
         </scene>
+        <!--ChatingRoomListViewController-->
+        <scene sceneID="UCl-My-4xf">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ChatingRoomListViewController" referencedIdentifier="ChatingRoomListViewController" id="WHk-9J-SHp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Ajt-Fi-bX9"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AWe-Ue-hah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="891" y="419"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="97"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

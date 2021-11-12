@@ -16,17 +16,54 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3pt-3a-V7S">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem id="HJp-qI-W41">
+                                        <rightBarButtonItems>
+                                            <barButtonItem image="gear.circle" catalog="system" id="AIZ-9F-2uD"/>
+                                            <barButtonItem image="plus.message.fill" catalog="system" id="pVG-66-MWS"/>
+                                            <barButtonItem image="magnifyingglass" catalog="system" id="6ZZ-zA-xpy"/>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jhY-Hz-tOP">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3pt-3a-V7S" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="4hd-to-3Qf"/>
+                            <constraint firstItem="3pt-3a-V7S" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="8ia-TX-pm0"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jhY-Hz-tOP" secondAttribute="trailing" id="ZOs-Pw-5UY"/>
+                            <constraint firstItem="3pt-3a-V7S" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="bf1-eL-HnX"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jhY-Hz-tOP" secondAttribute="bottom" id="cde-gd-9ps"/>
+                            <constraint firstItem="jhY-Hz-tOP" firstAttribute="top" secondItem="3pt-3a-V7S" secondAttribute="bottom" id="hoH-fG-qxg"/>
+                            <constraint firstItem="jhY-Hz-tOP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="oro-RR-K7L"/>
+                        </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="bubble.left.and.bubble.right.fill" catalog="system" id="Zyd-dj-vpa"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="chatingRoomListTableView" destination="jhY-Hz-tOP" id="x2X-IZ-g2F"/>
+                        <outlet property="customNavigationItem" destination="HJp-qI-W41" id="6dC-LI-ZvI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarItem title="Item" id="aEy-2Y-W5V"/>
             </objects>
-            <point key="canvasLocation" x="-16" y="70"/>
+            <point key="canvasLocation" x="-17" y="79"/>
         </scene>
     </scenes>
     <resources>
+        <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="97"/>
+        <image name="gear.circle" catalog="system" width="128" height="121"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="plus.message.fill" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

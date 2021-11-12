@@ -133,7 +133,7 @@ extension AddFriendViewController{
 extension AddFriendViewController{
     @objc func addFriend(sender : UIButton){
         if let searchedUserInfo = searchedUserInfo {
-            DatabaseManager.shared.updateChildValues([searchedUserUid!: searchedUserInfo ,"friendCount": ConnectedUser.shared.friendCount + 1], forPath: "Users/\(ConnectedUser.shared.uid)/Friends") { (
+            DatabaseManager.shared.updateChildValues([searchedUserUid!: searchedUserInfo], forPath: "Users/\(ConnectedUser.shared.user.uid)/Friends") { (
                 error , reference) in
                 self.searchByEmailResultView.addFriendButton.isEnabled = false
             }

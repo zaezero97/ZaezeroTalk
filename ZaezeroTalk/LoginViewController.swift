@@ -44,8 +44,8 @@ class LoginViewController: UIViewController {
     lazy var indicator: NVActivityIndicatorView = {
         let indicator = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 75, height: 75),
                                                 type: .ballRotateChase,
-                                            color: .black,
-                                            padding: 0)
+                                                color: .black,
+                                                padding: 0)
         self.view.addSubview(indicator)
         indicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -55,7 +55,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         try! Auth.auth().signOut() //test 코드 실제에선 자동 로그인으로 구현할 생각
-     
+        
         if let color = remoteConfig["app_color"].stringValue{
             loginButton.backgroundColor = UIColor(hex: color)
             signUpButton.backgroundColor = UIColor(hex: color)
@@ -66,9 +66,8 @@ class LoginViewController: UIViewController {
         guard let email = emailTextField.text , let password = pwdTextField.text else {
             return
         }
-        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-            print("Login :", result?.user.email)
-            print("Login :", error)
+        Auth.auth().signIn(withEmail: email, password: password) {
+            (result, error) in
             self.indicator.startAnimating()
             if error != nil { //로그인 실패
                 self.indicator.stopAnimating()
@@ -77,21 +76,34 @@ class LoginViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             } else { // 로그인 성공
                 guard let result = result else { return }
-                ConnectedUser.shared.uid = result.user.uid
-                DatabaseManager.shared.fetchUserInfoByUid(uid: result.user.uid, completion: {
-                    userInfo in
-                    DatabaseManager.shared.saveUserInfo(userInfo:userInfo)
+                DatabaseManager.shared.fetchUserByUid(uid: result.user.uid, completion: {
+                    user in
+                    let userInfo = user?["UserInfo"] as? [String: Any]
+                    let friends = user?["Friends"] as? [String: Any]
+                    
+                    let email = userInfo?["email"] as? String ?? ""
+                    let name = userInfo?["name"] as? String ?? ""
+                    var friend_arr = [Friend]()
+                    if let friends = friends {
+                        for key in friends.keys {
+                            let friendInfo = friends[key] as? [String: Any]
+                            let friendEmail = friendInfo?["email"] as? String ?? ""
+                            let friendName = friendInfo?["name"] as? String ?? ""
+                            friend_arr.append(Friend(uid: key, email: friendEmail, name: friendName))
+                        }
+                    }
+                    ConnectedUser.shared.user = User(uid: result.user.uid, userInfo: UserInfo(email: email, name: name), friends: friend_arr)
                     DispatchQueue.main.async {
                         self.indicator.stopAnimating()
                         let storyboard = UIStoryboard(name: "TabbarViewController", bundle: nil)
                         let TabbarVC = storyboard.instantiateViewController(withIdentifier: "TabbarViewController")
                         TabbarVC.modalPresentationStyle = .fullScreen
-                        self.present(TabbarVC, animated: true, completion: nil)
+                        self.present(TabbarVC, animated: true,completion: {
+                            DatabaseManager.shared.registerUserInfoObserver(forUid: result.user.uid) // 로그인 성공시 유저의 정보가 변경될 때 마다 비동기적으로 가져올 수 있는 옵저버 등록
+                            DatabaseManager.shared.registerFriendsOfUserObserver(forUid: result.user.uid)
+                        })
                     }
                 })
-              
-                DatabaseManager.shared.registerUserInfoObserver(forUid: result.user.uid) // 로그인 성공시 유저의 정보가 변경될 때 마다 비동기적으로 가져올 수 있는 옵저버 등록
-                DatabaseManager.shared.registerFriendsOfUserObserver(forUid: result.user.uid)
                 
             }
         }
