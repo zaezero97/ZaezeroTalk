@@ -76,35 +76,17 @@ class LoginViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             } else { // 로그인 성공
                 guard let result = result else { return }
-                DatabaseManager.shared.fetchUserByUid(uid: result.user.uid, completion: {
-                    user in
-                    let userInfo = user?["UserInfo"] as? [String: Any]
-                    let friends = user?["Friends"] as? [String: Any]
-                    
-                    let email = userInfo?["email"] as? String ?? ""
-                    let name = userInfo?["name"] as? String ?? ""
-                    var friend_arr = [Friend]()
-                    if let friends = friends {
-                        for key in friends.keys {
-                            let friendInfo = friends[key] as? [String: Any]
-                            let friendEmail = friendInfo?["email"] as? String ?? ""
-                            let friendName = friendInfo?["name"] as? String ?? ""
-                            friend_arr.append(Friend(uid: key, email: friendEmail, name: friendName))
-                        }
-                    }
-                    ConnectedUser.shared.user = User(uid: result.user.uid, userInfo: UserInfo(email: email, name: name), friends: friend_arr)
+                DatabaseManager.shared.fetchUser(by: result.user.uid, completion: {
                     DispatchQueue.main.async {
                         self.indicator.stopAnimating()
                         let storyboard = UIStoryboard(name: "TabbarViewController", bundle: nil)
                         let TabbarVC = storyboard.instantiateViewController(withIdentifier: "TabbarViewController")
                         TabbarVC.modalPresentationStyle = .fullScreen
                         self.present(TabbarVC, animated: true,completion: {
-                            DatabaseManager.shared.registerUserInfoObserver(forUid: result.user.uid) // 로그인 성공시 유저의 정보가 변경될 때 마다 비동기적으로 가져올 수 있는 옵저버 등록
-                            DatabaseManager.shared.registerFriendsOfUserObserver(forUid: result.user.uid)
                         })
                     }
                 })
-                
+                DatabaseManager.shared.registerUserObserver(by: result.user.uid)//
             }
         }
     }

@@ -10,6 +10,7 @@ import Foundation
 class ConnectedUser {
     static let shared = ConnectedUser()
     var user : User!
+    var uid: String?
     private init() {
         
     }

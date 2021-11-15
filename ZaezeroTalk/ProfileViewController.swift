@@ -45,9 +45,10 @@ class ProfileViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     @IBAction func clickChatButton(_ sender: Any) {
+        guard let selectedFriend = selectedFriend else { return }
         let storyboard = UIStoryboard(name: "ChatingRoomViewController", bundle: nil)
         let ChatingRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
-        
+        ChatingRoomVC.participants.append(selectedFriend)
         ChatingRoomVC.modalPresentationStyle = .fullScreen
         present(ChatingRoomVC, animated: true, completion: nil)
     }
@@ -58,3 +59,6 @@ class ProfileViewController: UIViewController {
 // MARK: - Bar Button action func
 extension ProfileViewController {
 }
+
+
+

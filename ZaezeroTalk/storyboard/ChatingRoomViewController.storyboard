@@ -27,8 +27,8 @@
                                             </connections>
                                         </barButtonItem>
                                         <rightBarButtonItems>
-                                            <barButtonItem image="barButtonItem:URB-Dz-gq5:image" catalog="system" id="URB-Dz-gq5"/>
-                                            <barButtonItem image="barButtonItem:8Py-WW-LKL:image" catalog="system" id="8Py-WW-LKL"/>
+                                            <barButtonItem image="barButtonItem:URB-Dz-gq5:image" id="URB-Dz-gq5"/>
+                                            <barButtonItem image="barButtonItem:8Py-WW-LKL:image" id="8Py-WW-LKL"/>
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
@@ -45,7 +45,7 @@
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4Lc-Lx-1rd">
                                         <rect key="frame" x="54" y="5" width="355" height="50"/>
-                                        <color key="backgroundColor" systemColor="systemBrownColor"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="9Nw-Cx-SEa"/>
                                         </constraints>
@@ -53,6 +53,15 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdS-a9-ces">
+                                        <rect key="frame" x="365" y="14.5" width="44" height="31"/>
+                                        <color key="tintColor" systemColor="systemGray2Color"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="arrow.up.circle.fill" catalog="system" title=""/>
+                                        <connections>
+                                            <action selector="clickSendButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="wYB-kI-Cnx"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfN-FG-TJX">
                                         <rect key="frame" x="5" y="14.5" width="44" height="31"/>
                                         <state key="normal" title="Button"/>
@@ -61,6 +70,8 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="gdS-a9-ces" firstAttribute="centerY" secondItem="4Lc-Lx-1rd" secondAttribute="centerY" id="7Nh-Gy-aAY"/>
+                                    <constraint firstItem="gdS-a9-ces" firstAttribute="trailing" secondItem="4Lc-Lx-1rd" secondAttribute="trailing" id="Lfm-Ak-kiD"/>
                                     <constraint firstAttribute="trailing" secondItem="4Lc-Lx-1rd" secondAttribute="trailing" constant="5" id="LlO-PJ-B8C"/>
                                     <constraint firstItem="PfN-FG-TJX" firstAttribute="leading" secondItem="OYY-qD-P3a" secondAttribute="leading" constant="5" id="VfS-5d-lf4"/>
                                     <constraint firstItem="4Lc-Lx-1rd" firstAttribute="leading" secondItem="PfN-FG-TJX" secondAttribute="trailing" constant="5" id="Wno-Mc-xMm"/>
@@ -88,6 +99,8 @@
                     <connections>
                         <outlet property="chatingTableView" destination="k5C-sx-KYw" id="HwD-9a-NY5"/>
                         <outlet property="customNavigationItem" destination="E24-Ts-bRJ" id="FYq-Jp-gae"/>
+                        <outlet property="inputTextView" destination="4Lc-Lx-1rd" id="8Dn-0c-fUb"/>
+                        <outlet property="sendButton" destination="gdS-a9-ces" id="9mE-jz-mXA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -96,7 +109,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="barButtonItem:8Py-WW-LKL:image" catalog="system" width="128" height="115">
+        <image name="arrow.up.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="barButtonItem:8Py-WW-LKL:image" width="128" height="115">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
 S2V5ZWRBcmNoaXZlctEICVRyb290gAGvEBELDBscIRkmKywzNjlDS0xQU1UkbnVsbNcNDg8QERITFBUW
@@ -15951,7 +15965,7 @@ b4wADm+OAA5vkAAOb5kADm+eAA5vpAAOb6wADm+uAA5vsAAOb7IADm+0AA6BVAAOgVkADoFmAA6BaQAO
 gXYADoF7AA6BgwAOgYYADoGLAA6BkwAAAAAAAAQBAAAAAAAAAFYAAAAAAAAAAAAAAAAADoGWA
 </mutableData>
         </image>
-        <image name="barButtonItem:URB-Dz-gq5:image" catalog="system" width="128" height="64">
+        <image name="barButtonItem:URB-Dz-gq5:image" width="128" height="64">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
 S2V5ZWRBcmNoaXZlctEICVRyb290gAGvEBELDBscIRkmKywzNjlDS0xQU1UkbnVsbNcNDg8QERITFBUW
@@ -24851,8 +24865,11 @@ AAAAAAAACCF1A
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

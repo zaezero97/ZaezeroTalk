@@ -7,9 +7,14 @@
 
 import Foundation
 
-struct ChatingRoom {
-    let participants: [String: Bool]
-    let id: String
-    let name: String
-    let messages = [Message]()
+struct ChatingRoom: Codable{
+    var participants: [String: Any]
+    var name: String
+    var messages: Message?
+    
+    enum CodingKeys: String,CodingKeys {
+        case participants
+        case name
+        case messages = "messages"
+    }
 }

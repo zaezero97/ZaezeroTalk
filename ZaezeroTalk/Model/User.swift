@@ -8,8 +8,7 @@
 import Foundation
 
 
-struct User{
-    var uid: String
+struct User: Codable{
     var userInfo: UserInfo
     var friends = [Friend]()
 }

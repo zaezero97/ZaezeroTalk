@@ -75,11 +75,12 @@ class SignUpViewController: UIViewController {
                 }
                 return
             }
-            let joinUser = result.user
-            guard let email = joinUser.email, let name = self.nameTextField.text else { return }
+            
+            let signUpUser = result.user
+            guard let email = signUpUser.email, let name = self.nameTextField.text else { return }
             let userInfo = [ "email": email, "name": name]
-            DatabaseManager.shared.setValue(userInfo, forPath: "Users/\(joinUser.uid)/UserInfo")
-            let changeRequest = joinUser.createProfileChangeRequest()
+            DatabaseManager.shared.setValue(userInfo, forPath: "Users/\(signUpUser.uid)/userInfo")
+            let changeRequest = signUpUser.createProfileChangeRequest()
             changeRequest.displayName = self.nameTextField.text
             changeRequest.commitChanges {
                 error in

@@ -8,7 +8,6 @@
 import Foundation
 
 struct Friend: Codable{
-    let uid: String
     let email: String
     var name: String
 }

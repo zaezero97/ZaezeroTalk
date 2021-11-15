@@ -5,16 +5,16 @@
 //  Created by 재영신 on 2021/11/12.
 //
 
-import Foundation
+import UIKit
 
-enum MessageType {
+enum MessageType: String{
     case Text
     case Image
 }
-struct Message {
+struct Message: Codable{
     let sender: String
-    let time: [AnyHashable: Any]
-    let isread: Bool
-    let type: MessageType
+    let time: Int
+    let readUsers: [String: Any]
+    let type: String
     let content: String
 }

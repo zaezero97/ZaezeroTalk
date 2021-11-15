@@ -11,8 +11,7 @@ import Firebase
 
 class AddFriendViewController: UIViewController {
     
-    var searchedUserInfo : [String: Any]?
-    var searchedUserUid : String?
+    var searchedUserInfo: UserInfo?
     @IBOutlet weak var customNavigationBar: UINavigationBar!
     @IBOutlet weak var customNavigationItem: UINavigationItem! {
         didSet {
@@ -84,35 +83,28 @@ extension AddFriendViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let searchEmail = textField.text , searchEmail.count > 0 else { return true }
         
-        DatabaseManager.shared.fetchUserInfoWithUidByEmail(email: searchEmail,completion: {
-            userInfo,uid in
+        DatabaseManager.shared.fetchUserInfo(email: searchEmail) {
+            userInfo in
             guard let userInfo = userInfo else {
                 self.searchByEmailResultView.isHidden = true
                 self.searchByEmailResultLabel.isHidden = false
                 return
             }
-            
-            let name = userInfo["name"] as? String ?? ""
             self.searchedUserInfo = userInfo
-            self.searchedUserUid = uid
-            self.searchByEmailResultView.nameLabel.text = name
+            self.searchByEmailResultView.nameLabel.text = userInfo.name
             self.searchByEmailResultView.addFriendButton.isEnabled = false
             self.searchByEmailResultLabel.isHidden = true
             self.searchByEmailResultView.isHidden = false
             
-            DatabaseManager.shared.findFriend(by: self.searchedUserUid!, completion: {
-                (isExisted) in
-                DispatchQueue.main.async {
-                    if isExisted {
-                        self.searchByEmailResultView.addFriendButton.isEnabled = false
-                    } else {
-                        self.searchByEmailResultView.addFriendButton.isEnabled = true
-                    }
-                }
-                
-            })
-            
-        })
+            let isExisted = ConnectedUser.shared.user.friends.contains { friend in
+                friend.email == self.searchedUserInfo!.email
+            }
+            if isExisted {
+                self.searchByEmailResultView.addFriendButton.isEnabled = false
+            } else {
+                self.searchByEmailResultView.addFriendButton.isEnabled = true
+            }
+        }
         
         textField.becomeFirstResponder()
         return true
@@ -132,12 +124,12 @@ extension AddFriendViewController{
 // MARK: - email로 사람 검색 후 친구 추가 버튼 클릭 이벤트 함수
 extension AddFriendViewController{
     @objc func addFriend(sender : UIButton){
-        if let searchedUserInfo = searchedUserInfo {
-            DatabaseManager.shared.updateChildValues([searchedUserUid!: searchedUserInfo], forPath: "Users/\(ConnectedUser.shared.user.uid)/Friends") { (
-                error , reference) in
-                self.searchByEmailResultView.addFriendButton.isEnabled = false
-            }
-            
-        }
+//        if let searchedUserInfo = searchedUserInfo {
+//            DatabaseManager.shared.updateChildValues([searchedUserUid!: searchedUserInfo], forPath: "Users/\(ConnectedUser.shared.user.uid)/friends") { (
+//                error , reference) in
+//                self.searchByEmailResultView.addFriendButton.isEnabled = false
+//            }
+//
+//        }
     }
 }
