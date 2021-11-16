@@ -10,6 +10,7 @@ import UIKit
 class ChatingRoomCell: UITableViewCell {
 
     
+    @IBOutlet weak var headCountLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var lastMeesageLabel: UILabel!

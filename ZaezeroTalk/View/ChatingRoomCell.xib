@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="120" id="KGk-i7-Jjw" customClass="ChatingRoomCell" customModule="ZaezeroTalk" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatingRoomCell" rowHeight="120" id="KGk-i7-Jjw" customClass="ChatingRoomCell" customModule="ZaezeroTalk" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="360" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -18,16 +18,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VbH-vh-eXv">
-                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="120"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="G7k-SA-HJZ"/>
                             <constraint firstAttribute="width" constant="50" id="qMc-hb-2uV"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="채팅방 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTZ-ax-p7U">
-                        <rect key="frame" x="55" y="5" width="78" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <rect key="frame" x="55" y="5" width="91" height="24"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CYP-xi-aXP">
@@ -36,10 +34,16 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="마지막 message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIM-qV-XZy">
-                        <rect key="frame" x="55" y="31" width="118" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="마지막 message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIM-qV-XZy">
+                        <rect key="frame" x="55" y="34" width="118" height="81"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eP-Wd-MPe">
+                        <rect key="frame" x="151" y="5" width="26" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -48,16 +52,19 @@
                     <constraint firstAttribute="bottom" secondItem="qIM-qV-XZy" secondAttribute="bottom" constant="5" id="7tI-AG-2RP"/>
                     <constraint firstAttribute="trailing" secondItem="CYP-xi-aXP" secondAttribute="trailing" constant="5" id="H7Q-4d-d6Q"/>
                     <constraint firstAttribute="bottom" secondItem="VbH-vh-eXv" secondAttribute="bottom" id="PQI-Aq-yUq"/>
+                    <constraint firstItem="4eP-Wd-MPe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="gsb-GA-ubj"/>
                     <constraint firstItem="hTZ-ax-p7U" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="hp4-nn-OvK"/>
                     <constraint firstItem="hTZ-ax-p7U" firstAttribute="leading" secondItem="VbH-vh-eXv" secondAttribute="trailing" constant="5" id="iOM-zG-bCI"/>
                     <constraint firstItem="VbH-vh-eXv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="moc-85-hdB"/>
                     <constraint firstItem="qIM-qV-XZy" firstAttribute="top" secondItem="hTZ-ax-p7U" secondAttribute="bottom" constant="5" id="oPH-dM-Amz"/>
                     <constraint firstItem="qIM-qV-XZy" firstAttribute="leading" secondItem="VbH-vh-eXv" secondAttribute="trailing" constant="5" id="uus-So-DLf"/>
+                    <constraint firstItem="4eP-Wd-MPe" firstAttribute="leading" secondItem="hTZ-ax-p7U" secondAttribute="trailing" constant="5" id="xu2-Z8-sds"/>
                     <constraint firstItem="VbH-vh-eXv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="yT9-sF-RWS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="headCountLabel" destination="4eP-Wd-MPe" id="91g-w5-Cvt"/>
                 <outlet property="lastMeesageLabel" destination="qIM-qV-XZy" id="g5h-pV-4Zf"/>
                 <outlet property="nameLabel" destination="hTZ-ax-p7U" id="lSI-hi-wfJ"/>
                 <outlet property="roomImageView" destination="VbH-vh-eXv" id="teI-kK-1AT"/>

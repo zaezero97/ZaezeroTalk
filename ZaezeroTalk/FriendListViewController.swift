@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 class FriendListViewController: UIViewController {
     
-    var friends = [Friend]()
+    var friends = [(uid: String,info: UserInfo)]()
     @IBOutlet weak var customNavigationBar: UINavigationBar!
     @IBOutlet weak var customNavigationItem: UINavigationItem! {
         didSet {
@@ -37,10 +37,13 @@ class FriendListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let friendsDictionary = ConnectedUser.shared.user.friends {
-            friends = Array(friendsDictionary.values)
+            friends = friendsDictionary.map { (key,value) in
+                (key,value)
+            }
         }
         friendListTableView.reloadData()
     }
+    
     @IBAction func clickAddFriendButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "AddFriendViewController", bundle: nil)
         let addFriendVC = storyboard.instantiateViewController(withIdentifier: "AddFriendViewController") as! AddFriendViewController
@@ -63,7 +66,7 @@ extension FriendListViewController: UITableViewDataSource{
         if section == 0 {
             return "나의 프로필"
         } else {
-            return "친구 " + String(ConnectedUser.shared.user.friends!.count)
+            return "친구 " + String(friends.count)
         }
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -73,7 +76,7 @@ extension FriendListViewController: UITableViewDataSource{
         if section == 0 {
             return 1
         } else {
-            return ConnectedUser.shared.user.friends!.count
+            return friends.count
         }
     }
     
@@ -82,7 +85,7 @@ extension FriendListViewController: UITableViewDataSource{
         if indexPath.section == 0 {
             cell.nameLabel.text = ConnectedUser.shared.user.userInfo.name
         } else {
-                cell.nameLabel.text = friends[indexPath.row].name
+            cell.nameLabel.text = friends[indexPath.row].info.name
         }
         
         return cell
@@ -98,8 +101,6 @@ extension FriendListViewController: UITableViewDelegate{
         let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
         let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
         if indexPath.section != 0 {
-            
-            
             profileVC.selectedFriend = friends[indexPath.row]
         }
         present(profileVC, animated: true, completion: nil)

@@ -19,6 +19,7 @@
 		AE5FA775273B7B1F00F211CE /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FA773273B7B1F00F211CE /* TextFieldCell.swift */; };
 		AE5FA776273B7B1F00F211CE /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE5FA774273B7B1F00F211CE /* TextFieldCell.xib */; };
 		AE6BB5D5273634E600D99462 /* remoteConfigDefault.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE6BB5D4273634E600D99462 /* remoteConfigDefault.plist */; };
+		AE90BA4E2743A4B500D04469 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE90BA4D2743A4B500D04469 /* Int.swift */; };
 		AE998F9B273D5A4400F6767B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE998F9A273D5A4400F6767B /* ProfileViewController.swift */; };
 		AE998F9D273D5A5600F6767B /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */; };
 		AEAE17C9273DE9BC00A44737 /* ChatingRoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17C8273DE9BC00A44737 /* ChatingRoomListViewController.swift */; };
@@ -28,7 +29,6 @@
 		AEAE17D3273DEF2E00A44737 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17D2273DEF2E00A44737 /* Message.swift */; };
 		AEAE17D5273DEF3900A44737 /* ChatingRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17D4273DEF3900A44737 /* ChatingRoom.swift */; };
 		AEAE17D7273E070700A44737 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17D6273E070700A44737 /* UserInfo.swift */; };
-		AEAE17D9273E07B800A44737 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17D8273E07B800A44737 /* Friend.swift */; };
 		AEAF93FD273B530900BE2FF1 /* AddFriendViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAF93FC273B530900BE2FF1 /* AddFriendViewController.storyboard */; };
 		AEAF93FF273B531700BE2FF1 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */; };
 		AEB19B2B274219AC007D649E /* MyMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB19B29274219AC007D649E /* MyMessageCell.swift */; };
@@ -69,6 +69,7 @@
 		AE5FA773273B7B1F00F211CE /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		AE5FA774273B7B1F00F211CE /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		AE6BB5D4273634E600D99462 /* remoteConfigDefault.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = remoteConfigDefault.plist; sourceTree = "<group>"; };
+		AE90BA4D2743A4B500D04469 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Int.swift; path = ../../../Int.swift; sourceTree = "<group>"; };
 		AE998F9A273D5A4400F6767B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
 		AEAA8BFD273CA7FF00400EDD /* memo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = memo.md; sourceTree = "<group>"; };
@@ -79,7 +80,6 @@
 		AEAE17D2273DEF2E00A44737 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		AEAE17D4273DEF3900A44737 /* ChatingRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatingRoom.swift; sourceTree = "<group>"; };
 		AEAE17D6273E070700A44737 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		AEAE17D8273E07B800A44737 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		AEAF93FC273B530900BE2FF1 /* AddFriendViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddFriendViewController.storyboard; sourceTree = "<group>"; };
 		AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		AEB19B29274219AC007D649E /* MyMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageCell.swift; sourceTree = "<group>"; };
@@ -155,6 +155,7 @@
 			children = (
 				AE524A0F273528F60017F770 /* UIColor.swift */,
 				AE30D6FE273B9D5A0058F06B /* UIView.swift */,
+				AE90BA4D2743A4B500D04469 /* Int.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -255,7 +256,6 @@
 				AEAE17D4273DEF3900A44737 /* ChatingRoom.swift */,
 				AEBE6BFF2739FCC9008B0B61 /* User.swift */,
 				AEAE17D6273E070700A44737 /* UserInfo.swift */,
-				AEAE17D8273E07B800A44737 /* Friend.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -412,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEB3A9DD273E3671008E7031 /* ChatingRoomViewController.swift in Sources */,
+				AE90BA4E2743A4B500D04469 /* Int.swift in Sources */,
 				AEAF93FF273B531700BE2FF1 /* AddFriendViewController.swift in Sources */,
 				AEFC6FF5273963E80092E037 /* TabbarViewController.swift in Sources */,
 				AE30D701273BA02C0058F06B /* SearchByEmailResultView.swift in Sources */,
@@ -432,7 +433,6 @@
 				AEB1D4E32736DEFF00E1BD4F /* LoginViewController.swift in Sources */,
 				AEBE6BFD2739F630008B0B61 /* FriendListViewController.swift in Sources */,
 				AE30D6FF273B9D5A0058F06B /* UIView.swift in Sources */,
-				AEAE17D9273E07B800A44737 /* Friend.swift in Sources */,
 				AEB97CF527351C0D00DCDF77 /* SceneDelegate.swift in Sources */,
 				AEBE6C002739FCC9008B0B61 /* User.swift in Sources */,
 				AE30D703273BB3AF0058F06B /* ConnectedUser.swift in Sources */,

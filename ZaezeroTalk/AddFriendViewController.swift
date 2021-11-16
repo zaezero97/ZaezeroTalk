@@ -134,9 +134,10 @@ extension AddFriendViewController{
         
         if let searchedUserInfo = searchedUserInfo {
             DatabaseManager.shared.fetchUid(email: searchedUserInfo.email)
-            { uid in
+            {
+                uid in
                 guard let uid = uid else { return }
-                DatabaseManager.shared.updateChildValues([uid: searchedUserInfo], forPath: "Users/\(ConnectedUser.shared.uid)/friends") { (
+                DatabaseManager.shared.updateChildValues([uid: searchedUserInfo.toDictionary()], forPath: "Users/\(ConnectedUser.shared.uid)/friends") { (
                     error , reference) in
                     self.searchByEmailResultView.addFriendButton.isEnabled = false
                 }

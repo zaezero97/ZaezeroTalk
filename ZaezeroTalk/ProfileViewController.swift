@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileNameLabel: UILabel! {
         didSet {
             if let selectedFriend = selectedFriend {
-                profileNameLabel.text = selectedFriend.name
+                profileNameLabel.text = selectedFriend.info.name
             } else {
                 profileNameLabel.text = ConnectedUser.shared.user.userInfo.name
             }
@@ -34,11 +34,10 @@ class ProfileViewController: UIViewController {
     }
    
     
-    var selectedFriend: Friend?
+    var selectedFriend: (uid: String,info: UserInfo)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     @IBAction func clickXButton(_ sender: Any) {
@@ -48,6 +47,7 @@ class ProfileViewController: UIViewController {
         guard let selectedFriend = selectedFriend else { return }
         let storyboard = UIStoryboard(name: "ChatingRoomViewController", bundle: nil)
         let ChatingRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
+        print("selectedFriend",selectedFriend)
         ChatingRoomVC.participants.append(selectedFriend)
         ChatingRoomVC.modalPresentationStyle = .fullScreen
         present(ChatingRoomVC, animated: true, completion: nil)

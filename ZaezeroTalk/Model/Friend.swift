@@ -10,4 +10,5 @@ import Foundation
 struct Friend: Codable{
     let email: String
     var name: String
+    
 }

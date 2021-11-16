@@ -10,5 +10,5 @@ import Foundation
 
 struct User: Codable{
     var userInfo: UserInfo
-    var friends : [String:Friend]?
+    var friends : [String: UserInfo]?
 }

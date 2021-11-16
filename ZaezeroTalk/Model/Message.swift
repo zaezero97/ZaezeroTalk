@@ -11,7 +11,6 @@ import UIKit
 struct Message: Codable{
     let sender: String?
     let time: Int?
-    let readUsers: [String: Bool]?
     let type: String?
     let content: String?
 }

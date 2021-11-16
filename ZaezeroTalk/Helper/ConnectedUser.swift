@@ -10,7 +10,8 @@ import Foundation
 class ConnectedUser {
     static let shared = ConnectedUser()
     var user : User!
-    var uid: String?
+    var uid = ""
+    var chatingRoomList: [(id: String, info: ChatingRoom)]?
     private init() {
         
     }
