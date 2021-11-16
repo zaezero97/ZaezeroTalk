@@ -7,14 +7,11 @@
 
 import UIKit
 
-enum MessageType: String{
-    case Text
-    case Image
-}
+
 struct Message: Codable{
-    let sender: String
-    let time: Int
-    let readUsers: [String: Any]
-    let type: String
-    let content: String
+    let sender: String?
+    let time: Int?
+    let readUsers: [String: Bool]?
+    let type: String?
+    let content: String?
 }

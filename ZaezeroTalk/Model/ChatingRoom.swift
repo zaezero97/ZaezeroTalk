@@ -8,13 +8,7 @@
 import Foundation
 
 struct ChatingRoom: Codable{
-    var participants: [String: Any]
+    var participants: [String: Bool]
     var name: String
     var messages: Message?
-    
-    enum CodingKeys: String,CodingKeys {
-        case participants
-        case name
-        case messages = "messages"
-    }
 }

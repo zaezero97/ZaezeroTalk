@@ -31,7 +31,7 @@ class ChatingRoomViewController: UIViewController {
         didSet {
             inputTextView.delegate = self
             inputTextView.layer.cornerRadius = inputTextView.bounds.height / 2
-            JSONDecoder.de
+            
         }
     }
     @IBOutlet weak var chatingTableView: UITableView! {
@@ -51,20 +51,20 @@ class ChatingRoomViewController: UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        let participantUids = participants.map { participant in
-            participant.uid
-        }
-        DatabaseManager.shared.fetchRoom(participantUids: participantUids, completion: {
-            chatingRoom in
-            if let chatingRoom = chatingRoom {
-                DatabaseManager.shared.registerRoomObserver(id: chatingRoom.id, completion: {
-                    room in
-                    self.chatingRoom = room
-                    self.chatingTableView.reloadData()
-                    self.navigationItem.title = self.chatingRoom?.name
-                })
-            }
-        })
+//        let participantUids = participants.map { participant in
+//            participant.uis
+//        }
+//        DatabaseManager.shared.fetchRoom(participantUids: participantUids, completion: {
+//            chatingRoom in
+//            if let chatingRoom = chatingRoom {
+//                DatabaseManager.shared.registerRoomObserver(id: chatingRoom.id, completion: {
+//                    room in
+//                    self.chatingRoom = room
+//                    self.chatingTableView.reloadData()
+//                    self.navigationItem.title = self.chatingRoom?.name
+//                })
+//            }
+//        })
     }
  
     
@@ -73,44 +73,46 @@ class ChatingRoomViewController: UIViewController {
     }
     
     @IBAction func clickSendButton(_ sender: Any) {
-        if let chatingRoom = chatingRoom {
-            let message = Message(sender: ConnectedUser.shared.user.uid, time: ServerValue.timestamp(), readUsers: [ConnectedUser.shared.user.uid: 1], type: MessageType.Text.rawValue, content: inputTextView.text)
-            DatabaseManager.shared.sendMessage(sendMessage: message, room: chatingRoom)
-        } else {
-            let participantUids = participants.map { participant in
-                participant.uid
-            }
-            DatabaseManager.shared.createRoomWithObserver(participantUids: participantUids, message: inputTextView.text, name: customNavigationItem.title ?? "",observerCompletion: {
-                room in
-                self.chatingRoom = room
-                self.chatingTableView.reloadData()
-                self.navigationItem.title = self.chatingRoom?.name
-            })
-         
-        }
+//        if let chatingRoom = chatingRoom {
+//            let message = Message(sender: ConnectedUser.shared.user.uid, time: ServerValue.timestamp(), readUsers: [ConnectedUser.shared.user.uid: 1], type: MessageType.Text.rawValue, content: inputTextView.text)
+//            DatabaseManager.shared.sendMessage(sendMessage: message, room: chatingRoom)
+//        } else {
+//            let participantUids = participants.map { participant in
+//                participant.uid
+//            }
+//            DatabaseManager.shared.createRoomWithObserver(participantUids: participantUids, message: inputTextView.text, name: customNavigationItem.title ?? "",observerCompletion: {
+//                room in
+//                self.chatingRoom = room
+//                self.chatingTableView.reloadData()
+//                self.navigationItem.title = self.chatingRoom?.name
+//            })
+//
+//        }
     }
 }
 
 // MARK: - TableView DataSource
 extension ChatingRoomViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chatingRoom?.messages.count ?? 0
+//        return chatingRoom?.messages.count ?? 0
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let chatingRoom = chatingRoom else { return UITableViewCell() }
         
-        if chatingRoom.messages[indexPath.row].sender == ConnectedUser.shared.user.uid {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
-            cell.contentTextView.text = chatingRoom.messages[indexPath.row].content
-            cell.timeLabel.text = chatingRoom.messages[indexPath.row].time.values.first as? String ?? ""
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OtherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
-            cell.contentTextView.text = chatingRoom.messages[indexPath.row].content
-            cell.timeLabel.text = chatingRoom.messages[indexPath.row].time.values.first as? String ?? ""
-            return cell
-        }
+//        if chatingRoom.messages[indexPath.row].sender == ConnectedUser.shared.user.uid {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
+//            cell.contentTextView.text = chatingRoom.messages[indexPath.row].content
+//            cell.timeLabel.text = chatingRoom.messages[indexPath.row].time.values.first as? String ?? ""
+//            return cell
+//        } else {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "OtherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
+//            cell.contentTextView.text = chatingRoom.messages[indexPath.row].content
+//            cell.timeLabel.text = chatingRoom.messages[indexPath.row].time.values.first as? String ?? ""
+//            return cell
+//        }
+        return UITableViewCell()
     }
 }
 

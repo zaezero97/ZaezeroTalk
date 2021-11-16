@@ -27,8 +27,10 @@ class DatabaseManager{
     func updateChildValues(_ value: [String: Any], forPath path: String, completion: @escaping (Error?,DatabaseReference)-> Void){
         ref.child(path).updateChildValues(value,withCompletionBlock: completion)
     }
-    func fetchUid(email: String,compltion: @escaping (String) -> Void) {
-        ref.child("Users")
+    func fetchUid(email: String,compltion: @escaping (String?) -> Void) {
+        ref.child("Users").queryOrdered(byChild: "userInfo").queryEqual(toValue: email).observeSingleEvent(of: .value) { snapshot in
+            compltion(snapshot.key)
+        }
     }
     func fetchUser(email : String ,completion : @escaping (User?) -> Void){
         ref.child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value) { snapshot in
@@ -44,10 +46,12 @@ class DatabaseManager{
     }
     
     func fetchUser(uid: String, completion : @escaping (User?) -> Void) {
+        print(uid)
         ref.child("Users/\(uid)").observeSingleEvent(of: .value, with: {
             snapshot in
             do{
             let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
+                print(data)
             let result = try JSONDecoder().decode(User.self, from: data)
                 completion(result)
             } catch {
@@ -71,15 +75,24 @@ class DatabaseManager{
         })
     }
     func fetchUserInfo(email: String, completion : @escaping (UserInfo?) -> Void){
-        ref.child("Users/userInfo").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: {
+        ref.child("Users").queryOrdered(byChild: "userInfo/email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: {
             snapshot in
+            print("email",email)
+            print("fetchUserInfo!!!",snapshot.value)
+            guard snapshot.exists() else {
+                completion(nil)
+                return
+            }
+            let child = snapshot.value as! [String: Any]
+            let userInfoDictionary = child[child.keys.first!] as! [String: Any]
+            
             do{
-            let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
+                let data = try JSONSerialization.data(withJSONObject: userInfoDictionary["userInfo"]!, options: .prettyPrinted)
             let result = try JSONDecoder().decode(UserInfo.self, from: data)
                 completion(result)
+                print(result)
             } catch {
                 print("-> Error : \(error.localizedDescription)")
-                completion(nil)
             }
         })
     }

@@ -76,7 +76,12 @@ class LoginViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             } else { // 로그인 성공
                 guard let result = result else { return }
-                DatabaseManager.shared.fetchUser(by: result.user.uid, completion: {
+                DatabaseManager.shared.fetchUser(uid: result.user.uid, completion: {
+                    user in
+                    print(user)
+                    ConnectedUser.shared.user = user
+                    ConnectedUser.shared.uid = result.user.uid
+                    
                     DispatchQueue.main.async {
                         self.indicator.stopAnimating()
                         let storyboard = UIStoryboard(name: "TabbarViewController", bundle: nil)

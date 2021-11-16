@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 class FriendListViewController: UIViewController {
     
-    
+    var friends = [Friend]()
     @IBOutlet weak var customNavigationBar: UINavigationBar!
     @IBOutlet weak var customNavigationItem: UINavigationItem! {
         didSet {
@@ -32,10 +32,13 @@ class FriendListViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let friendsDictionary = ConnectedUser.shared.user.friends {
+            friends = Array(friendsDictionary.values)
+        }
         friendListTableView.reloadData()
     }
     @IBAction func clickAddFriendButton(_ sender: Any) {
@@ -60,7 +63,7 @@ extension FriendListViewController: UITableViewDataSource{
         if section == 0 {
             return "나의 프로필"
         } else {
-            return "친구 " + String(ConnectedUser.shared.user.friends.count)
+            return "친구 " + String(ConnectedUser.shared.user.friends!.count)
         }
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,7 +73,7 @@ extension FriendListViewController: UITableViewDataSource{
         if section == 0 {
             return 1
         } else {
-            return ConnectedUser.shared.user.friends.count
+            return ConnectedUser.shared.user.friends!.count
         }
     }
     
@@ -79,7 +82,7 @@ extension FriendListViewController: UITableViewDataSource{
         if indexPath.section == 0 {
             cell.nameLabel.text = ConnectedUser.shared.user.userInfo.name
         } else {
-            cell.nameLabel.text = ConnectedUser.shared.user.friends[indexPath.row].name
+                cell.nameLabel.text = friends[indexPath.row].name
         }
         
         return cell
@@ -95,7 +98,9 @@ extension FriendListViewController: UITableViewDelegate{
         let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
         let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
         if indexPath.section != 0 {
-            profileVC.selectedFriend = ConnectedUser.shared.user.friends[indexPath.row]
+            
+            
+            profileVC.selectedFriend = friends[indexPath.row]
         }
         present(profileVC, animated: true, completion: nil)
     }

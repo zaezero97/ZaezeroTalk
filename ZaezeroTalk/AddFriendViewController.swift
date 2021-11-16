@@ -28,10 +28,10 @@ class AddFriendViewController: UIViewController {
     lazy var searchByEmailResultView : SearchByEmailResultView = {
         let view = UIView.loadViewFromNib(nib: "SearchByEmailResultView") as! SearchByEmailResultView
         self.textFieldTableView.addSubview(view)
-        view.snp.makeConstraints { make in
+        view.snp.makeConstraints {
+            make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(-100)
-            
         }
         view.isHidden = true
         view.addFriendButton.addTarget(self, action: #selector(addFriend), for: .touchUpInside)
@@ -85,6 +85,7 @@ extension AddFriendViewController: UITextFieldDelegate {
         
         DatabaseManager.shared.fetchUserInfo(email: searchEmail) {
             userInfo in
+            
             guard let userInfo = userInfo else {
                 self.searchByEmailResultView.isHidden = true
                 self.searchByEmailResultLabel.isHidden = false
@@ -96,7 +97,13 @@ extension AddFriendViewController: UITextFieldDelegate {
             self.searchByEmailResultLabel.isHidden = true
             self.searchByEmailResultView.isHidden = false
             
-            let isExisted = ConnectedUser.shared.user.friends.contains { friend in
+            guard let friends = ConnectedUser.shared.user.friends else {
+                self.searchByEmailResultView.addFriendButton.isEnabled = true
+                return
+            }
+            let isExisted = friends.values.contains
+            {
+                friend in
                 friend.email == self.searchedUserInfo!.email
             }
             if isExisted {
@@ -124,12 +131,17 @@ extension AddFriendViewController{
 // MARK: - email로 사람 검색 후 친구 추가 버튼 클릭 이벤트 함수
 extension AddFriendViewController{
     @objc func addFriend(sender : UIButton){
-//        if let searchedUserInfo = searchedUserInfo {
-//            DatabaseManager.shared.updateChildValues([searchedUserUid!: searchedUserInfo], forPath: "Users/\(ConnectedUser.shared.user.uid)/friends") { (
-//                error , reference) in
-//                self.searchByEmailResultView.addFriendButton.isEnabled = false
-//            }
-//
-//        }
+        
+        if let searchedUserInfo = searchedUserInfo {
+            DatabaseManager.shared.fetchUid(email: searchedUserInfo.email)
+            { uid in
+                guard let uid = uid else { return }
+                DatabaseManager.shared.updateChildValues([uid: searchedUserInfo], forPath: "Users/\(ConnectedUser.shared.uid)/friends") { (
+                    error , reference) in
+                    self.searchByEmailResultView.addFriendButton.isEnabled = false
+                }
+            }
+
+        }
     }
 }
