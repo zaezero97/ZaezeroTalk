@@ -50,7 +50,7 @@
             <connections>
                 <outlet property="nameLabel" destination="nFg-gi-yAO" id="OZm-Ck-7zX"/>
                 <outlet property="profileImageView" destination="M7B-I4-yNX" id="QIu-Ms-HCQ"/>
-                <outlet property="stateLabel" destination="Zym-Et-YPj" id="kEt-Ni-Dm2"/>
+                <outlet property="stateMessageLabel" destination="Zym-Et-YPj" id="kEt-Ni-Dm2"/>
             </connections>
             <point key="canvasLocation" x="281.15942028985512" y="125.22321428571428"/>
         </tableViewCell>

@@ -9,6 +9,8 @@ import UIKit
 import Firebase
 
 class ChatingRoomViewController: UIViewController {
+    @IBOutlet weak var inputTextViewBottomMargin: NSLayoutConstraint!
+    @IBOutlet weak var inputTextViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var customNavigationItem: UINavigationItem! {
         didSet {
             var title = ""
@@ -31,21 +33,20 @@ class ChatingRoomViewController: UIViewController {
         didSet {
             inputTextView.delegate = self
             inputTextView.layer.cornerRadius = inputTextView.bounds.height / 2
-            
         }
     }
     @IBOutlet weak var chatingTableView: UITableView! {
         didSet {
             chatingTableView.delegate = self
             chatingTableView.dataSource = self
-            
-            chatingTableView.register(UINib(nibName: "MyMessageCell", bundle: nil), forCellReuseIdentifier: "MyMessageCell")
-            chatingTableView.register(UINib(nibName: "OtherPersonMessageCell", bundle: nil), forCellReuseIdentifier: "OtherPersonMessageCell")
+            chatingTableView.estimatedRowHeight = 10
+            chatingTableView.rowHeight = UITableView.automaticDimension
+            chatingTableView.separatorStyle = .none
         }
     }
     
     var participants = [(uid: String, info: UserInfo)]() // 나를 제외한 참가자들
-    var chatingRoom: (id: String, info: ChatingRoom)? 
+    var chatingRoom: (id: String, info: ChatingRoom)?
     var messages = [Message]() {
         didSet {
             print(messages)
@@ -54,6 +55,12 @@ class ChatingRoomViewController: UIViewController {
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        
+        chatingTableView.register(UINib(nibName: "MyMessageCell", bundle: nil), forCellReuseIdentifier: "MyMessageCell")
+        chatingTableView.register(UINib(nibName: "OtherPersonMessageCell", bundle: nil), forCellReuseIdentifier: "OtherPersonMessageCell")
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         
         if let curRoom = fetchCurrentRoom() {
             chatingRoom = curRoom
@@ -76,7 +83,7 @@ class ChatingRoomViewController: UIViewController {
         
         // 방에 입장 시 방이 존재하면 방의 정보를 가져오고 방의 상태 변경을 감지하는 옵저버를 등록한다,
     }
- 
+    
     
     @IBAction func clickBackButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -120,9 +127,6 @@ class ChatingRoomViewController: UIViewController {
 
 // MARK: - TableView DataSource
 extension ChatingRoomViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
@@ -133,18 +137,15 @@ extension ChatingRoomViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
             cell.contentTextView.text = messages[indexPath.row].content
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
-            cell.layer.borderWidth = 5.0
-            cell.layer.borderColor = UIColor.white.cgColor
-            cell.selectionStyle = .none
+//            cell.layer.borderWidth = 5.0
+//            cell.layer.borderColor = UIColor.clear.cgColor
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OtherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
-            print("otherPersonMessageCell",messages[indexPath.row].content)
             cell.contentTextView.text = messages[indexPath.row].content
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
-            cell.layer.borderWidth = 5.0
-            cell.layer.borderColor = UIColor.clear.cgColor
-            cell.selectionStyle = .none
+//            cell.layer.borderWidth = 5.0
+//            cell.layer.borderColor = UIColor.clear.cgColor
             return cell
         }
     }
@@ -167,6 +168,17 @@ extension ChatingRoomViewController: UITextViewDelegate {
             sendButton.isEnabled = false
             sendButton.tintColor = .darkGray
         }
+        
+        
+        if textView.contentSize.height <= 50{
+            inputTextViewHeightConstraint.constant = 50
+        } else if textView.contentSize.height >= 100 {
+            inputTextViewHeightConstraint.constant = 100
+        } else {
+            inputTextViewHeightConstraint.constant = textView.contentSize.height
+        }
+        
+        
     }
 }
 
@@ -195,4 +207,27 @@ extension ChatingRoomViewController {
     }
 }
 
-
+// MARK: - keyboard func
+extension ChatingRoomViewController {
+    @objc func keyboardWillShow(noti : Notification){
+        let notiInfo = noti.userInfo!
+        let keyboardFrame = notiInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        let animationDuration = notiInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
+        
+        
+        UIView.animate(withDuration: animationDuration) {
+            self.inputTextViewBottomMargin.constant = keyboardFrame.size.height - self.view.safeAreaInsets.bottom
+            self.view.layoutIfNeeded()
+        }
+    }
+    @objc func keyboardDidHide(noti : Notification){
+        let notiInfo = noti.userInfo!
+        let animationDuration = notiInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
+        
+        
+        UIView.animate(withDuration: animationDuration) {
+            self.inputTextViewBottomMargin.constant = 5
+            self.view.layoutIfNeeded()
+        }
+    }
+}

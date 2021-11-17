@@ -48,6 +48,9 @@
                                                 <action selector="clickChatButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="rr9-ck-QV1"/>
                                             </connections>
                                         </button>
+                                        <connections>
+                                            <action selector="clickChatButton:" destination="Y6W-OH-hqX" id="NFr-vf-qfv"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="9yE-pk-zpZ"/>
                                     <barButtonItem style="plain" id="FKg-OX-7rq">
@@ -60,20 +63,29 @@
                                                 <action selector="clickEditProfileButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="C5A-NH-EaF"/>
                                             </connections>
                                         </button>
+                                        <connections>
+                                            <action selector="clickEditProfileButton:" destination="Y6W-OH-hqX" id="RVc-ac-aRE"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="JI2-ze-g70"/>
                                 </items>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zC0-vL-cnT">
-                                <rect key="frame" x="157" y="545.5" width="100" height="99"/>
+                                <rect key="frame" x="157" y="524.5" width="100" height="99"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="We7-oU-etg"/>
                                     <constraint firstAttribute="height" constant="100" id="a5l-O7-eF2"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glQ-4e-eom">
-                                <rect key="frame" x="186" y="650" width="42" height="21"/>
+                                <rect key="frame" x="186" y="629" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isZ-SP-jOP">
+                                <rect key="frame" x="186" y="655" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -85,12 +97,14 @@
                             <constraint firstItem="Wio-59-xmi" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="0qe-0G-bzD"/>
                             <constraint firstItem="zC0-vL-cnT" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="4LR-t6-BdV"/>
                             <constraint firstItem="fbI-dO-Epl" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="CfT-TW-CyY"/>
-                            <constraint firstItem="fbI-dO-Epl" firstAttribute="top" secondItem="glQ-4e-eom" secondAttribute="bottom" constant="75" id="Iiq-bB-Gkx"/>
                             <constraint firstAttribute="trailing" secondItem="Wio-59-xmi" secondAttribute="trailing" id="LKL-I9-DVI"/>
+                            <constraint firstItem="fbI-dO-Epl" firstAttribute="top" secondItem="isZ-SP-jOP" secondAttribute="bottom" constant="70" id="aNv-Me-uva"/>
                             <constraint firstItem="glQ-4e-eom" firstAttribute="top" secondItem="zC0-vL-cnT" secondAttribute="bottom" constant="5" id="buu-qt-KsT"/>
                             <constraint firstItem="fbI-dO-Epl" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hYb-wc-iaX"/>
                             <constraint firstItem="glQ-4e-eom" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hd1-Ke-6dD"/>
+                            <constraint firstItem="isZ-SP-jOP" firstAttribute="top" secondItem="glQ-4e-eom" secondAttribute="bottom" constant="5" id="j7h-Ht-u4f"/>
                             <constraint firstAttribute="bottom" secondItem="fbI-dO-Epl" secondAttribute="bottom" id="p2J-pI-8lH"/>
+                            <constraint firstItem="isZ-SP-jOP" firstAttribute="centerX" secondItem="glQ-4e-eom" secondAttribute="centerX" id="xb4-Fs-tRR"/>
                             <constraint firstItem="Wio-59-xmi" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="yDA-Rb-o0k"/>
                         </constraints>
                     </view>
@@ -98,6 +112,7 @@
                         <outlet property="customNavigationBar" destination="Wio-59-xmi" id="IU7-Xm-2Ga"/>
                         <outlet property="profileImageView" destination="zC0-vL-cnT" id="Mnw-Qz-Ekr"/>
                         <outlet property="profileNameLabel" destination="glQ-4e-eom" id="Xxw-4J-44q"/>
+                        <outlet property="stateMessageLabel" destination="isZ-SP-jOP" id="9K8-jI-ysS"/>
                         <outlet property="toolBar" destination="fbI-dO-Epl" id="Nxb-s3-gxK"/>
                     </connections>
                 </viewController>

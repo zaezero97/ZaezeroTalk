@@ -84,8 +84,10 @@ extension FriendListViewController: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
         if indexPath.section == 0 {
             cell.nameLabel.text = ConnectedUser.shared.user.userInfo.name
+            cell.stateMessageLabel.text = ConnectedUser.shared.user.userInfo.stateMessage ?? ""
         } else {
             cell.nameLabel.text = friends[indexPath.row].info.name
+            cell.stateMessageLabel.text = friends[indexPath.row].info.stateMessage ?? ""
         }
         
         return cell
@@ -103,6 +105,7 @@ extension FriendListViewController: UITableViewDelegate{
         if indexPath.section != 0 {
             profileVC.selectedFriend = friends[indexPath.row]
         }
+        profileVC.modalPresentationStyle = .fullScreen
         present(profileVC, animated: true, completion: nil)
     }
 }

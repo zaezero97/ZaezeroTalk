@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Edit State Message View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="EditStateMessageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="EditStateMessageViewController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5DS-vI-RpE">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="상태메시지" id="3qN-Wx-TSp">
+                                        <barButtonItem key="leftBarButtonItem" title="취소" id="WJL-To-wHB">
+                                            <connections>
+                                                <action selector="clickCancleButton:" destination="Y6W-OH-hqX" id="TfF-Sm-kkB"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="확인" id="jgO-Gl-ePx">
+                                            <connections>
+                                                <action selector="clickDoneButton:" destination="Y6W-OH-hqX" id="Fwp-oO-060"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dG1-qr-twE">
+                                <rect key="frame" x="30" y="431.5" width="354" height="33"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="New-37-PRE">
+                                <rect key="frame" x="340" y="433.5" width="44" height="31"/>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="xmark.circle.fill" catalog="system" title=""/>
+                                <connections>
+                                    <action selector="clickClearButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="FA0-6E-qVV"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQU-1w-zuU">
+                                <rect key="frame" x="189" y="485.5" width="36" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c8x-pS-MVm">
+                                <rect key="frame" x="30" y="474.5" width="354" height="1"/>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="jZM-ke-bet"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.51435740890000003" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="aQU-1w-zuU" firstAttribute="top" secondItem="c8x-pS-MVm" secondAttribute="bottom" constant="10" id="2WC-zs-tLr"/>
+                            <constraint firstItem="dG1-qr-twE" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="2X9-2L-O6q"/>
+                            <constraint firstItem="5DS-vI-RpE" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="4Av-f4-pXu"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="c8x-pS-MVm" secondAttribute="trailing" constant="30" id="EbF-JJ-L0H"/>
+                            <constraint firstItem="New-37-PRE" firstAttribute="bottom" secondItem="dG1-qr-twE" secondAttribute="bottom" id="Mf9-O4-36x"/>
+                            <constraint firstItem="New-37-PRE" firstAttribute="trailing" secondItem="dG1-qr-twE" secondAttribute="trailing" id="Ndr-yZ-BHG"/>
+                            <constraint firstItem="dG1-qr-twE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="Rtw-qq-OmZ"/>
+                            <constraint firstItem="c8x-pS-MVm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="hN6-xh-fdR"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="dG1-qr-twE" secondAttribute="trailing" constant="30" id="mJ8-IW-WsO"/>
+                            <constraint firstItem="5DS-vI-RpE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="o67-96-Tl4"/>
+                            <constraint firstItem="5DS-vI-RpE" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="p5h-Oa-wA1"/>
+                            <constraint firstItem="aQU-1w-zuU" firstAttribute="centerX" secondItem="c8x-pS-MVm" secondAttribute="centerX" id="soi-Lf-QnC"/>
+                            <constraint firstItem="c8x-pS-MVm" firstAttribute="top" secondItem="dG1-qr-twE" secondAttribute="bottom" constant="10" id="vSd-pm-DQS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="customNavigationBar" destination="5DS-vI-RpE" id="OOH-Sm-eR7"/>
+                        <outlet property="maxLengthLabel" destination="aQU-1w-zuU" id="bmb-gp-RaR"/>
+                        <outlet property="stateMessageTextView" destination="dG1-qr-twE" id="OED-37-6xJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-16" y="65"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

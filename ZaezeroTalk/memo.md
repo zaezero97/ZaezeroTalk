@@ -102,3 +102,10 @@ autoid = {
             })
             
         })
+
+
+
+            let underlayer = CALayer()
+            underlayer.frame = CGRect(x: 0, y: stateMessageTextField.bounds.height + 5, width: stateMessageTextField.bounds.width, height: 1)
+            underlayer.backgroundColor = UIColor.red.cgColor
+            underlayer.cornerRadius = 1

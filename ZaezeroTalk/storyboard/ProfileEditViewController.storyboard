@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bT6-fL-OUc">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile Edit View Controller-->
+        <scene sceneID="3n6-N6-iyG">
+            <objects>
+                <viewController storyboardIdentifier="ProfileEditViewController" id="bT6-fL-OUc" customClass="ProfileEditViewController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vVe-Rl-bI9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p88-dJ-V49">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem id="9N7-yF-Vvk">
+                                        <barButtonItem key="leftBarButtonItem" title="취소" id="sml-jZ-nRV">
+                                            <connections>
+                                                <action selector="clickCancleButton:" destination="bT6-fL-OUc" id="Yk7-EX-gaL"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="완료" id="pDQ-hn-8er">
+                                            <connections>
+                                                <action selector="clickDoneButton:" destination="bT6-fL-OUc" id="Fah-m1-yMS"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="standardAppearance">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </navigationBarAppearance>
+                            </navigationBar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2X-uR-FSU">
+                                <rect key="frame" x="0.0" y="746" width="414" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="Dne-ku-Nmp"/>
+                                </constraints>
+                                <items/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </toolbar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4xe-sv-Q6X">
+                                <rect key="frame" x="157" y="519.5" width="100" height="99"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="0fl-pN-tnP"/>
+                                    <constraint firstAttribute="height" constant="100" id="veV-A3-4w2"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnb-K8-Beh">
+                                <rect key="frame" x="186" y="624" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GdR-Ik-hQJ">
+                                <rect key="frame" x="0.0" y="650" width="414" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system" imagePlacement="trailing">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="ttest">
+                                            <attributes>
+                                                <font key="NSFont" size="12" name="AppleSDGothicNeo-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="clickEditStateMessageButton:" destination="bT6-fL-OUc" eventType="touchUpInside" id="8pF-XH-diS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="L1e-9Z-mpb"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="p88-dJ-V49" secondAttribute="trailing" id="0NC-j2-M3e"/>
+                            <constraint firstItem="V2X-uR-FSU" firstAttribute="trailing" secondItem="L1e-9Z-mpb" secondAttribute="trailing" id="A7D-eh-pzZ"/>
+                            <constraint firstItem="jnb-K8-Beh" firstAttribute="centerX" secondItem="vVe-Rl-bI9" secondAttribute="centerX" id="AtU-Gn-9BJ"/>
+                            <constraint firstItem="p88-dJ-V49" firstAttribute="top" secondItem="L1e-9Z-mpb" secondAttribute="top" id="Jb0-kg-cvE"/>
+                            <constraint firstItem="4xe-sv-Q6X" firstAttribute="centerX" secondItem="vVe-Rl-bI9" secondAttribute="centerX" id="KO8-yZ-Eg3"/>
+                            <constraint firstItem="jnb-K8-Beh" firstAttribute="centerX" secondItem="GdR-Ik-hQJ" secondAttribute="centerX" id="Lnt-bd-HpV"/>
+                            <constraint firstItem="V2X-uR-FSU" firstAttribute="leading" secondItem="L1e-9Z-mpb" secondAttribute="leading" id="Lqa-GG-QDl"/>
+                            <constraint firstItem="GdR-Ik-hQJ" firstAttribute="leading" secondItem="L1e-9Z-mpb" secondAttribute="leading" id="W08-jj-VH7"/>
+                            <constraint firstAttribute="bottom" secondItem="V2X-uR-FSU" secondAttribute="bottom" id="gNt-r6-jYD"/>
+                            <constraint firstItem="p88-dJ-V49" firstAttribute="leading" secondItem="vVe-Rl-bI9" secondAttribute="leading" id="hiR-TM-uTJ"/>
+                            <constraint firstItem="L1e-9Z-mpb" firstAttribute="trailing" secondItem="GdR-Ik-hQJ" secondAttribute="trailing" id="hus-SV-dXj"/>
+                            <constraint firstItem="GdR-Ik-hQJ" firstAttribute="top" secondItem="jnb-K8-Beh" secondAttribute="bottom" constant="5" id="idN-5C-P0K"/>
+                            <constraint firstItem="V2X-uR-FSU" firstAttribute="top" secondItem="GdR-Ik-hQJ" secondAttribute="bottom" constant="65" id="jf1-au-vF1"/>
+                            <constraint firstItem="jnb-K8-Beh" firstAttribute="top" secondItem="4xe-sv-Q6X" secondAttribute="bottom" constant="5" id="yyT-J5-sXA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="jnb-K8-Beh" id="SNc-Qy-PWd"/>
+                        <outlet property="stateMessageButton" destination="GdR-Ik-hQJ" id="gxX-jf-n0q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uab-ob-K9s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="48" y="40"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
+    </resources>
+</document>
