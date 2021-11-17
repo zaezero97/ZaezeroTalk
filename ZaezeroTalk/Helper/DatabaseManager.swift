@@ -116,7 +116,7 @@ class DatabaseManager{
             ConnectedUser.shared.user.userInfo = UserInfo(email: email, name: name)
         })
     }
-  
+    
 }
 
 // MARK: - Room
@@ -150,7 +150,6 @@ extension DatabaseManager {
             guard snapshot.exists() else { return }
             do{
                 let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
-                print(snapshot.value!)
                 let result = try JSONDecoder().decode(ChatingRoom.self, from: data)
                 completion(result)
             } catch {
@@ -174,8 +173,27 @@ extension DatabaseManager {
         ]
         
         ref.child("Rooms/\(autoId)").setValue(roomInfo,withCompletionBlock:
-        {_,_ in
+                                                {_,_ in
             completion(autoId)
         })
+    }
+    
+    func registerAddedMessageObserver(roomId: String, completion: @escaping (Message?) -> Void){
+        ref.child("Rooms/\(roomId)/messages").observe(.childAdded) { snapshot in
+            if !snapshot.exists() {
+                completion(nil)
+                return
+            }
+            print("snapshot!!!!",snapshot.value)
+            do{
+                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
+                let result = try JSONDecoder().decode(Message.self, from: data)
+                completion(result)
+            } catch {
+                print("-> Error registerRoomObserver: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+        }
     }
 }

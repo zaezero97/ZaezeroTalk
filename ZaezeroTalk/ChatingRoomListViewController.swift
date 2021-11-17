@@ -34,7 +34,10 @@ class ChatingRoomListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        chatingRoomListTableView.reloadData()
+    }
 }
 
 // MARK: - TableView Datasource

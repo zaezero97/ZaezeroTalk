@@ -45,15 +45,10 @@ class ChatingRoomViewController: UIViewController {
     }
     
     var participants = [(uid: String, info: UserInfo)]() // 나를 제외한 참가자들
-    var chatingRoom: (id: String, info: ChatingRoom)? {
-        didSet {
-            messages = Array(chatingRoom!.info.messages!.values)
-        }
-    }
-    var messages: [Message]? {
+    var chatingRoom: (id: String, info: ChatingRoom)? 
+    var messages = [Message]() {
         didSet {
             print(messages)
-            self.chatingTableView.reloadData()
         }
     }
     
@@ -68,7 +63,18 @@ class ChatingRoomViewController: UIViewController {
                 }
                 self.chatingRoom = (id: curRoom.id,info: room)
             }
+            DatabaseManager.shared.registerAddedMessageObserver(roomId: curRoom.id, completion: {
+                message in
+                if let message = message {
+                    self.messages.append(message)
+                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                    self.chatingTableView.insertRows(at: [indexPath], with: .automatic)
+                    self.chatingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                }
+            })
         }
+        
+        // 방에 입장 시 방이 존재하면 방의 정보를 가져오고 방의 상태 변경을 감지하는 옵저버를 등록한다,
     }
  
     
@@ -83,6 +89,7 @@ class ChatingRoomViewController: UIViewController {
             "type": "Text",
             "content": inputTextView.text!
         ]
+        
         if let chatingRoom = chatingRoom {
             DatabaseManager.shared.sendMessage(sendMessage: message, room: chatingRoom)
         } else {
@@ -94,40 +101,60 @@ class ChatingRoomViewController: UIViewController {
                     guard let room = room else {
                         return
                     }
-                    self.chatingTableView.reloadData()
                     self.chatingRoom = (id: id,info: room)
                 }
+                DatabaseManager.shared.registerAddedMessageObserver(roomId: id, completion: {
+                    message in
+                    if let message = message {
+                        self.messages.append(message)
+                        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                        self.chatingTableView.insertRows(at: [indexPath], with: .automatic)
+                        self.chatingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                    }
+                })
             })
-        }
+        }// 방이 존재하면 메시지를 보내고 존재하지 않으면 새로 방을 만들고 room의 상태변화를 감지하는 옵저버를 등록한다.
+        
     }
 }
 
 // MARK: - TableView DataSource
 extension ChatingRoomViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages?.count ?? 0
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
     }
-    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let chatingRoom = chatingRoom else { return UITableViewCell() }
+        guard chatingRoom != nil else { return UITableViewCell() }
         
-        if messages![indexPath.row].sender == ConnectedUser.shared.uid {
+        if messages[indexPath.row].sender == ConnectedUser.shared.uid {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
-            cell.contentTextView.text = messages![indexPath.row].content
-            cell.timeLabel.text = messages![indexPath.row].time?.toDayTime
+            cell.contentTextView.text = messages[indexPath.row].content
+            cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
+            cell.layer.borderWidth = 5.0
+            cell.layer.borderColor = UIColor.white.cgColor
+            cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OtherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
-            cell.contentTextView.text = messages![indexPath.row].content
-            cell.timeLabel.text = messages![indexPath.row].time?.toDayTime
+            print("otherPersonMessageCell",messages[indexPath.row].content)
+            cell.contentTextView.text = messages[indexPath.row].content
+            cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
+            cell.layer.borderWidth = 5.0
+            cell.layer.borderColor = UIColor.clear.cgColor
+            cell.selectionStyle = .none
             return cell
         }
-        return UITableViewCell()
     }
 }
 
 // MARK: - TableView Delegate
 extension ChatingRoomViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = .clear
+    }
 }
 
 // MARK: - TextView Delegate
