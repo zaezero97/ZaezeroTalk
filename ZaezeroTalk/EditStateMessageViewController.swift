@@ -24,6 +24,7 @@ class EditStateMessageViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        stateMessageTextView.becomeFirstResponder()
     }
     @IBAction func clickCancleButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
