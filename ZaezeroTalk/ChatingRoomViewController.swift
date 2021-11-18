@@ -11,24 +11,13 @@ import Firebase
 class ChatingRoomViewController: UIViewController {
     @IBOutlet weak var inputTextViewBottomMargin: NSLayoutConstraint!
     @IBOutlet weak var inputTextViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var customNavigationItem: UINavigationItem! {
-        didSet {
-            var title = ""
-            participants.forEach { participant in
-                title += participant.info.name + ","
-            }
-            title.removeLast()
-            customNavigationItem.title = title
-            // 채팅방 이름 설정
-        }
-    }
-    //버튼 초기 비활성화 상태 지정
+    @IBOutlet weak var customNavigationItem: UINavigationItem!
     @IBOutlet weak var sendButton: UIButton! {
         didSet {
             sendButton.isEnabled = false
             sendButton.tintColor = .darkGray
         }
-    }
+    }//버튼 초기 비활성화 상태 지정
     @IBOutlet weak var inputTextView: UITextView! {
         didSet {
             inputTextView.delegate = self
@@ -45,8 +34,11 @@ class ChatingRoomViewController: UIViewController {
         }
     }
     
-    var participants = [(uid: String, info: UserInfo)]() // 나를 제외한 참가자들
+    var participantUids = [String]() // 나를 포함
+    var participantNames = [String]()
+    
     var chatingRoom: (id: String, info: ChatingRoom)?
+    
     var messages = [Message]() {
         didSet {
             print(messages)
@@ -64,6 +56,13 @@ class ChatingRoomViewController: UIViewController {
         
         if let curRoom = fetchCurrentRoom() {
             chatingRoom = curRoom
+            if curRoom.info.name.count == 0 {
+                var names = participantNames
+                names.removeAll { name in
+                    name == ConnectedUser.shared.user.userInfo.name
+                }
+                customNavigationItem.title = names.joined(separator: ",")
+            }
             DatabaseManager.shared.registerRoomObserver(id: curRoom.id) { room in
                 guard let room = room else {
                     return
@@ -79,6 +78,12 @@ class ChatingRoomViewController: UIViewController {
                     self.chatingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
                 }
             })
+        } else {
+            var names = participantNames
+            names.removeAll { name in
+                name == ConnectedUser.shared.user.userInfo.name
+            }
+            customNavigationItem.title = names.joined(separator: ",")
         }
         
         // 방에 입장 시 방이 존재하면 방의 정보를 가져오고 방의 상태 변경을 감지하는 옵저버를 등록한다,
@@ -100,9 +105,7 @@ class ChatingRoomViewController: UIViewController {
         if let chatingRoom = chatingRoom {
             DatabaseManager.shared.sendMessage(sendMessage: message, room: chatingRoom)
         } else {
-            DatabaseManager.shared.createRoom(message: message, participantUids: participants.map({
-                $0.uid
-            }), name: customNavigationItem.title! , completion: {
+            DatabaseManager.shared.createRoom(message: message, participantUids: participantUids, participantNames: participantNames, name: nil , completion: {
                 id in
                 DatabaseManager.shared.registerRoomObserver(id: id) { room in
                     guard let room = room else {
@@ -139,6 +142,7 @@ extension ChatingRoomViewController: UITableViewDataSource {
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
 //            cell.layer.borderWidth = 5.0
 //            cell.layer.borderColor = UIColor.clear.cgColor
+            cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OtherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
@@ -146,6 +150,7 @@ extension ChatingRoomViewController: UITableViewDataSource {
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
 //            cell.layer.borderWidth = 5.0
 //            cell.layer.borderColor = UIColor.clear.cgColor
+            cell.selectionStyle = .none
             return cell
         }
     }
@@ -189,13 +194,12 @@ extension ChatingRoomViewController {
         // 현재 사용자가 참여하고 있는 방 리스트
         
         let curRoom = roomList.first { (id, info) in
-            let set1 = Set(info.participants.keys)
-            var set2 = Set(participants.map({
-                $0.uid
-            }))
+            let set1 = Set(info.uids.toFBArray())
+            var set2 = Set(participantUids)
+            print("Set!!!",set1,set2)
             set2.insert(ConnectedUser.shared.uid)
             let result = set1.intersection(set2)
-            if result.count == participants.count + 1
+            if result.count == participantUids.count
             {
                 return true
             } else {

@@ -22,6 +22,9 @@
 		AE90BA4E2743A4B500D04469 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE90BA4D2743A4B500D04469 /* Int.swift */; };
 		AE998F9B273D5A4400F6767B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE998F9A273D5A4400F6767B /* ProfileViewController.swift */; };
 		AE998F9D273D5A5600F6767B /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */; };
+		AEA8BD222745FF5800038841 /* RoomUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8BD212745FF5800038841 /* RoomUsers.swift */; };
+		AEA8BD242746027A00038841 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8BD232746027A00038841 /* String.swift */; };
+		AEA8BD282746048C00038841 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8BD272746048C00038841 /* Array.swift */; };
 		AEAD438827448DF900337B89 /* youBubble.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB19B3127421ABB007D649E /* youBubble.png */; };
 		AEAD438A2744B4BE00337B89 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAD43892744B4BE00337B89 /* ProfileEditViewController.swift */; };
 		AEAD438C2744B4CB00337B89 /* ProfileEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAD438B2744B4CB00337B89 /* ProfileEditViewController.storyboard */; };
@@ -77,6 +80,9 @@
 		AE90BA4D2743A4B500D04469 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Int.swift; path = ../../../Int.swift; sourceTree = "<group>"; };
 		AE998F9A273D5A4400F6767B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
+		AEA8BD212745FF5800038841 /* RoomUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomUsers.swift; sourceTree = "<group>"; };
+		AEA8BD232746027A00038841 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		AEA8BD272746048C00038841 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		AEAA8BFD273CA7FF00400EDD /* memo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = memo.md; sourceTree = "<group>"; };
 		AEAD43892744B4BE00337B89 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		AEAD438B2744B4CB00337B89 /* ProfileEditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileEditViewController.storyboard; sourceTree = "<group>"; };
@@ -165,6 +171,8 @@
 				AE524A0F273528F60017F770 /* UIColor.swift */,
 				AE30D6FE273B9D5A0058F06B /* UIView.swift */,
 				AE90BA4D2743A4B500D04469 /* Int.swift */,
+				AEA8BD232746027A00038841 /* String.swift */,
+				AEA8BD272746048C00038841 /* Array.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -269,6 +277,7 @@
 				AEAE17D4273DEF3900A44737 /* ChatingRoom.swift */,
 				AEBE6BFF2739FCC9008B0B61 /* User.swift */,
 				AEAE17D6273E070700A44737 /* UserInfo.swift */,
+				AEA8BD212745FF5800038841 /* RoomUsers.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -439,8 +448,10 @@
 				AEAE17D7273E070700A44737 /* UserInfo.swift in Sources */,
 				AE5FA775273B7B1F00F211CE /* TextFieldCell.swift in Sources */,
 				AEB19B3627421D6D007D649E /* OtherPersonMessageCell.swift in Sources */,
+				AEA8BD242746027A00038841 /* String.swift in Sources */,
 				AEAE17D3273DEF2E00A44737 /* Message.swift in Sources */,
 				AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */,
+				AEA8BD222745FF5800038841 /* RoomUsers.swift in Sources */,
 				AEB19B2B274219AC007D649E /* MyMessageCell.swift in Sources */,
 				AEAE17D0273DEBCC00A44737 /* ChatingRoomCell.swift in Sources */,
 				AEBE6C04273A4AED008B0B61 /* ProfileCell.swift in Sources */,
@@ -455,6 +466,7 @@
 				AEBE6C002739FCC9008B0B61 /* User.swift in Sources */,
 				AE30D703273BB3AF0058F06B /* ConnectedUser.swift in Sources */,
 				AE15B7292738E815008AD434 /* DatabaseManager.swift in Sources */,
+				AEA8BD282746048C00038841 /* Array.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

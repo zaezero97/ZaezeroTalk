@@ -46,7 +46,6 @@ class DatabaseManager{
     }
     
     func fetchUser(uid: String, completion : @escaping (User?) -> Void) {
-        print(uid)
         ref.child("Users/\(uid)").observeSingleEvent(of: .value, with: {
             snapshot in
             do{
@@ -113,7 +112,8 @@ class DatabaseManager{
             let userInfo = snapshot.value as? [String: Any]
             let email = userInfo?["email"] as? String ?? ""
             let name = userInfo?["name"] as? String ?? ""
-            ConnectedUser.shared.user.userInfo = UserInfo(email: email, name: name)
+            let stateMessage = userInfo?["stateMessage"] as? String ?? ""
+            ConnectedUser.shared.user.userInfo = UserInfo(email: email, name: name, stateMessage: stateMessage)
         })
     }
     
@@ -122,7 +122,8 @@ class DatabaseManager{
 // MARK: - Room
 extension DatabaseManager {
     func registerRoomListObserver(uid: String, completion: @escaping ([(id: String, info: ChatingRoom)]?) -> Void) {
-        ref.child("Rooms").queryOrdered(byChild: "participants/\(uid)").observe(.value, with: {
+        
+        ref.child("Rooms").queryOrdered(byChild: "uids").queryStarting(atValue: "%${\(uid)}%").queryEnding(atValue: uid+"\u{F8FF}").observe(.value, with: {
             snapshot in
             var chatingRooms = [(id: String ,info: ChatingRoom)]()
             do{
@@ -158,24 +159,34 @@ extension DatabaseManager {
             }
         }
     }
-    func createRoom(message: [String: Any],participantUids: [String], name: String, completion: @escaping (String) -> Void) {
+    func createRoom(message: [String: Any],participantUids: [String],participantNames: [String], name: String?, completion: @escaping (String) -> Void) {
         let autoId = ref.childByAutoId().key!
         var participants = [String: Any]()
-        participantUids.forEach {
-            participants[$0] = "false"
-        }
-        participants[ConnectedUser.shared.uid] = "true"
         let msgAutoId = ref.childByAutoId().key!
         let roomInfo: [String: Any] = [
             "messages": [msgAutoId: message],
-            "participants": participants,
-            "name": name
+            //"participants": participants,
+            "uids": participantUids.toFBString(),
+            "userNames": participantNames.toFBString(),
+            "name": name ?? "",
+            "lastMessage": message["content"]!
         ]
         
         ref.child("Rooms/\(autoId)").setValue(roomInfo,withCompletionBlock:
                                                 {_,_ in
             completion(autoId)
         })
+        
+        participantUids.forEach {
+            participants[$0] = "false"
+        }
+        participants[ConnectedUser.shared.uid] = "true"
+        
+        ref.child("RoomUsers/\(autoId)").setValue(participants) { error, _ in
+            if error != nil {
+                print("error ->",error.debugDescription)
+            }
+        }
     }
     
     func registerAddedMessageObserver(roomId: String, completion: @escaping (Message?) -> Void){
@@ -184,7 +195,7 @@ extension DatabaseManager {
                 completion(nil)
                 return
             }
-            print("snapshot!!!!",snapshot.value)
+            
             do{
                 let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
                 let result = try JSONDecoder().decode(Message.self, from: data)
@@ -195,7 +206,9 @@ extension DatabaseManager {
                 return
             }
         }
+        
     }
+    
 }
 
 

@@ -53,16 +53,41 @@ extension ChatingRoomListViewController: UITableViewDataSource {
         guard let chatingRoomList = ConnectedUser.shared.chatingRoomList else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatingRoomCell", for: indexPath) as! ChatingRoomCell
         let roomInfo = chatingRoomList[indexPath.row].info
-        cell.headCountLabel.text = String(roomInfo.participants.count)
+        cell.headCountLabel.text = String(roomInfo.uids.toFBArray().count)
         cell.lastMeesageLabel.text = roomInfo.messages?.values.first?.content ?? ""
         cell.roomImageView.image = UIImage(systemName: "person.2.wave.2")
         cell.timeLabel.text = roomInfo.messages?.values.first?.time?.toDayTime
-        cell.nameLabel.text = roomInfo.name
+        
+        if roomInfo.name.isEmpty {
+            var removedNames = roomInfo.userNames.toFBArray()
+            removedNames.removeAll { name in
+                name == ConnectedUser.shared.user.userInfo.name
+            }
+            cell.nameLabel.text = removedNames.joined(separator: ",")
+        } else {
+            cell.nameLabel.text = roomInfo.name
+        }
+        
         return cell
     }
     
 }
 // MARK: - TableView Delegate
 extension ChatingRoomListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let chatingRoomList = ConnectedUser.shared.chatingRoomList else { return }
+        let roomInfo = chatingRoomList[indexPath.row].info
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let storyboard = UIStoryboard(name: "ChatingRoomViewController", bundle: nil)
+        let chationRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
+        
     
+        chationRoomVC.participantUids = roomInfo.uids.toFBArray()
+        chationRoomVC.participantNames = roomInfo.userNames.toFBArray()
+        
+        chationRoomVC.modalPresentationStyle = .fullScreen
+        present(chationRoomVC, animated: true, completion: nil)
+    }
 }

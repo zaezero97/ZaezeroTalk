@@ -10,12 +10,9 @@ import Foundation
 struct UserInfo: Codable {
     let email: String
     var name: String
-    var stateMessage: String? {
-        didSet {
-            print("stateMessage Change !!!",stateMessage)
-        }
-    }
+    var stateMessage: String
+    
     func toDictionary() -> [String: Any] {
-        return ["email": email, "name": name]
+        return ["email": email, "name": name, "stateMessage": stateMessage]
     }
 }
