@@ -12,6 +12,7 @@ target 'ZaezeroTalk' do
   	pod 'Firebase/RemoteConfig'
 	pod 'Firebase/Auth'	
 	pod 'Firebase/Database'
+	pod 'Firebase/Storage'
 
 	#TextFieldEffects
 	pod 'TextFieldEffects'

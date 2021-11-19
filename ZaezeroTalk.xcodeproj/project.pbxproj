@@ -25,6 +25,7 @@
 		AEA8BD222745FF5800038841 /* RoomUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8BD212745FF5800038841 /* RoomUsers.swift */; };
 		AEA8BD242746027A00038841 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8BD232746027A00038841 /* String.swift */; };
 		AEA8BD282746048C00038841 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8BD272746048C00038841 /* Array.swift */; };
+		AEA8BD2A2746280200038841 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8BD292746280200038841 /* UIImageView.swift */; };
 		AEAD438827448DF900337B89 /* youBubble.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB19B3127421ABB007D649E /* youBubble.png */; };
 		AEAD438A2744B4BE00337B89 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAD43892744B4BE00337B89 /* ProfileEditViewController.swift */; };
 		AEAD438C2744B4CB00337B89 /* ProfileEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAD438B2744B4CB00337B89 /* ProfileEditViewController.storyboard */; };
@@ -83,6 +84,7 @@
 		AEA8BD212745FF5800038841 /* RoomUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomUsers.swift; sourceTree = "<group>"; };
 		AEA8BD232746027A00038841 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		AEA8BD272746048C00038841 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		AEA8BD292746280200038841 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		AEAA8BFD273CA7FF00400EDD /* memo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = memo.md; sourceTree = "<group>"; };
 		AEAD43892744B4BE00337B89 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		AEAD438B2744B4CB00337B89 /* ProfileEditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileEditViewController.storyboard; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				AE90BA4D2743A4B500D04469 /* Int.swift */,
 				AEA8BD232746027A00038841 /* String.swift */,
 				AEA8BD272746048C00038841 /* Array.swift */,
+				AEA8BD292746280200038841 /* UIImageView.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				AE30D701273BA02C0058F06B /* SearchByEmailResultView.swift in Sources */,
 				AEAE17C9273DE9BC00A44737 /* ChatingRoomListViewController.swift in Sources */,
 				AE44D06D2738A7B3007A567A /* SignUpViewController.swift in Sources */,
+				AEA8BD2A2746280200038841 /* UIImageView.swift in Sources */,
 				AEAE17D5273DEF3900A44737 /* ChatingRoom.swift in Sources */,
 				AEAE17D7273E070700A44737 /* UserInfo.swift in Sources */,
 				AE5FA775273B7B1F00F211CE /* TextFieldCell.swift in Sources */,
@@ -625,7 +629,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -656,7 +660,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -211,4 +211,9 @@ extension DatabaseManager {
     
 }
 
-
+// MARK: - Image
+extension DatabaseManager {
+    func uploadImage(image: UIImage) {
+        guard let data = image.jpegData(compressionQuality: 1) ?? image.pngData() else { return }
+    }
+}

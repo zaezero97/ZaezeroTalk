@@ -89,6 +89,7 @@
                     </view>
                     <connections>
                         <outlet property="nameLabel" destination="jnb-K8-Beh" id="SNc-Qy-PWd"/>
+                        <outlet property="profileImageView" destination="4xe-sv-Q6X" id="fCl-Eq-98o"/>
                         <outlet property="stateMessageButton" destination="GdR-Ik-hQJ" id="gxX-jf-n0q"/>
                     </connections>
                 </viewController>
