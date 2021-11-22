@@ -19,6 +19,8 @@
 		AE5FA775273B7B1F00F211CE /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FA773273B7B1F00F211CE /* TextFieldCell.swift */; };
 		AE5FA776273B7B1F00F211CE /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE5FA774273B7B1F00F211CE /* TextFieldCell.xib */; };
 		AE6BB5D5273634E600D99462 /* remoteConfigDefault.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE6BB5D4273634E600D99462 /* remoteConfigDefault.plist */; };
+		AE8DD078274B5BDD0023ADF3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8DD077274B5BDD0023ADF3 /* SearchViewController.swift */; };
+		AE8DD07A274B5BE90023ADF3 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */; };
 		AE90BA4E2743A4B500D04469 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE90BA4D2743A4B500D04469 /* Int.swift */; };
 		AE998F9B273D5A4400F6767B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE998F9A273D5A4400F6767B /* ProfileViewController.swift */; };
 		AE998F9D273D5A5600F6767B /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */; };
@@ -78,6 +80,8 @@
 		AE5FA773273B7B1F00F211CE /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		AE5FA774273B7B1F00F211CE /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		AE6BB5D4273634E600D99462 /* remoteConfigDefault.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = remoteConfigDefault.plist; sourceTree = "<group>"; };
+		AE8DD077274B5BDD0023ADF3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchViewController.storyboard; sourceTree = "<group>"; };
 		AE90BA4D2743A4B500D04469 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Int.swift; path = ../../../Int.swift; sourceTree = "<group>"; };
 		AE998F9A273D5A4400F6767B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
@@ -211,6 +215,7 @@
 				AEB3A9DE273E368D008E7031 /* ChatingRoomViewController.storyboard */,
 				AEAE17CA273DE9C800A44737 /* ChatingRoomListViewController.storyboard */,
 				AEAD438F2744C40500337B89 /* EditStateMessageViewController.storyboard */,
+				AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 				AEFC6FF4273963E80092E037 /* TabbarViewController.swift */,
 				AEAF93FE273B531700BE2FF1 /* AddFriendViewController.swift */,
 				AEBE6BFC2739F630008B0B61 /* FriendListViewController.swift */,
+				AE8DD077274B5BDD0023ADF3 /* SearchViewController.swift */,
 				AE998F9A273D5A4400F6767B /* ProfileViewController.swift */,
 				AEAD43892744B4BE00337B89 /* ProfileEditViewController.swift */,
 				AEB3A9DC273E3671008E7031 /* ChatingRoomViewController.swift */,
@@ -375,6 +381,7 @@
 				AEB3A9DF273E368D008E7031 /* ChatingRoomViewController.storyboard in Resources */,
 				AEAF93FD273B530900BE2FF1 /* AddFriendViewController.storyboard in Resources */,
 				AE30D6FD273B99660058F06B /* SearchByEmailResultView.xib in Resources */,
+				AE8DD07A274B5BE90023ADF3 /* SearchViewController.storyboard in Resources */,
 				AEAE17D1273DEBCC00A44737 /* ChatingRoomCell.xib in Resources */,
 				AEAD438C2744B4CB00337B89 /* ProfileEditViewController.storyboard in Resources */,
 				AE6BB5D5273634E600D99462 /* remoteConfigDefault.plist in Resources */,
@@ -451,6 +458,7 @@
 				AEAE17D5273DEF3900A44737 /* ChatingRoom.swift in Sources */,
 				AEAE17D7273E070700A44737 /* UserInfo.swift in Sources */,
 				AE5FA775273B7B1F00F211CE /* TextFieldCell.swift in Sources */,
+				AE8DD078274B5BDD0023ADF3 /* SearchViewController.swift in Sources */,
 				AEB19B3627421D6D007D649E /* OtherPersonMessageCell.swift in Sources */,
 				AEA8BD242746027A00038841 /* String.swift in Sources */,
 				AEAE17D3273DEF2E00A44737 /* Message.swift in Sources */,

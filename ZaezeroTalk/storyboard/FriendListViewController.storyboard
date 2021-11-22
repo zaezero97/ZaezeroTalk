@@ -33,7 +33,11 @@
                                                     <action selector="clickAddFriendButton:" destination="Y6W-OH-hqX" id="pun-tW-QHC"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem image="magnifyingglass" catalog="system" id="yqB-eD-VsZ"/>
+                                            <barButtonItem image="magnifyingglass" catalog="system" id="yqB-eD-VsZ">
+                                                <connections>
+                                                    <action selector="clickSearchButton:" destination="Y6W-OH-hqX" id="nIG-jI-jR7"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>

@@ -93,19 +93,19 @@ class DatabaseManager{
             }
         })
     }
-    func registerUserObserver(by uid: String) {
-        ref.child("Users/\(uid)").observe(.value) {
-            snapshot in
-            do{
-                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
-                let result = try JSONDecoder().decode(User.self, from: data)
-                ConnectedUser.shared.uid = snapshot.key
-                ConnectedUser.shared.user = result
-            } catch {
-                print("-> Error : \(error.localizedDescription)")
-            }
-        }
-    }
+//    func registerUserObserver(by uid: String) {
+//        ref.child("Users/\(uid)").observe(.value) {
+//            snapshot in
+//            do{
+//                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
+//                let result = try JSONDecoder().decode(User.self, from: data)
+//                ConnectedUser.shared.uid = snapshot.key
+//                ConnectedUser.shared.user = result
+//            } catch {
+//                print("-> Error : \(error.localizedDescription)")
+//            }
+//        }
+//    }
     func registerUserInfoObserver(forUid uid: String){
         ref.child("Users/\(uid)/userInfo").observe(.value, with: {
             snapshot in

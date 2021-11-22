@@ -46,12 +46,22 @@ class FriendListViewController: UIViewController {
         friendListTableView.reloadData()
     }
     
+    
     @IBAction func clickAddFriendButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "AddFriendViewController", bundle: nil)
         let addFriendVC = storyboard.instantiateViewController(withIdentifier: "AddFriendViewController") as! AddFriendViewController
         addFriendVC.modalPresentationStyle = .fullScreen
         present(addFriendVC, animated: true, completion: nil)
     }
+    
+    @IBAction func clickSearchButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "SearchViewController", bundle: nil)
+        let searchVC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        searchVC.modalPresentationStyle = .fullScreen
+        searchVC.modalTransitionStyle = .crossDissolve
+        present(searchVC, animated: true, completion: nil)
+    }
+    
 }
 
 
@@ -114,8 +124,6 @@ extension FriendListViewController: UITableViewDataSource{
         
         return cell
     }
-    
-    
 }
 
 // MARK: - TableView Delegate

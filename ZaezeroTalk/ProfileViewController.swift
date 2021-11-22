@@ -96,6 +96,6 @@ extension ProfileViewController {
         } else {
             profileImageView.image  = UIImage(systemName: "person.crop.rectangle.fill")
         }
-       
+        
     }
 }

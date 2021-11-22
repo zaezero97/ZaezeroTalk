@@ -9,7 +9,7 @@ import UIKit
 import FirebaseDatabase
 
 class ChatingRoomListViewController: UIViewController {
-
+    
     
     
     @IBOutlet weak var chatingRoomListTableView: UITableView! {
@@ -69,7 +69,7 @@ extension ChatingRoomListViewController: UITableViewDataSource {
             cell.nameLabel.text = roomInfo.name
         }
         
-    
+        
         return cell
     }
     
@@ -85,7 +85,7 @@ extension ChatingRoomListViewController: UITableViewDelegate {
         let storyboard = UIStoryboard(name: "ChatingRoomViewController", bundle: nil)
         let chationRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
         
-    
+        
         chationRoomVC.participantUids = roomInfo.uids.toFBArray()
         chationRoomVC.participantNames = roomInfo.userNames.toFBArray()
         

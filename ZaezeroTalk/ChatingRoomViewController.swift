@@ -192,7 +192,6 @@ extension ChatingRoomViewController {
         let curRoom = roomList.first { (id, info) in
             let set1 = Set(info.uids.toFBArray())
             var set2 = Set(participantUids)
-            print("Set!!!",set1,set2)
             set2.insert(ConnectedUser.shared.uid)
             let result = set1.intersection(set2)
             if result.count == participantUids.count
