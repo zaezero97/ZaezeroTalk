@@ -72,9 +72,10 @@ class SignUpViewController: UIViewController {
                             self.view.layoutIfNeeded()
                         }
                     }
-                }
+                } // 회원가입 실패 !!
                 return
             }
+            
             
             let signUpUser = result.user
             guard let email = signUpUser.email, let name = self.nameTextField.text else { return }

@@ -53,6 +53,7 @@ extension ChatingRoomListViewController: UITableViewDataSource {
         guard let chatingRoomList = ConnectedUser.shared.chatingRoomList else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatingRoomCell", for: indexPath) as! ChatingRoomCell
         let roomInfo = chatingRoomList[indexPath.row].info
+        
         cell.headCountLabel.text = String(roomInfo.uids.toFBArray().count)
         cell.lastMeesageLabel.text = roomInfo.lastMessage
         cell.roomImageView.image = UIImage(systemName: "person.2.wave.2")

@@ -41,6 +41,7 @@ class LoginViewController: UIViewController {
     let remoteConfig = RemoteConfig.remoteConfig()
     var emailErrorLabelHeight : NSLayoutConstraint!
     var pwdErrorLabelHeight : NSLayoutConstraint!
+    
     lazy var indicator: NVActivityIndicatorView = {
         let indicator = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 75, height: 75),
                                                 type: .ballRotateChase,
@@ -52,6 +53,7 @@ class LoginViewController: UIViewController {
         }
         return indicator
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         try! Auth.auth().signOut() //test 코드 실제에선 자동 로그인으로 구현할 생각
@@ -63,9 +65,7 @@ class LoginViewController: UIViewController {
         
     }
     @IBAction func clicklLoginButton(_ sender: Any) {
-        guard let email = emailTextField.text , let password = pwdTextField.text else {
-            return
-        }
+        guard let email = emailTextField.text , let password = pwdTextField.text else { return }
         Auth.auth().signIn(withEmail: email, password: password) {
             (result, error) in
             self.indicator.startAnimating()

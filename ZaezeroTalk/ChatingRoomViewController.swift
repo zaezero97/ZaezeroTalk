@@ -56,7 +56,7 @@ class ChatingRoomViewController: UIViewController {
         
         if let curRoom = fetchCurrentRoom() {
             chatingRoom = curRoom
-            if curRoom.info.name.count == 0 {
+            if curRoom.info.name.isEmpty {
                 var names = participantNames
                 names.removeAll { name in
                     name == ConnectedUser.shared.user.userInfo.name

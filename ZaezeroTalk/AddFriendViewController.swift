@@ -85,41 +85,41 @@ extension AddFriendViewController: UITextFieldDelegate {
         
         DatabaseManager.shared.fetchUserInfo(email: searchEmail) {
             userInfo in
-            
-            guard let userInfo = userInfo else {
-                self.searchByEmailResultView.isHidden = true
-                self.searchByEmailResultLabel.isHidden = false
-                return
-            }
-            self.searchedUserInfo = userInfo
-            self.searchByEmailResultView.nameLabel.text = userInfo.name
-            self.searchByEmailResultView.addFriendButton.isEnabled = false
-            self.searchByEmailResultLabel.isHidden = true
-            self.searchByEmailResultView.isHidden = false
-            
-            guard let friends = ConnectedUser.shared.user.friends else {
-                self.searchByEmailResultView.addFriendButton.isEnabled = true
-                return
-            }
-            let isExisted = friends.values.contains
-            {
-                friend in
-                friend.email == self.searchedUserInfo!.email
-            }
-            if isExisted {
-                self.searchByEmailResultView.addFriendButton.isEnabled = false
-            } else {
-                self.searchByEmailResultView.addFriendButton.isEnabled = true
-            }
+            self.showSearchResultView(userInfo: userInfo)
         }
-        
         textField.becomeFirstResponder()
         return true
     }
 }
 
+// MARK: - 친구 검색 결과창
+extension AddFriendViewController {
+    func showSearchResultView(userInfo: UserInfo?) {
+        if let userInfo = userInfo {
+            searchedUserInfo = userInfo
+            searchByEmailResultView.nameLabel.text = userInfo.name
+            searchByEmailResultView.addFriendButton.isEnabled = false
+            searchByEmailResultLabel.isHidden = true
+            searchByEmailResultView.isHidden = false
+            if let friends = ConnectedUser.shared.user.friends {
+                let isExisted = friends.values.contains(where: {
+                    friend in
+                    friend.email == searchedUserInfo!.email
+                })
+                searchByEmailResultView.addFriendButton.isEnabled = !isExisted
+            } else {
+                searchByEmailResultView.addFriendButton.isEnabled = true
+            }
+        } else {
+            searchByEmailResultView.isHidden = true
+            searchByEmailResultLabel.isHidden = false
+        }
+        
+    }
+}
+
 // MARK: - 상단 네비게이션 바에 뷰가 닿을 때 경계선 보이게 하는 함수
-extension AddFriendViewController{
+extension AddFriendViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0 {
             customNavigationBar.standardAppearance.shadowColor = .gray
@@ -131,7 +131,6 @@ extension AddFriendViewController{
 // MARK: - email로 사람 검색 후 친구 추가 버튼 클릭 이벤트 함수
 extension AddFriendViewController{
     @objc func addFriend(sender : UIButton){
-        
         if let searchedUserInfo = searchedUserInfo {
             DatabaseManager.shared.fetchUid(email: searchedUserInfo.email)
             {

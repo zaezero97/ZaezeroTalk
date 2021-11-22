@@ -10,6 +10,7 @@ import Firebase
 class FriendListViewController: UIViewController {
     
     var friends = [(uid: String,info: UserInfo)]()
+    
     @IBOutlet weak var customNavigationBar: UINavigationBar!
     @IBOutlet weak var customNavigationItem: UINavigationItem! {
         didSet {
@@ -30,6 +31,7 @@ class FriendListViewController: UIViewController {
         label.textAlignment = .left
         return label
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -86,7 +88,6 @@ extension FriendListViewController: UITableViewDataSource{
             cell.nameLabel.text = ConnectedUser.shared.user.userInfo.name
             cell.stateMessageLabel.text = ConnectedUser.shared.user.userInfo.stateMessage ?? ""
             if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl, !profileImageUrl.isEmpty {
-                print("profileImageUrl!!!->",profileImageUrl)
                 let url = URL(string: profileImageUrl)
                 DispatchQueue.global().async {
                     let data = try? Data(contentsOf: url!)
