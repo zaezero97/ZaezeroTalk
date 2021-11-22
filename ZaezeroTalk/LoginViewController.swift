@@ -78,7 +78,6 @@ class LoginViewController: UIViewController {
                 guard let result = result else { return }
                 DatabaseManager.shared.fetchUser(uid: result.user.uid, completion: {
                     user in
-                    print(user)
                     ConnectedUser.shared.user = user
                     ConnectedUser.shared.uid = result.user.uid
                     
@@ -91,7 +90,7 @@ class LoginViewController: UIViewController {
                         })
                     }
                 })
-                DatabaseManager.shared.registerUserObserver(by: result.user.uid)//
+                //DatabaseManager.shared.registerUserObserver(by: result.user.uid)//
             }
         }
     }

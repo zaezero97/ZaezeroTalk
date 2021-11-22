@@ -54,9 +54,9 @@ extension ChatingRoomListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatingRoomCell", for: indexPath) as! ChatingRoomCell
         let roomInfo = chatingRoomList[indexPath.row].info
         cell.headCountLabel.text = String(roomInfo.uids.toFBArray().count)
-        cell.lastMeesageLabel.text = roomInfo.messages?.values.first?.content ?? ""
+        cell.lastMeesageLabel.text = roomInfo.lastMessage
         cell.roomImageView.image = UIImage(systemName: "person.2.wave.2")
-        cell.timeLabel.text = roomInfo.messages?.values.first?.time?.toDayTime
+        cell.timeLabel.text = roomInfo.lastMessageTime
         
         if roomInfo.name.isEmpty {
             var removedNames = roomInfo.userNames.toFBArray()
@@ -68,6 +68,7 @@ extension ChatingRoomListViewController: UITableViewDataSource {
             cell.nameLabel.text = roomInfo.name
         }
         
+    
         return cell
     }
     

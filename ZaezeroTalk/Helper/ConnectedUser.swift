@@ -9,7 +9,11 @@ import Foundation
 
 class ConnectedUser {
     static let shared = ConnectedUser()
-    var user : User!
+    var user : User! {
+        didSet {
+            print("user Change!!! ->",user.userInfo.profileImageUrl)
+        }
+    }
     var uid = ""
     var chatingRoomList: [(id: String, info: ChatingRoom)]?
     private init() {

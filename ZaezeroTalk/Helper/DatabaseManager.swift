@@ -7,11 +7,11 @@
 
 import Foundation
 import Firebase
+import FirebaseStorage
 
 class DatabaseManager{
     static let shared = DatabaseManager()
     let ref = Database.database().reference()
-    var roomObserver: UInt?
     private init(){
         
     }
@@ -113,7 +113,8 @@ class DatabaseManager{
             let email = userInfo?["email"] as? String ?? ""
             let name = userInfo?["name"] as? String ?? ""
             let stateMessage = userInfo?["stateMessage"] as? String ?? ""
-            ConnectedUser.shared.user.userInfo = UserInfo(email: email, name: name, stateMessage: stateMessage)
+            let profileImageUrl = userInfo?["profileImageUrl"] as? String ?? ""
+            ConnectedUser.shared.user.userInfo = UserInfo(email: email, name: name, stateMessage: stateMessage, profileImageUrl: profileImageUrl)
         })
     }
     
@@ -145,6 +146,7 @@ extension DatabaseManager {
     func sendMessage(sendMessage: [String: Any], room: (id: String ,info: ChatingRoom)) {
         let messageAutoId = ref.childByAutoId().key!
         updateChildValues([messageAutoId: sendMessage], forPath: "Rooms/\(room.id)/messages")
+        updateChildValues(["lastMessage": sendMessage["content"]!,"lastMessageTime": sendMessage["time"]!], forPath: "Room/\(room.id)")
     }
     func registerRoomObserver(id: String,completion: @escaping (ChatingRoom?) -> Void) {
         ref.child("Rooms/\(id)").observe(.value) { snapshot in
@@ -165,11 +167,11 @@ extension DatabaseManager {
         let msgAutoId = ref.childByAutoId().key!
         let roomInfo: [String: Any] = [
             "messages": [msgAutoId: message],
-            //"participants": participants,
             "uids": participantUids.toFBString(),
             "userNames": participantNames.toFBString(),
             "name": name ?? "",
-            "lastMessage": message["content"]!
+            "lastMessage": message["content"]!,
+            "lastMessageTime": message["time"]!
         ]
         
         ref.child("Rooms/\(autoId)").setValue(roomInfo,withCompletionBlock:
@@ -213,7 +215,26 @@ extension DatabaseManager {
 
 // MARK: - Image
 extension DatabaseManager {
-    func uploadImage(image: UIImage) {
-        guard let data = image.jpegData(compressionQuality: 1) ?? image.pngData() else { return }
+    func uploadImage(image: UIImage,uid: String, completion: @escaping (String) -> Void) {
+        guard let data = image.jpegData(compressionQuality: 0.1) ?? image.pngData() else { return }
+        print("image Data!!!!", data)
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/png"
+        Storage.storage().reference().child("profileImage/\(uid).png").putData(data, metadata: metaData) {
+            (metaData,error) in
+            if let error = error {
+                print("error ->", error)
+                print("error -> image upload error!!!",error.localizedDescription)
+            } else {
+                Storage.storage().reference().child("profileImage/\(uid).png").downloadURL { (url, error) in
+                    if let error = error {
+                        print("error -> download Image Error",error)
+                    } else {
+                        self.ref.child("Users/\(uid)/userInfo").updateChildValues(["profileImageUrl": url?.absoluteString ?? ""])
+                    }
+                    completion(url?.absoluteString ?? "")
+                }
+            }
+        }
     }
 }

@@ -7,11 +7,21 @@
 
 import UIKit
 import PhotosUI
+import NVActivityIndicatorView
 
 class ProfileEditViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView! {
         didSet {
+            if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl, !profileImageUrl.isEmpty {
+                let url = URL(string: profileImageUrl)
+                DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: url!)
+                    DispatchQueue.main.async { self.profileImageView.image = UIImage(data: data!) }
+                }
+            } else {
+                profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+            }
             let gesture = UITapGestureRecognizer(target: self, action: #selector(clickProfileImageView(imageView:)))
             profileImageView.addGestureRecognizer(gesture)
             profileImageView.isUserInteractionEnabled = true
@@ -24,7 +34,7 @@ class ProfileEditViewController: UIViewController {
     }
     @IBOutlet weak var stateMessageButton: UIButton! {
         didSet {
-            if oldStateMessage.count != 0 {
+            if let oldStateMessage = oldStateMessage, oldStateMessage.count != 0 {
                 //stateMessageButton.titleLabel?.text = oldStateMessage
                 stateMessageButton.setTitle(oldStateMessage, for: .normal)
             } else {
@@ -34,9 +44,24 @@ class ProfileEditViewController: UIViewController {
             
         }
     }
+    
+    lazy var indicator: NVActivityIndicatorView = {
+        let indicator = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 75, height: 75),
+                                                type: .ballRotateChase,
+                                                color: .black,
+                                                padding: 0)
+        self.view.addSubview(indicator)
+        indicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        return indicator
+    }()
+    
     let oldStateMessage = ConnectedUser.shared.user.userInfo.stateMessage
     var newStateMessage: String?
     var fetchedImage:  PHFetchResult<PHAsset>?
+    var doneCallback: ((String,UserInfo) -> Void)!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,20 +92,45 @@ class ProfileEditViewController: UIViewController {
     
     @IBAction func clickDoneButton(_ sender: Any) {
         
-        guard let newStateMessage = newStateMessage, newStateMessage.count > 0 else { return } // 변경할 상태메시지를 입력하지 않았을 경우
-        
-        if let fetchedImage != nil {
-            
-        }
-        
-        if oldStateMessage != newStateMessage {
-            DatabaseManager.shared.updateChildValues(["stateMessage": newStateMessage],forPath: "Users/\(ConnectedUser.shared.uid)/userInfo") {
-                _, _ in
+        indicator.startAnimating()
+        var modifyUserInfo = ConnectedUser.shared.user.userInfo
+        if fetchedImage != nil {
+            DatabaseManager.shared.uploadImage(image: profileImageView.image!, uid: ConnectedUser.shared.uid, completion: {
+                url in
+                modifyUserInfo.profileImageUrl = url
+                if let newStateMessage = self.newStateMessage, newStateMessage.count > 0 {
+                    if self.oldStateMessage != newStateMessage {
+                        DatabaseManager.shared.updateChildValues(["stateMessage": newStateMessage],forPath: "Users/\(ConnectedUser.shared.uid)/userInfo") {
+                            _, _ in
+                            modifyUserInfo.stateMessage = newStateMessage
+                            self.doneCallback(ConnectedUser.shared.uid,modifyUserInfo)
+                            self.indicator.stopAnimating()
+                            self.dismiss(animated: false, completion: nil)
+                        }
+                    }
+                } else {
+                    self.doneCallback(ConnectedUser.shared.uid,modifyUserInfo)
+                    self.indicator.stopAnimating()
+                    self.dismiss(animated: false, completion: nil)
+                }
+            })
+        } else {
+            if let newStateMessage = newStateMessage, newStateMessage.count > 0 {
+                if oldStateMessage != newStateMessage {
+                    DatabaseManager.shared.updateChildValues(["stateMessage": newStateMessage],forPath: "Users/\(ConnectedUser.shared.uid)/userInfo") {
+                        _, _ in
+                        modifyUserInfo.stateMessage = newStateMessage
+                        self.doneCallback(ConnectedUser.shared.uid,modifyUserInfo)
+                        self.indicator.stopAnimating()
+                        self.dismiss(animated: false, completion: nil)
+                    }
+                }
+            } else {
+                self.indicator.stopAnimating()
                 self.dismiss(animated: false, completion: nil)
             }
         }
         
-        dismiss(animated: false, completion: nil)
     }
     
 }
@@ -125,9 +175,10 @@ extension ProfileEditViewController{
         }))
         self.present(alert, animated: true, completion: nil)
     }
-  
+    
 }
 
+// MARK: - PHPickerViewControllerDelegate
 extension ProfileEditViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         let identifiers = results.map{ $0.assetIdentifier ?? ""}

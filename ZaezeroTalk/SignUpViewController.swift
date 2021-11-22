@@ -78,7 +78,7 @@ class SignUpViewController: UIViewController {
             
             let signUpUser = result.user
             guard let email = signUpUser.email, let name = self.nameTextField.text else { return }
-            let userInfo = [ "email": email, "name": name, "stateMessage": ""]
+            let userInfo = [ "email": email, "name": name]
             DatabaseManager.shared.setValue(userInfo, forPath: "Users/\(signUpUser.uid)/userInfo")
             let changeRequest = signUpUser.createProfileChangeRequest()
             changeRequest.displayName = self.nameTextField.text

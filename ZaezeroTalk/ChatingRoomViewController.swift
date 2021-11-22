@@ -31,6 +31,8 @@ class ChatingRoomViewController: UIViewController {
             chatingTableView.estimatedRowHeight = 10
             chatingTableView.rowHeight = UITableView.automaticDimension
             chatingTableView.separatorStyle = .none
+            chatingTableView.register(UINib(nibName: "MyMessageCell", bundle: nil), forCellReuseIdentifier: "MyMessageCell")
+            chatingTableView.register(UINib(nibName: "OtherPersonMessageCell", bundle: nil), forCellReuseIdentifier: "OtherPersonMessageCell")
         }
     }
     
@@ -48,8 +50,6 @@ class ChatingRoomViewController: UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        chatingTableView.register(UINib(nibName: "MyMessageCell", bundle: nil), forCellReuseIdentifier: "MyMessageCell")
-        chatingTableView.register(UINib(nibName: "OtherPersonMessageCell", bundle: nil), forCellReuseIdentifier: "OtherPersonMessageCell")
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
@@ -140,16 +140,12 @@ extension ChatingRoomViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
             cell.contentTextView.text = messages[indexPath.row].content
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
-//            cell.layer.borderWidth = 5.0
-//            cell.layer.borderColor = UIColor.clear.cgColor
             cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OtherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
             cell.contentTextView.text = messages[indexPath.row].content
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
-//            cell.layer.borderWidth = 5.0
-//            cell.layer.borderColor = UIColor.clear.cgColor
             cell.selectionStyle = .none
             return cell
         }

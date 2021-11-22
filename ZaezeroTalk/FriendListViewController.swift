@@ -84,10 +84,31 @@ extension FriendListViewController: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
         if indexPath.section == 0 {
             cell.nameLabel.text = ConnectedUser.shared.user.userInfo.name
-            cell.stateMessageLabel.text = ConnectedUser.shared.user.userInfo.stateMessage
+            cell.stateMessageLabel.text = ConnectedUser.shared.user.userInfo.stateMessage ?? ""
+            if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl, !profileImageUrl.isEmpty {
+                print("profileImageUrl!!!->",profileImageUrl)
+                let url = URL(string: profileImageUrl)
+                DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: url!)
+                    DispatchQueue.main.async { cell.profileImageView.image = UIImage(data: data!) }
+                }
+                
+            } else {
+                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+            }
+            
         } else {
             cell.nameLabel.text = friends[indexPath.row].info.name
-            cell.stateMessageLabel.text = friends[indexPath.row].info.stateMessage
+            cell.stateMessageLabel.text = friends[indexPath.row].info.stateMessage ?? ""
+            if let profileImageUrl = friends[indexPath.row].info.profileImageUrl, !profileImageUrl.isEmpty {
+                let url = URL(string: profileImageUrl)
+                DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: url!)
+                    DispatchQueue.main.async { cell.profileImageView.image = UIImage(data: data!) }
+                }
+            } else {
+                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+            }
         }
         
         return cell
@@ -103,13 +124,15 @@ extension FriendListViewController: UITableViewDelegate{
         let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
         let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
         if indexPath.section == 0 {
-            profileVC.selectedFriendUid = ConnectedUser.shared.uid
+            profileVC.selectedUserUid = ConnectedUser.shared.uid
+            profileVC.selectedUserInfo = ConnectedUser.shared.user.userInfo
         } else {
-            profileVC.selectedFriendUid = friends[indexPath.row].uid
+            profileVC.selectedUserUid = friends[indexPath.row].uid
+            profileVC.selectedUserInfo = friends[indexPath.row].info
         }
         profileVC.modalPresentationStyle = .fullScreen
         present(profileVC, animated: true, completion: nil)
-    }
+    } // 친구 목록에서 친구 선택시 프로필 화면 present
 }
 
 extension FriendListViewController{
