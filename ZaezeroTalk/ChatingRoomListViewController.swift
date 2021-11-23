@@ -57,7 +57,7 @@ extension ChatingRoomListViewController: UITableViewDataSource {
         cell.headCountLabel.text = String(roomInfo.uids.toFBArray().count)
         cell.lastMeesageLabel.text = roomInfo.lastMessage
         cell.roomImageView.image = UIImage(systemName: "person.2.wave.2")
-        cell.timeLabel.text = roomInfo.lastMessageTime
+        cell.timeLabel.text = roomInfo.lastMessageTime.toDayTime
         
         if roomInfo.name.isEmpty {
             var removedNames = roomInfo.userNames.toFBArray()

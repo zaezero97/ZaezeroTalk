@@ -10,7 +10,6 @@ import SnapKit
 import Firebase
 
 class AddFriendViewController: UIViewController {
-    
     var searchedUserInfo: UserInfo?
     @IBOutlet weak var customNavigationBar: UINavigationBar!
     @IBOutlet weak var customNavigationItem: UINavigationItem! {

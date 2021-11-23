@@ -9,9 +9,11 @@ import Foundation
 import Firebase
 import FirebaseStorage
 
+
 class DatabaseManager{
     static let shared = DatabaseManager()
     let ref = Database.database().reference()
+    private var messageObserver: UInt?
     private init(){
         
     }
@@ -146,7 +148,7 @@ extension DatabaseManager {
     func sendMessage(sendMessage: [String: Any], room: (id: String ,info: ChatingRoom)) {
         let messageAutoId = ref.childByAutoId().key!
         updateChildValues([messageAutoId: sendMessage], forPath: "Rooms/\(room.id)/messages")
-        updateChildValues(["lastMessage": sendMessage["content"]!,"lastMessageTime": sendMessage["time"]!], forPath: "Room/\(room.id)")
+        updateChildValues(["lastMessage": sendMessage["content"]!,"lastMessageTime": sendMessage["time"]!], forPath: "Rooms/\(room.id)")
     }
     func registerRoomObserver(id: String,completion: @escaping (ChatingRoom?) -> Void) {
         ref.child("Rooms/\(id)").observe(.value) { snapshot in
@@ -192,7 +194,7 @@ extension DatabaseManager {
     }
     
     func registerAddedMessageObserver(roomId: String, completion: @escaping (Message?) -> Void){
-        ref.child("Rooms/\(roomId)/messages").observe(.childAdded) { snapshot in
+        messageObserver = ref.child("Rooms/\(roomId)/messages").observe(.childAdded) { snapshot in
             if !snapshot.exists() {
                 completion(nil)
                 return
@@ -211,6 +213,18 @@ extension DatabaseManager {
         
     }
     
+    func removeMessageObserver(){
+        guard let handle = messageObserver else { return }
+        ref.removeObserver(withHandle: handle)
+    }
+    
+    func enterRoom(uid: String,roomId: String){
+        updateChildValues([uid: "true"], forPath: "RoomUsers/\(roomId)")
+    }
+    
+    func exitRoomuid(uid: String,roomId: String){
+        updateChildValues([uid: "false"], forPath: "RoomUsers/\(roomId)")
+    }
 }
 
 // MARK: - Image

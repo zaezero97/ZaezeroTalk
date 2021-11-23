@@ -14,5 +14,5 @@ struct ChatingRoom: Codable{
     var name: String
     var messages: [String: Message]?
     var lastMessage: String
-    var lastMessageTime: String
+    var lastMessageTime: Int
 }

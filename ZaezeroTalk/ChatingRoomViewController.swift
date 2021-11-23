@@ -56,6 +56,7 @@ class ChatingRoomViewController: UIViewController {
         
         if let curRoom = fetchCurrentRoom() {
             chatingRoom = curRoom
+            DatabaseManager.shared.enterRoom(uid: ConnectedUser.shared.uid, roomId: curRoom.id)
             if curRoom.info.name.isEmpty {
                 var names = participantNames
                 names.removeAll { name in
@@ -89,6 +90,11 @@ class ChatingRoomViewController: UIViewController {
         // 방에 입장 시 방이 존재하면 방의 정보를 가져오고 방의 상태 변경을 감지하는 옵저버를 등록한다,
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        DatabaseManager.shared.removeMessageObserver()
+        DatabaseManager.shared.exitRoomuid(uid: ConnectedUser.shared.uid, roomId: chatingRoom!.id)
+    }
     
     @IBAction func clickBackButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
