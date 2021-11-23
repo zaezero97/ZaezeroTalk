@@ -57,6 +57,7 @@ class ChatingRoomViewController: UIViewController {
         if let curRoom = fetchCurrentRoom() {
             chatingRoom = curRoom
             DatabaseManager.shared.enterRoom(uid: ConnectedUser.shared.uid, roomId: curRoom.id)
+            DatabaseManager.shared.readMessage(messages: curRoom.info.messages, roomId: curRoom.id)
             if curRoom.info.name.isEmpty {
                 var names = participantNames
                 names.removeAll { name in
@@ -70,15 +71,28 @@ class ChatingRoomViewController: UIViewController {
                 }
                 self.chatingRoom = (id: curRoom.id,info: room)
             }
-            DatabaseManager.shared.registerAddedMessageObserver(roomId: curRoom.id, completion: {
-                message in
-                if let message = message {
-                    self.messages.append(message)
-                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-                    self.chatingTableView.insertRows(at: [indexPath], with: .automatic)
-                    self.chatingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            //            DatabaseManager.shared.registerAddedMessageObserver(roomId: curRoom.id, completion: {
+            //                message, messageId in
+            //                if var message = message, let messageId = messageId{
+            //                    guard var readUsers = message.readUsers else { return }
+            //                    readUsers[ConnectedUser.shared.uid] = "true"
+            //                    message.readUsers = readUsers
+            //                    DatabaseManager.shared.readMessage(message: message, roomId: curRoom.id, messageId: messageId)
+            //                    self.messages.append(message)
+            //                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+            //                    self.chatingTableView.insertRows(at: [indexPath], with: .automatic)
+            //                    self.chatingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            //                }
+            //            })
+            DatabaseManager.shared.registerMessageObserver(roomId: curRoom.id) {
+                fetchedMessages in
+                guard let fetchedMessages = fetchedMessages else {
+                    return
                 }
-            })
+                self.messages = fetchedMessages
+                self.chatingTableView.reloadData()
+                self.chatingTableView.scrollToRow(at: IndexPath(row: self.messages.count - 1, section: 0), at: .bottom, animated: false)
+            }
         } else {
             var names = participantNames
             names.removeAll { name in
@@ -93,7 +107,7 @@ class ChatingRoomViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         DatabaseManager.shared.removeMessageObserver()
-        DatabaseManager.shared.exitRoomuid(uid: ConnectedUser.shared.uid, roomId: chatingRoom!.id)
+        DatabaseManager.shared.exitRoom(uid: ConnectedUser.shared.uid, roomId: chatingRoom!.id)
     }
     
     @IBAction func clickBackButton(_ sender: Any) {
@@ -109,25 +123,37 @@ class ChatingRoomViewController: UIViewController {
         ]
         
         if let chatingRoom = chatingRoom {
-            DatabaseManager.shared.sendMessage(sendMessage: message, room: chatingRoom)
+            DatabaseManager.shared.sendMessage(sendMessage: message, roomId: chatingRoom.id, completion: nil)
         } else {
             DatabaseManager.shared.createRoom(message: message, participantUids: participantUids, participantNames: participantNames, name: nil , completion: {
-                id in
-                DatabaseManager.shared.registerRoomObserver(id: id) { room in
+                roomId in
+                DatabaseManager.shared.registerRoomObserver(id: roomId) { room in
                     guard let room = room else {
                         return
                     }
-                    self.chatingRoom = (id: id,info: room)
+                    self.chatingRoom = (id: roomId,info: room)
                 }
-                DatabaseManager.shared.registerAddedMessageObserver(roomId: id, completion: {
-                    message in
-                    if let message = message {
-                        self.messages.append(message)
-                        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-                        self.chatingTableView.insertRows(at: [indexPath], with: .automatic)
-                        self.chatingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                //                DatabaseManager.shared.registerAddedMessageObserver(roomId: roomId, completion: {
+                //                    message, messageId in
+                //                    if var message = message, let messageId = messageId{
+                //                        message.readUsers![ConnectedUser.shared.uid] = "true"
+                //                        DatabaseManager.shared.readMessage(message: message, roomId: roomId, messageId: messageId)
+                //                        self.messages.append(message)
+                //                        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                //                        self.chatingTableView.insertRows(at: [indexPath], with: .automatic)
+                //                        self.chatingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                //                    }
+                //                })
+                DatabaseManager.shared.registerMessageObserver(roomId: roomId) {
+                    fetchedMessages in
+                    guard let fetchedMessages = fetchedMessages else {
+                        return
                     }
-                })
+                    self.messages = fetchedMessages
+                    self.chatingTableView.reloadData()
+                    self.chatingTableView.scrollToRow(at: IndexPath(row: self.messages.count - 1, section: 0), at: .bottom, animated: false)
+                
+                }
             })
         }// 방이 존재하면 메시지를 보내고 존재하지 않으면 새로 방을 만들고 room의 상태변화를 감지하는 옵저버를 등록한다.
         
@@ -141,17 +167,20 @@ extension ChatingRoomViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard chatingRoom != nil else { return UITableViewCell() }
+        guard let readUsers = messages[indexPath.row].readUsers else { return UITableViewCell()}
         
         if messages[indexPath.row].sender == ConnectedUser.shared.uid {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
             cell.contentTextView.text = messages[indexPath.row].content
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
+            cell.readCountLabel.text = participantUids.count == readUsers.count ? "" : String(participantUids.count - (readUsers.count ) )
             cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OtherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
             cell.contentTextView.text = messages[indexPath.row].content
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
+            cell.readCountLabel.text = participantUids.count == readUsers.count ? "" : String(participantUids.count - (readUsers.count ) )
             cell.selectionStyle = .none
             return cell
         }
@@ -208,6 +237,7 @@ extension ChatingRoomViewController {
             }
         }
         
+        
         return curRoom
     }
 }
@@ -236,3 +266,7 @@ extension ChatingRoomViewController {
         }
     }
 }
+
+
+
+

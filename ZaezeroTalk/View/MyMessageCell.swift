@@ -9,6 +9,7 @@ import UIKit
 
 class MyMessageCell: UITableViewCell {
 
+    @IBOutlet weak var readCountLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
     override func awakeFromNib() {

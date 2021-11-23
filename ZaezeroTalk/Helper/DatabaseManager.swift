@@ -13,6 +13,8 @@ import FirebaseStorage
 class DatabaseManager{
     static let shared = DatabaseManager()
     let ref = Database.database().reference()
+    private var addMessageObserver: UInt?
+    private var changeMessageObserver: UInt?
     private var messageObserver: UInt?
     private init(){
         
@@ -95,19 +97,7 @@ class DatabaseManager{
             }
         })
     }
-//    func registerUserObserver(by uid: String) {
-//        ref.child("Users/\(uid)").observe(.value) {
-//            snapshot in
-//            do{
-//                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
-//                let result = try JSONDecoder().decode(User.self, from: data)
-//                ConnectedUser.shared.uid = snapshot.key
-//                ConnectedUser.shared.user = result
-//            } catch {
-//                print("-> Error : \(error.localizedDescription)")
-//            }
-//        }
-//    }
+    
     func registerUserInfoObserver(forUid uid: String){
         ref.child("Users/\(uid)/userInfo").observe(.value, with: {
             snapshot in
@@ -145,10 +135,34 @@ extension DatabaseManager {
         })
     }
     
-    func sendMessage(sendMessage: [String: Any], room: (id: String ,info: ChatingRoom)) {
+    func sendMessage(sendMessage: [String: Any], roomId: String, completion: ((String) -> Void)?) {
         let messageAutoId = ref.childByAutoId().key!
-        updateChildValues([messageAutoId: sendMessage], forPath: "Rooms/\(room.id)/messages")
-        updateChildValues(["lastMessage": sendMessage["content"]!,"lastMessageTime": sendMessage["time"]!], forPath: "Rooms/\(room.id)")
+        updateChildValues([messageAutoId: sendMessage], forPath: "Rooms/\(roomId)/messages")
+        updateChildValues(["lastMessage": sendMessage["content"]!,"lastMessageTime": sendMessage["time"]!], forPath: "Rooms/\(roomId)")
+        
+        ref.child("RoomUsers/\(roomId)").observeSingleEvent(of: .value, with: {
+            snapshot in
+            print("snapshot !!!",snapshot)
+            
+            let users = snapshot.value as! [String: String]
+            var readUsers = [String: String]()
+            print("users!!!",users)
+            users.forEach { (key,value) in
+                if value == "true" {
+                    readUsers[key] = "true"
+                }
+            }
+            
+            //방에 참여하고 있는 유저(value == true) 를 readUsers 에다가 저장
+            self.ref.child("Rooms/\(roomId)/messages/\(messageAutoId)/readUsers").setValue(readUsers,withCompletionBlock: {
+                (_,_) in
+                if let completion = completion {
+                    completion(roomId)
+                }
+            })
+        })
+        
+        
     }
     func registerRoomObserver(id: String,completion: @escaping (ChatingRoom?) -> Void) {
         ref.child("Rooms/\(id)").observe(.value) { snapshot in
@@ -164,52 +178,92 @@ extension DatabaseManager {
         }
     }
     func createRoom(message: [String: Any],participantUids: [String],participantNames: [String], name: String?, completion: @escaping (String) -> Void) {
-        let autoId = ref.childByAutoId().key!
+        let roomId = ref.childByAutoId().key!
         var participants = [String: Any]()
-        let msgAutoId = ref.childByAutoId().key!
         let roomInfo: [String: Any] = [
-            "messages": [msgAutoId: message],
             "uids": participantUids.toFBString(),
             "userNames": participantNames.toFBString(),
             "name": name ?? "",
-            "lastMessage": message["content"]!,
-            "lastMessageTime": message["time"]!
         ]
-        
-        ref.child("Rooms/\(autoId)").setValue(roomInfo,withCompletionBlock:
-                                                {_,_ in
-            completion(autoId)
-        })
-        
-        participantUids.forEach {
-            participants[$0] = "false"
-        }
-        participants[ConnectedUser.shared.uid] = "true"
-        
-        ref.child("RoomUsers/\(autoId)").setValue(participants) { error, _ in
-            if error != nil {
-                print("error ->",error.debugDescription)
+        ref.child("Rooms/\(roomId)").setValue(roomInfo,withCompletionBlock:
+                                                {
+            _,_ in
+            participantUids.forEach {
+                participants[$0] = "false"
             }
-        }
+            participants[ConnectedUser.shared.uid] = "true"
+            self.ref.child("RoomUsers/\(roomId)").setValue(participants) { error, _ in
+                if error != nil {
+                    print("error ->",error.debugDescription)
+                } else {
+                    self.sendMessage(sendMessage: message,roomId: roomId,completion: completion)
+                }
+            }
+        })
     }
     
-    func registerAddedMessageObserver(roomId: String, completion: @escaping (Message?) -> Void){
-        messageObserver = ref.child("Rooms/\(roomId)/messages").observe(.childAdded) { snapshot in
+    func registerAddedMessageObserver(roomId: String, completion: @escaping (Message?, String?) -> Void){
+        addMessageObserver = ref.child("Rooms/\(roomId)/messages").observe(.childAdded) { snapshot in
             if !snapshot.exists() {
-                completion(nil)
+                completion(nil, nil)
                 return
             }
             
             do{
                 let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
                 let result = try JSONDecoder().decode(Message.self, from: data)
-                completion(result)
+                completion(result, snapshot.key)
+            } catch {
+                print("-> Error registerRoomObserver: \(error.localizedDescription)")
+                completion(nil, nil)
+                return
+            }
+        }
+        
+    }
+    func registerMessageObserver(roomId: String, completion: @escaping ([Message]?) -> Void) {
+        messageObserver = ref.child("Rooms/\(roomId)/messages").observe(.value) { snapshot in
+            if !snapshot.exists() {
+                completion(nil)
+                return
+            }
+            print("MessageObserver !!! ->", snapshot.value)
+            do{
+                var messages = [Message]()
+                for child in snapshot.children {
+                    let child = child as! DataSnapshot
+                    let data = try JSONSerialization.data(withJSONObject: child.value!, options: .prettyPrinted)
+                    let result = try JSONDecoder().decode(Message.self, from: data)
+                    messages.append(result)
+                }
+                
+                completion(messages)
             } catch {
                 print("-> Error registerRoomObserver: \(error.localizedDescription)")
                 completion(nil)
                 return
             }
         }
+    }
+    func registerChangeMessageObserver(roomId: String, completion: @escaping (Message?, String?) -> Void) {
+        changeMessageObserver = ref.child("Rooms/\(roomId)/messages").observe(.childChanged, with: { snapshot in
+            if !snapshot.exists() {
+                completion(nil, nil)
+                return
+            }
+            
+            do{
+                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
+                let result = try JSONDecoder().decode(Message.self, from: data)
+                print("Change Message Observer !!! ->",snapshot.value)
+                completion(result, snapshot.key)
+            } catch {
+                print("-> Error registerRoomObserver: \(error.localizedDescription)")
+                completion(nil, nil)
+                return
+            }
+        })
+        
         
     }
     
@@ -218,12 +272,26 @@ extension DatabaseManager {
         ref.removeObserver(withHandle: handle)
     }
     
+    
     func enterRoom(uid: String,roomId: String){
         updateChildValues([uid: "true"], forPath: "RoomUsers/\(roomId)")
+        
     }
     
-    func exitRoomuid(uid: String,roomId: String){
+    func exitRoom(uid: String,roomId: String){
         updateChildValues([uid: "false"], forPath: "RoomUsers/\(roomId)")
+    }
+    
+    func readMessage(messages: [String: Message], roomId: String){
+        
+        var newMessages = [String: Any]()
+        
+        messages.forEach { id,message in
+            var newMessage = message
+            newMessage.readUsers![ConnectedUser.shared.uid] = "true"
+            newMessages[id] = newMessage.toDictionary()
+        }
+        ref.child("Rooms/\(roomId)/messages").setValue(newMessages)
     }
 }
 

@@ -34,9 +34,16 @@
                         <color key="textColor" systemColor="systemGray2Color"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a08-ic-vQl">
+                        <rect key="frame" x="189" y="41" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="bwn-Mb-H3K" firstAttribute="leading" secondItem="hu7-45-PoH" secondAttribute="leading" constant="25" id="2Xj-xh-MNC"/>
+                    <constraint firstItem="i4v-Ek-TER" firstAttribute="top" secondItem="a08-ic-vQl" secondAttribute="bottom" constant="5" id="AgC-5T-EWy"/>
                     <constraint firstItem="bwn-Mb-H3K" firstAttribute="trailing" secondItem="hu7-45-PoH" secondAttribute="trailing" constant="-25" id="Erd-79-1Il"/>
                     <constraint firstItem="i4v-Ek-TER" firstAttribute="bottom" secondItem="hu7-45-PoH" secondAttribute="bottom" id="KA1-iN-W43"/>
                     <constraint firstAttribute="bottom" secondItem="hu7-45-PoH" secondAttribute="bottom" id="KLq-zo-KIq"/>
@@ -45,11 +52,13 @@
                     <constraint firstItem="i4v-Ek-TER" firstAttribute="leading" secondItem="hu7-45-PoH" secondAttribute="trailing" constant="5" id="cVV-lh-ta2"/>
                     <constraint firstItem="bwn-Mb-H3K" firstAttribute="top" secondItem="hu7-45-PoH" secondAttribute="top" id="dRp-R5-VJg"/>
                     <constraint firstItem="hu7-45-PoH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="haE-XY-kUw"/>
+                    <constraint firstItem="a08-ic-vQl" firstAttribute="leading" secondItem="hu7-45-PoH" secondAttribute="trailing" constant="5" id="qDY-q0-tet"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="contentTextView" destination="bwn-Mb-H3K" id="Jvw-8O-EIL"/>
+                <outlet property="readCountLabel" destination="a08-ic-vQl" id="uKf-Xo-qv1"/>
                 <outlet property="timeLabel" destination="i4v-Ek-TER" id="2uK-ar-u6F"/>
             </connections>
             <point key="canvasLocation" x="192.75362318840581" y="110.49107142857143"/>

@@ -13,4 +13,17 @@ struct Message: Codable{
     let time: Int?
     let type: String?
     let content: String?
+    var readUsers: [String: String]?
+    
+    func toDictionary() -> [String: Any]{
+        var dictionary = [String: Any]()
+        
+        dictionary["sender"] = sender ?? ""
+        dictionary["time"] = time ?? ""
+        dictionary["type"] = type ?? ""
+        dictionary["content"] = content ?? ""
+        dictionary["readUsers"] = readUsers ?? [String: String]()
+        
+        return dictionary
+    }
 }
