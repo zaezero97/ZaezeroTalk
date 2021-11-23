@@ -20,96 +20,6 @@ class DatabaseManager{
         
     }
     
-    func setValue(_ value: [String: Any], forPath path: String){
-        ref.child(path).setValue(value)
-    }
-    
-    func updateChildValues(_ value: [String: Any], forPath path: String){
-        ref.child(path).updateChildValues(value)
-    }
-    func updateChildValues(_ value: [String: Any], forPath path: String, completion: @escaping (Error?,DatabaseReference)-> Void){
-        ref.child(path).updateChildValues(value,withCompletionBlock: completion)
-    }
-    func fetchUid(email: String,compltion: @escaping (String?) -> Void) {
-        ref.child("Users").queryOrdered(byChild: "userInfo/email").queryEqual(toValue: email).observeSingleEvent(of: .value) { snapshot in
-            let child = snapshot.value as! [String: Any]
-            compltion(child.keys.first)
-        }
-    }
-    func fetchUser(email : String ,completion : @escaping (User?) -> Void){
-        ref.child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value) { snapshot in
-            do{
-                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
-                let result = try JSONDecoder().decode(User.self, from: data)
-                completion(result)
-            } catch {
-                print("-> Error : \(error.localizedDescription)")
-                completion(nil)
-            }
-        }
-    }
-    
-    func fetchUser(uid: String, completion : @escaping (User?) -> Void) {
-        ref.child("Users/\(uid)").observeSingleEvent(of: .value, with: {
-            snapshot in
-            do{
-                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
-                print(data)
-                let result = try JSONDecoder().decode(User.self, from: data)
-                completion(result)
-            } catch {
-                print("-> Error : \(error.localizedDescription)")
-                completion(nil)
-            }
-        })
-    }
-    
-    func fetchUserInfo(uid: String, completion : @escaping (UserInfo?) -> Void){
-        ref.child("Users/\(uid)/userInfo").observeSingleEvent(of: .value, with: {
-            snapshot in
-            do{
-                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
-                let result = try JSONDecoder().decode(UserInfo.self, from: data)
-                completion(result)
-            } catch {
-                print("-> Error : \(error.localizedDescription)")
-                completion(nil)
-            }
-        })
-    }
-    func fetchUserInfo(email: String, completion : @escaping (UserInfo?) -> Void){
-        ref.child("Users").queryOrdered(byChild: "userInfo/email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: {
-            snapshot in
-            guard snapshot.exists() else {
-                completion(nil)
-                return
-            }
-            let child = snapshot.value as! [String: Any]
-            let userInfoDictionary = child[child.keys.first!] as! [String: Any]
-            
-            do{
-                let data = try JSONSerialization.data(withJSONObject: userInfoDictionary["userInfo"]!, options: .prettyPrinted)
-                let result = try JSONDecoder().decode(UserInfo.self, from: data)
-                completion(result)
-                print(result)
-            } catch {
-                print("-> Error : \(error.localizedDescription)")
-            }
-        })
-    }
-    
-    func registerUserInfoObserver(forUid uid: String){
-        ref.child("Users/\(uid)/userInfo").observe(.value, with: {
-            snapshot in
-            let userInfo = snapshot.value as? [String: Any]
-            let email = userInfo?["email"] as? String ?? ""
-            let name = userInfo?["name"] as? String ?? ""
-            let stateMessage = userInfo?["stateMessage"] as? String ?? ""
-            let profileImageUrl = userInfo?["profileImageUrl"] as? String ?? ""
-            ConnectedUser.shared.user.userInfo = UserInfo(email: email, name: name, stateMessage: stateMessage, profileImageUrl: profileImageUrl)
-        })
-    }
-    
 }
 
 // MARK: - Room
@@ -318,5 +228,108 @@ extension DatabaseManager {
                 }
             }
         }
+    }
+}
+
+
+
+// MARK: - Set,Update Data
+extension DatabaseManager {
+    func setValue(_ value: [String: Any], forPath path: String){
+        ref.child(path).setValue(value)
+    }
+    
+    func updateChildValues(_ value: [String: Any], forPath path: String){
+        ref.child(path).updateChildValues(value)
+    }
+    func updateChildValues(_ value: [String: Any], forPath path: String, completion: @escaping (Error?,DatabaseReference)-> Void){
+        ref.child(path).updateChildValues(value,withCompletionBlock: completion)
+    }
+}
+
+// MARK: - Fetch User Data
+extension DatabaseManager {
+    
+    func fetchUid(email: String,compltion: @escaping (String?) -> Void) {
+        ref.child("Users").queryOrdered(byChild: "userInfo/email").queryEqual(toValue: email).observeSingleEvent(of: .value) { snapshot in
+            let child = snapshot.value as! [String: Any]
+            compltion(child.keys.first)
+        }
+    }
+    func fetchUser(email : String ,completion : @escaping (User?) -> Void){
+        ref.child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value) { snapshot in
+            do{
+                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
+                let result = try JSONDecoder().decode(User.self, from: data)
+                completion(result)
+            } catch {
+                print("-> Error : \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+    
+    func fetchUser(uid: String, completion : @escaping (User?) -> Void) {
+        ref.child("Users/\(uid)").observeSingleEvent(of: .value, with: {
+            snapshot in
+            do{
+                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
+                print(data)
+                let result = try JSONDecoder().decode(User.self, from: data)
+                completion(result)
+            } catch {
+                print("-> Error : \(error.localizedDescription)")
+                completion(nil)
+            }
+        })
+    }
+    
+    func fetchUserInfo(uid: String, completion : @escaping (UserInfo?) -> Void){
+        ref.child("Users/\(uid)/userInfo").observeSingleEvent(of: .value, with: {
+            snapshot in
+            do{
+                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
+                let result = try JSONDecoder().decode(UserInfo.self, from: data)
+                completion(result)
+            } catch {
+                print("-> Error : \(error.localizedDescription)")
+                completion(nil)
+            }
+        })
+    }
+    func fetchUserInfo(email: String, completion : @escaping (UserInfo?) -> Void){
+        ref.child("Users").queryOrdered(byChild: "userInfo/email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: {
+            snapshot in
+            guard snapshot.exists() else {
+                completion(nil)
+                return
+            }
+            let child = snapshot.value as! [String: Any]
+            let userInfoDictionary = child[child.keys.first!] as! [String: Any]
+            
+            do{
+                let data = try JSONSerialization.data(withJSONObject: userInfoDictionary["userInfo"]!, options: .prettyPrinted)
+                let result = try JSONDecoder().decode(UserInfo.self, from: data)
+                completion(result)
+                print(result)
+            } catch {
+                print("-> Error : \(error.localizedDescription)")
+            }
+        })
+    }
+}
+
+// MARK: - Register User Observer
+extension DatabaseManager {
+    func registerUserInfoObserver(forUid uid: String){
+        ref.child("Users/\(uid)/userInfo").observe(.value, with: {
+            snapshot in
+            let userInfo = snapshot.value as? [String: Any]
+            let email = userInfo?["email"] as? String ?? ""
+            let name = userInfo?["name"] as? String ?? ""
+            let stateMessage = userInfo?["stateMessage"] as? String ?? ""
+            let profileImageUrl = userInfo?["profileImageUrl"] as? String ?? ""
+            ConnectedUser.shared.user.userInfo = UserInfo(email: email, name: name, stateMessage: stateMessage, profileImageUrl: profileImageUrl)
+        })
     }
 }

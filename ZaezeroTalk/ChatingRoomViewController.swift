@@ -31,8 +31,8 @@ class ChatingRoomViewController: UIViewController {
             chatingTableView.estimatedRowHeight = 10
             chatingTableView.rowHeight = UITableView.automaticDimension
             chatingTableView.separatorStyle = .none
-            chatingTableView.register(UINib(nibName: "MyMessageCell", bundle: nil), forCellReuseIdentifier: "MyMessageCell")
-            chatingTableView.register(UINib(nibName: "OtherPersonMessageCell", bundle: nil), forCellReuseIdentifier: "OtherPersonMessageCell")
+            chatingTableView.register(UINib(nibName: "MyMessageCell", bundle: nil), forCellReuseIdentifier: "myMessageCell")
+            chatingTableView.register(UINib(nibName: "OtherPersonMessageCell", bundle: nil), forCellReuseIdentifier: "otherPersonMessageCell")
         }
     }
     
@@ -170,14 +170,14 @@ extension ChatingRoomViewController: UITableViewDataSource {
         guard let readUsers = messages[indexPath.row].readUsers else { return UITableViewCell()}
         
         if messages[indexPath.row].sender == ConnectedUser.shared.uid {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "myMessageCell", for: indexPath) as! MyMessageCell
             cell.contentTextView.text = messages[indexPath.row].content
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
             cell.readCountLabel.text = participantUids.count == readUsers.count ? "" : String(participantUids.count - (readUsers.count ) )
             cell.selectionStyle = .none
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OtherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "otherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
             cell.contentTextView.text = messages[indexPath.row].content
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
             cell.readCountLabel.text = participantUids.count == readUsers.count ? "" : String(participantUids.count - (readUsers.count ) )
