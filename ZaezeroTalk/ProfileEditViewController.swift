@@ -131,8 +131,8 @@ class ProfileEditViewController: UIViewController {
             }
         }
         
+        
     }
-    
 }
 
 // MARK: - Image View TapGesture Action Func , Gallery Func

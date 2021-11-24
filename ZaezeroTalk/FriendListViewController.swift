@@ -34,6 +34,22 @@ class FriendListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        DatabaseManager.shared.registerFriendObserver(completion: {
+            friendId, friendInfo in
+            print("friend Oberser!!! -> ",friendId,friendInfo)
+            ConnectedUser.shared.user.friends![friendId] = friendInfo
+            var row = 0
+            for index in self.friends.indices {
+                if self.friends[index].uid == friendId {
+                    self.friends[index].uid = friendId
+                    self.friends[index].info = friendInfo
+                    row = index
+                    break
+                }
+            }
+            self.friendListTableView.reloadRows(at: [IndexPath(row: row, section: 1)], with: .automatic)
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {

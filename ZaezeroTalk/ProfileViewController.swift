@@ -66,6 +66,7 @@ class ProfileViewController: UIViewController {
             uid,userInfo in
             self.setProfile(uid: uid, userInfo: userInfo)
             ConnectedUser.shared.user.userInfo = userInfo
+            DatabaseManager.shared.notiProfileChangeToFriends()
         }
         profileEditVC.modalTransitionStyle = .crossDissolve
         profileEditVC.modalPresentationStyle = .fullScreen

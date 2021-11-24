@@ -333,3 +333,40 @@ extension DatabaseManager {
         })
     }
 }
+
+// MARK: - Friend
+
+extension DatabaseManager {
+    func registerFriendObserver(completion: @escaping (String, UserInfo) -> Void) {
+        ref.child("Users/\(ConnectedUser.shared.uid)/friends").observe(.childChanged) {
+            snapshot in
+            do{
+                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
+                let result = try JSONDecoder().decode(UserInfo.self, from: data)
+                completion(snapshot.key, result)
+                print(result)
+            } catch {
+                print("-> Error Friend Observer: \(error.localizedDescription)")
+            }
+        }
+    }
+    func notiProfileChangeToFriends() {
+        ref.child("Users").observeSingleEvent(of: .value)
+        {
+            snapshot in
+            
+            for child in snapshot.children { // child -> User
+                let child = child as! DataSnapshot
+                let user = child.value as! [String: Any]
+                let friends = user["friends"] as! [String: Any]
+                
+                for key in friends.keys {
+                    if key == ConnectedUser.shared.uid {
+                        self.ref.child("Users/\(child.key)/friends/\(ConnectedUser.shared.uid)").setValue(ConnectedUser.shared.user.userInfo.toDictionary())
+                        break
+                    }
+                }
+            }
+        }
+    }
+}

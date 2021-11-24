@@ -90,7 +90,6 @@ class LoginViewController: UIViewController {
                         })
                     }
                 })
-                //DatabaseManager.shared.registerUserObserver(by: result.user.uid)//
             }
         }
     }
