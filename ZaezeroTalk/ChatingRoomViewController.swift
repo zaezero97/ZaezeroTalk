@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 
+
 class ChatingRoomViewController: UIViewController {
     @IBOutlet weak var inputTextViewBottomMargin: NSLayoutConstraint!
     @IBOutlet weak var inputTextViewHeightConstraint: NSLayoutConstraint!
@@ -175,6 +176,7 @@ extension ChatingRoomViewController: UITableViewDataSource {
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
             cell.readCountLabel.text = participantUids.count == readUsers.count ? "" : String(participantUids.count - (readUsers.count ) )
             cell.selectionStyle = .none
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "otherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell

@@ -22,7 +22,7 @@
                         <rect key="frame" x="381" y="10" width="87" height="194"/>
                         <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021.11.15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7f-ju-vkE">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="2021.11.15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7f-ju-vkE">
                         <rect key="frame" x="314" y="188" width="62" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" systemColor="systemGray2Color"/>
@@ -53,6 +53,7 @@
                     <constraint firstAttribute="trailing" secondItem="DJv-ya-lNF" secondAttribute="trailing" constant="5" id="Tae-P3-N5F"/>
                     <constraint firstItem="0bj-zB-m6V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="eBG-bu-dxm"/>
                     <constraint firstItem="0bj-zB-m6V" firstAttribute="leading" secondItem="DJv-ya-lNF" secondAttribute="leading" constant="10" id="ole-aa-9MJ"/>
+                    <constraint firstItem="M7f-ju-vkE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="u50-6G-uxB"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
