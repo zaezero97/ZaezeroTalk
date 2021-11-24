@@ -11,7 +11,11 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var stateMessageLabel: UILabel!
     @IBOutlet weak var profileNameLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView! {
+        didSet {
+            profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+        }
+    }
     @IBOutlet weak var toolBar: UIToolbar! {
         didSet {
             if selectedUserUid != ConnectedUser.shared.uid {
@@ -37,10 +41,10 @@ class ProfileViewController: UIViewController {
         setProfile(uid: selectedUserUid, userInfo: selectedUserInfo)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     @IBAction func clickXButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

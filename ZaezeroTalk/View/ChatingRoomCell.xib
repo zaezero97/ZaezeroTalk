@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="마지막 message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIM-qV-XZy">
-                        <rect key="frame" x="55" y="34" width="118" height="81"/>
+                        <rect key="frame" x="55" y="34" width="300" height="81"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -50,6 +50,7 @@
                 <constraints>
                     <constraint firstItem="CYP-xi-aXP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="3hs-Ey-tNQ"/>
                     <constraint firstAttribute="bottom" secondItem="qIM-qV-XZy" secondAttribute="bottom" constant="5" id="7tI-AG-2RP"/>
+                    <constraint firstAttribute="trailing" secondItem="qIM-qV-XZy" secondAttribute="trailing" constant="5" id="8U2-g6-5pj"/>
                     <constraint firstAttribute="trailing" secondItem="CYP-xi-aXP" secondAttribute="trailing" constant="5" id="H7Q-4d-d6Q"/>
                     <constraint firstAttribute="bottom" secondItem="VbH-vh-eXv" secondAttribute="bottom" id="PQI-Aq-yUq"/>
                     <constraint firstItem="4eP-Wd-MPe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="gsb-GA-ubj"/>

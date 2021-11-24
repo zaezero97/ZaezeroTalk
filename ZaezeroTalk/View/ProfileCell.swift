@@ -10,7 +10,11 @@ import UIKit
 class ProfileCell: UITableViewCell {
 
     @IBOutlet weak var stateMessageLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView! {
+        didSet {
+            profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
+        }
+    }
     @IBOutlet weak var nameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

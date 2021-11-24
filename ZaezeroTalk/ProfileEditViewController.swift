@@ -25,6 +25,7 @@ class ProfileEditViewController: UIViewController {
             let gesture = UITapGestureRecognizer(target: self, action: #selector(clickProfileImageView(imageView:)))
             profileImageView.addGestureRecognizer(gesture)
             profileImageView.isUserInteractionEnabled = true
+            profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         }
     }
     @IBOutlet weak var nameLabel: UILabel! {

@@ -34,7 +34,11 @@ class FriendListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if let friendsDictionary = ConnectedUser.shared.user.friends {
+            friends = friendsDictionary.map { (key,value) in
+                (key,value)
+            }
+        }
         DatabaseManager.shared.registerFriendObserver(completion: {
             friendId, friendInfo in
             print("friend Oberser!!! -> ",friendId,friendInfo)
@@ -54,12 +58,12 @@ class FriendListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let friendsDictionary = ConnectedUser.shared.user.friends {
-            friends = friendsDictionary.map { (key,value) in
-                (key,value)
-            }
-        }
-        friendListTableView.reloadData()
+        //        if let friendsDictionary = ConnectedUser.shared.user.friends {
+        //            friends = friendsDictionary.map { (key,value) in
+        //                (key,value)
+        //            }
+        //        }
+        //        friendListTableView.reloadData()
     }
     
     
