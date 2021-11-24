@@ -22,6 +22,8 @@
 		AE8DD078274B5BDD0023ADF3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8DD077274B5BDD0023ADF3 /* SearchViewController.swift */; };
 		AE8DD07A274B5BE90023ADF3 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */; };
 		AE90BA4E2743A4B500D04469 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE90BA4D2743A4B500D04469 /* Int.swift */; };
+		AE9951A7274DD39A002ADAAF /* RoomDrawerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9951A6274DD39A002ADAAF /* RoomDrawerMenuViewController.swift */; };
+		AE9951A9274DD3A1002ADAAF /* RoomDrawerMenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE9951A8274DD3A1002ADAAF /* RoomDrawerMenuViewController.storyboard */; };
 		AE998F9B273D5A4400F6767B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE998F9A273D5A4400F6767B /* ProfileViewController.swift */; };
 		AE998F9D273D5A5600F6767B /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */; };
 		AEA8BD222745FF5800038841 /* RoomUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8BD212745FF5800038841 /* RoomUsers.swift */; };
@@ -83,6 +85,8 @@
 		AE8DD077274B5BDD0023ADF3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchViewController.storyboard; sourceTree = "<group>"; };
 		AE90BA4D2743A4B500D04469 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Int.swift; path = ../../../Int.swift; sourceTree = "<group>"; };
+		AE9951A6274DD39A002ADAAF /* RoomDrawerMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomDrawerMenuViewController.swift; sourceTree = "<group>"; };
+		AE9951A8274DD3A1002ADAAF /* RoomDrawerMenuViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RoomDrawerMenuViewController.storyboard; sourceTree = "<group>"; };
 		AE998F9A273D5A4400F6767B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
 		AEA8BD212745FF5800038841 /* RoomUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomUsers.swift; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 				AEAE17CA273DE9C800A44737 /* ChatingRoomListViewController.storyboard */,
 				AEAD438F2744C40500337B89 /* EditStateMessageViewController.storyboard */,
 				AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */,
+				AE9951A8274DD3A1002ADAAF /* RoomDrawerMenuViewController.storyboard */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 				AEB3A9DC273E3671008E7031 /* ChatingRoomViewController.swift */,
 				AEAE17C8273DE9BC00A44737 /* ChatingRoomListViewController.swift */,
 				AEAD438D2744C3F500337B89 /* EditStateMessageViewController.swift */,
+				AE9951A6274DD39A002ADAAF /* RoomDrawerMenuViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -378,6 +384,7 @@
 				AEAE17CB273DE9C800A44737 /* ChatingRoomListViewController.storyboard in Resources */,
 				AEB19B3727421D6D007D649E /* OtherPersonMessageCell.xib in Resources */,
 				AEB97CFC27351C0E00DCDF77 /* Assets.xcassets in Resources */,
+				AE9951A9274DD3A1002ADAAF /* RoomDrawerMenuViewController.storyboard in Resources */,
 				AEB3A9DF273E368D008E7031 /* ChatingRoomViewController.storyboard in Resources */,
 				AEAF93FD273B530900BE2FF1 /* AddFriendViewController.storyboard in Resources */,
 				AE30D6FD273B99660058F06B /* SearchByEmailResultView.xib in Resources */,
@@ -461,6 +468,7 @@
 				AE8DD078274B5BDD0023ADF3 /* SearchViewController.swift in Sources */,
 				AEB19B3627421D6D007D649E /* OtherPersonMessageCell.swift in Sources */,
 				AEA8BD242746027A00038841 /* String.swift in Sources */,
+				AE9951A7274DD39A002ADAAF /* RoomDrawerMenuViewController.swift in Sources */,
 				AEAE17D3273DEF2E00A44737 /* Message.swift in Sources */,
 				AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */,
 				AEA8BD222745FF5800038841 /* RoomUsers.swift in Sources */,
