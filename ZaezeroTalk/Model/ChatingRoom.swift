@@ -10,8 +10,9 @@ import Foundation
 struct ChatingRoom: Codable{
     var userNames: String
     var uids: String
-    var name: String
+    var name: String?
     var messages: [String: Message]
     var lastMessage: String
     var lastMessageTime: Int
+    let type: String
 }

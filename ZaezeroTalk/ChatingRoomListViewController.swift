@@ -63,14 +63,14 @@ extension ChatingRoomListViewController: UITableViewDataSource {
         cell.roomImageView.image = UIImage(systemName: "person.2.wave.2")
         cell.timeLabel.text = roomInfo.lastMessageTime.toDayTime
         
-        if roomInfo.name.isEmpty {
+        if let roomName = roomInfo.name {
+            cell.nameLabel.text = roomName
+        } else {
             var removedNames = roomInfo.userNames.toFBArray()
             removedNames.removeAll { name in
                 name == ConnectedUser.shared.user.userInfo.name
             }
             cell.nameLabel.text = removedNames.joined(separator: ",")
-        } else {
-            cell.nameLabel.text = roomInfo.name
         }
         
         
@@ -90,7 +90,6 @@ extension ChatingRoomListViewController: UITableViewDelegate {
         let chatingRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
         
         chatingRoomVC.curRoomId = chatingRoomList[indexPath.row].id
-        
         chatingRoomVC.participantUids = roomInfo.uids.toFBArray()
         chatingRoomVC.modalPresentationStyle = .fullScreen
         

@@ -90,17 +90,21 @@ extension DatabaseManager {
             }
         }
     }
-    func createRoom(message: [String: Any],participantUids: [String],participantNames: [String], name: String?, completion: @escaping (String, ChatingRoom) -> Void) {
+    func createRoom(message: [String: Any],participantUids: [String],participantNames: [String], name: String?,type: String , completion: @escaping (String, ChatingRoom) -> Void) {
         let roomId = ref.childByAutoId().key!
         var participants = [String: Any]()
         
-        let roomInfo: [String: Any] = [
+        var roomInfo: [String: Any] = [
             "uids": participantUids.toFBString(),
             "userNames": participantNames.toFBString(),
-            "name": name ?? "",
+            "type": type
         ]
         
-        let chatingRoom = ChatingRoom(userNames: participantNames.toFBString(), uids: participantUids.toFBString(), name: "", messages: [String: Message](), lastMessage: "", lastMessageTime: 0)
+        if let name = name {
+            roomInfo["name"] = name
+        }
+        
+        let chatingRoom = ChatingRoom(userNames: participantNames.toFBString(), uids: participantUids.toFBString(),name: name, messages: [String: Message](), lastMessage: "", lastMessageTime: 0, type: type)
         
         ref.child("Rooms/\(roomId)").setValue(roomInfo,withCompletionBlock:
                                                 {
@@ -230,6 +234,7 @@ extension DatabaseManager {
         ref.child("Rooms/\(roomId)").updateChildValues(["uids":newUids.toFBString(), "userNames":newUserNames.toFBString()])
         ref.child("RoomUsers/\(roomId)/\(ConnectedUser.shared.uid)").removeValue()
         ref.child("UserRooms/\(ConnectedUser.shared.uid)/\(roomId)").removeValue(completionBlock: completion)
+        ref.child("Users/\(ConnectedUser.shared.uid)/userInfo").removeAllObservers()
     }
     
 }
