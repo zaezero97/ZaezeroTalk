@@ -34,14 +34,14 @@ class FriendListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let friendsDictionary = ConnectedUser.shared.user.friends {
-            friends = friendsDictionary.map { (key,value) in
-                (key,value)
-            }
-        }
-        DatabaseManager.shared.registerFriendObserver(completion: {
+//        if let friendsDictionary = ConnectedUser.shared.user.friends {
+//            friends = friendsDictionary.map { (key,value) in
+//                (key,value)
+//            }
+//        }
+        DatabaseManager.shared.registerFriendChangeObserver(completion: {
             friendId, friendInfo in
-            print("friend Oberser!!! -> ",friendId,friendInfo)
+            print("friend change Oberser!!! -> ",friendId,friendInfo)
             ConnectedUser.shared.user.friends![friendId] = friendInfo
             var row = 0
             for index in self.friends.indices {
@@ -54,16 +54,22 @@ class FriendListViewController: UIViewController {
             }
             self.friendListTableView.reloadRows(at: [IndexPath(row: row, section: 1)], with: .automatic)
         })
+        DatabaseManager.shared.registerAddFriendObserver {
+            friendId, friendInfo in
+            print("friend add Oberser!!! -> ",friendId,friendInfo)
+            if let friends = ConnectedUser.shared.user.friends {
+                ConnectedUser.shared.user.friends![friendId] = friendInfo
+            } else {
+                ConnectedUser.shared.user.friends = [friendId: friendInfo]
+            }
+            self.friends.append((uid: friendId, info: friendInfo))
+            self.friendListTableView.insertRows(at: [IndexPath(row: self.friends.count - 1, section: 1)], with: .bottom)
+            self.friendListTableView.headerView(forSection: 1)!.textLabel!.text = "친구 " + String(self.friends.count)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        if let friendsDictionary = ConnectedUser.shared.user.friends {
-        //            friends = friendsDictionary.map { (key,value) in
-        //                (key,value)
-        //            }
-        //        }
-        //        friendListTableView.reloadData()
     }
     
     

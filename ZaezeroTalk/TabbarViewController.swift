@@ -14,12 +14,29 @@ class TabbarViewController: UITabBarController {
 
         // Do any additional setup after loading the view.
       
-        DatabaseManager.shared.registerRoomListObserver(uid: ConnectedUser.shared.uid, completion: {
-            rooms in
-            guard let rooms = rooms else {
+        DatabaseManager.shared.registerRoomListObserver(addCompletion: {
+            roomId,room in
+            guard let room = room else { return }
+            guard ConnectedUser.shared.chatingRoomList != nil else {
+                ConnectedUser.shared.chatingRoomList = [(id: roomId, info: room)]
                 return
             }
-            ConnectedUser.shared.chatingRoomList = rooms
+            ConnectedUser.shared.chatingRoomList?.removeAll(where: {
+                id, _ in
+                id == roomId
+            })
+            ConnectedUser.shared.chatingRoomList!.append((id: roomId, info: room))
+            
+        },removeCompletion: {
+            roomId in
+            guard ConnectedUser.shared.chatingRoomList != nil else { return }
+            ConnectedUser.shared.chatingRoomList!.removeAll { id,room in
+                if (id == roomId) {
+                    return true
+                } else {
+                    return false
+                }
+            }
         })
     }
 }

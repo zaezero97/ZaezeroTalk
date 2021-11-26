@@ -19,11 +19,13 @@ class ChatingRoomListViewController: UIViewController {
             chatingRoomListTableView.register(UINib(nibName: "ChatingRoomCell", bundle: nil), forCellReuseIdentifier: "ChatingRoomCell")
         }
     }
+    
     @IBOutlet weak var customNavigationItem: UINavigationItem! {
         didSet {
             customNavigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         }
     }
+    
     lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.text = "채팅"
@@ -31,9 +33,11 @@ class ChatingRoomListViewController: UIViewController {
         label.textAlignment = .left
         return label
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         chatingRoomListTableView.reloadData()
@@ -83,13 +87,15 @@ extension ChatingRoomListViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let storyboard = UIStoryboard(name: "ChatingRoomViewController", bundle: nil)
-        let chationRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
+        let chatingRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
+        
+        chatingRoomVC.curRoomId = chatingRoomList[indexPath.row].id
+        
+        chatingRoomVC.participantUids = roomInfo.uids.toFBArray()
+        chatingRoomVC.participantNames = roomInfo.userNames.toFBArray()
+        chatingRoomVC.modalPresentationStyle = .fullScreen
         
         
-        chationRoomVC.participantUids = roomInfo.uids.toFBArray()
-        chationRoomVC.participantNames = roomInfo.userNames.toFBArray()
-        
-        chationRoomVC.modalPresentationStyle = .fullScreen
-        present(chationRoomVC, animated: true, completion: nil)
+        present(chatingRoomVC, animated: true, completion: nil)
     }
 }

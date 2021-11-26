@@ -32,6 +32,7 @@ class ChatingRoomViewController: UIViewController {
             chatingTableView.estimatedRowHeight = 10
             chatingTableView.rowHeight = UITableView.automaticDimension
             chatingTableView.separatorStyle = .none
+            chatingTableView.register(UINib(nibName: "UserExitMessageCell", bundle: nil), forCellReuseIdentifier: "UserExitMessageCell")
             chatingTableView.register(UINib(nibName: "MyMessageCell", bundle: nil), forCellReuseIdentifier: "myMessageCell")
             chatingTableView.register(UINib(nibName: "OtherPersonMessageCell", bundle: nil), forCellReuseIdentifier: "otherPersonMessageCell")
         }
@@ -40,7 +41,8 @@ class ChatingRoomViewController: UIViewController {
     var participantUids = [String]() // 나를 포함
     var participantNames = [String]()
     
-    var chatingRoom: (id: String, info: ChatingRoom)?
+    var curRoomId: String?
+    var curRoomInfo: ChatingRoom?
     
     var messages = [Message]() {
         didSet {
@@ -55,37 +57,19 @@ class ChatingRoomViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         
-        if let curRoom = fetchCurrentRoom() {
-            chatingRoom = curRoom
-            DatabaseManager.shared.enterRoom(uid: ConnectedUser.shared.uid, roomId: curRoom.id)
-            DatabaseManager.shared.readMessage(messages: curRoom.info.messages, roomId: curRoom.id)
-            if curRoom.info.name.isEmpty {
+        fetchCurrentRoom()
+        
+        if let curRoomInfo = curRoomInfo , let curRoomId = curRoomId{
+            DatabaseManager.shared.enterRoom(uid: ConnectedUser.shared.uid, roomId: curRoomId)
+            DatabaseManager.shared.readMessage(messages: curRoomInfo.messages, roomId: curRoomId)
+            if curRoomInfo.name.isEmpty {
                 var names = participantNames
                 names.removeAll { name in
                     name == ConnectedUser.shared.user.userInfo.name
                 }
                 customNavigationItem.title = names.joined(separator: ",")
             }
-            DatabaseManager.shared.registerRoomObserver(id: curRoom.id) { room in
-                guard let room = room else {
-                    return
-                }
-                self.chatingRoom = (id: curRoom.id,info: room)
-            }
-            //            DatabaseManager.shared.registerAddedMessageObserver(roomId: curRoom.id, completion: {
-            //                message, messageId in
-            //                if var message = message, let messageId = messageId{
-            //                    guard var readUsers = message.readUsers else { return }
-            //                    readUsers[ConnectedUser.shared.uid] = "true"
-            //                    message.readUsers = readUsers
-            //                    DatabaseManager.shared.readMessage(message: message, roomId: curRoom.id, messageId: messageId)
-            //                    self.messages.append(message)
-            //                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-            //                    self.chatingTableView.insertRows(at: [indexPath], with: .automatic)
-            //                    self.chatingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-            //                }
-            //            })
-            DatabaseManager.shared.registerMessageObserver(roomId: curRoom.id) {
+            DatabaseManager.shared.registerMessageObserver(roomId: curRoomId) {
                 fetchedMessages in
                 guard let fetchedMessages = fetchedMessages else {
                     return
@@ -108,7 +92,15 @@ class ChatingRoomViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         DatabaseManager.shared.removeMessageObserver()
-        DatabaseManager.shared.exitRoom(uid: ConnectedUser.shared.uid, roomId: chatingRoom!.id)
+        //DatabaseManager.shared.leaveRoom(uid: ConnectedUser.shared.uid, roomId: chatingRoom!.id)
+    }
+    
+    @IBAction func clickMenuButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "SideMenuViewController", bundle: nil)
+        let sideMenuNavigationVC = storyboard.instantiateViewController(withIdentifier: "CustomSideMenuNavigationController") as! CustomSideMenuNavigationController
+        let sideMenuVC = sideMenuNavigationVC.viewControllers.first as! SideMenuViewController
+        sideMenuVC.delegate = self
+        present(sideMenuNavigationVC, animated: true, completion: nil)
     }
     
     @IBAction func clickBackButton(_ sender: Any) {
@@ -123,28 +115,13 @@ class ChatingRoomViewController: UIViewController {
             "content": inputTextView.text!
         ]
         
-        if let chatingRoom = chatingRoom {
-            DatabaseManager.shared.sendMessage(sendMessage: message, roomId: chatingRoom.id, completion: nil)
+        if let curRoomId = curRoomId {
+            DatabaseManager.shared.sendMessage(sendMessage: message, roomId: curRoomId)
         } else {
             DatabaseManager.shared.createRoom(message: message, participantUids: participantUids, participantNames: participantNames, name: nil , completion: {
-                roomId in
-                DatabaseManager.shared.registerRoomObserver(id: roomId) { room in
-                    guard let room = room else {
-                        return
-                    }
-                    self.chatingRoom = (id: roomId,info: room)
-                }
-                //                DatabaseManager.shared.registerAddedMessageObserver(roomId: roomId, completion: {
-                //                    message, messageId in
-                //                    if var message = message, let messageId = messageId{
-                //                        message.readUsers![ConnectedUser.shared.uid] = "true"
-                //                        DatabaseManager.shared.readMessage(message: message, roomId: roomId, messageId: messageId)
-                //                        self.messages.append(message)
-                //                        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-                //                        self.chatingTableView.insertRows(at: [indexPath], with: .automatic)
-                //                        self.chatingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-                //                    }
-                //                })
+                roomId,roomInfo in
+                self.curRoomId = roomId
+                self.curRoomInfo = roomInfo
                 DatabaseManager.shared.registerMessageObserver(roomId: roomId) {
                     fetchedMessages in
                     guard let fetchedMessages = fetchedMessages else {
@@ -153,7 +130,7 @@ class ChatingRoomViewController: UIViewController {
                     self.messages = fetchedMessages
                     self.chatingTableView.reloadData()
                     self.chatingTableView.scrollToRow(at: IndexPath(row: self.messages.count - 1, section: 0), at: .bottom, animated: false)
-                
+                    
                 }
             })
         }// 방이 존재하면 메시지를 보내고 존재하지 않으면 새로 방을 만들고 room의 상태변화를 감지하는 옵저버를 등록한다.
@@ -167,14 +144,21 @@ extension ChatingRoomViewController: UITableViewDataSource {
         return messages.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard chatingRoom != nil else { return UITableViewCell() }
-        guard let readUsers = messages[indexPath.row].readUsers else { return UITableViewCell()}
+        guard curRoomId != nil else { return UITableViewCell() }
         
+        if messages[indexPath.row].type == "exit" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UserExitMessageCell", for: indexPath) as! UserExitMessageCell
+            cell.userExitMessageLebel.text = messages[indexPath.row].content
+            
+            return cell
+        }
+        
+        guard let readUsers = messages[indexPath.row].readUsers else { return UITableViewCell()}
         if messages[indexPath.row].sender == ConnectedUser.shared.uid {
             let cell = tableView.dequeueReusableCell(withIdentifier: "myMessageCell", for: indexPath) as! MyMessageCell
             cell.contentTextView.text = messages[indexPath.row].content
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
-            cell.readCountLabel.text = participantUids.count == readUsers.count ? "" : String(participantUids.count - (readUsers.count ) )
+            cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
             cell.selectionStyle = .none
             
             return cell
@@ -182,7 +166,7 @@ extension ChatingRoomViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "otherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
             cell.contentTextView.text = messages[indexPath.row].content
             cell.timeLabel.text = messages[indexPath.row].time?.toDayTime
-            cell.readCountLabel.text = participantUids.count == readUsers.count ? "" : String(participantUids.count - (readUsers.count ) )
+            cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
             cell.selectionStyle = .none
             return cell
         }
@@ -222,30 +206,38 @@ extension ChatingRoomViewController: UITextViewDelegate {
 
 // MARK: - 채팅방 존재 여부 확인 함수
 extension ChatingRoomViewController {
-    func fetchCurrentRoom() -> (id: String,info: ChatingRoom)? {
-        guard let roomList = ConnectedUser.shared.chatingRoomList else { return nil}
+    func fetchCurrentRoom() {
+        guard let roomList = ConnectedUser.shared.chatingRoomList else { return }
         // 현재 사용자가 참여하고 있는 방 리스트
         
-        let curRoom = roomList.first { (id, info) in
-            let set1 = Set(info.uids.toFBArray())
-            var set2 = Set(participantUids)
-            set2.insert(ConnectedUser.shared.uid)
-            let result = set1.intersection(set2)
-            if result.count == participantUids.count
-            {
-                return true
-            } else {
-                return false
-            }
+        print("fetchCurrentRoom !!! -> ",roomList)
+        if let curRoomId = curRoomId {
+            for room in roomList {
+                if room.id == curRoomId {
+                    return curRoomInfo = room.info
+                }
+            } // 채팅방 리스트를 통해 방에 입장했을경우
+        } else {
+            let curRoom = roomList.first { (id, info) in
+                let sortedRoomInfoUids = info.uids.toFBArray().sorted()
+                let sortedParticipantUids = participantUids.sorted()
+                
+                if sortedRoomInfoUids == sortedParticipantUids {
+                    return true
+                } else {
+                    return false
+                }
+            } // 1대1 채팅으로 통해 방에 입장 했을 경우
+            
+            curRoomId = curRoom?.id
+            curRoomInfo = curRoom?.info
         }
-        
-        
-        return curRoom
     }
 }
 
 // MARK: - keyboard func
 extension ChatingRoomViewController {
+    
     @objc func keyboardWillShow(noti : Notification){
         let notiInfo = noti.userInfo!
         let keyboardFrame = notiInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
@@ -257,6 +249,7 @@ extension ChatingRoomViewController {
             self.view.layoutIfNeeded()
         }
     }
+    
     @objc func keyboardDidHide(noti : Notification){
         let notiInfo = noti.userInfo!
         let animationDuration = notiInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
@@ -270,5 +263,29 @@ extension ChatingRoomViewController {
 }
 
 
+// MARK: - read User Count 계산
+extension ChatingRoomViewController {
+    
+    /// read User Count 계산
+    /// - Returns: read Count
+    /// - Parameter readUsers: 메시지 읽은 유저 Dictionary
+    func calReadUserCount(readUsers: [String: String]) -> Int {
+        guard let curRoomInfo = curRoomInfo else { return 0 }
+        
+        let readUsersSet = Set(readUsers.keys)
+        let participantsSet = Set(curRoomInfo.uids.toFBArray())
+        
+        
+        let result = participantsSet.subtracting(readUsersSet)
+        print("result!!! ->",result)
+        return result.count
+    }
+}
 
-
+// MARK: - Side Menu Exit Delegate
+extension ChatingRoomViewController: Exitdelegate {
+    func roomExit(roomDismiss: @escaping (Error?, DatabaseReference) -> Void) {
+        guard let curRoomId = self.curRoomId , let curRoomInfo = self.curRoomInfo else { return }
+        DatabaseManager.shared.exitRoom(roomId: curRoomId, roomInfo: curRoomInfo,completion: roomDismiss)
+    }
+}

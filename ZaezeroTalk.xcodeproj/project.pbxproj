@@ -22,8 +22,12 @@
 		AE8DD078274B5BDD0023ADF3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8DD077274B5BDD0023ADF3 /* SearchViewController.swift */; };
 		AE8DD07A274B5BE90023ADF3 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */; };
 		AE90BA4E2743A4B500D04469 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE90BA4D2743A4B500D04469 /* Int.swift */; };
-		AE9951A7274DD39A002ADAAF /* RoomDrawerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9951A6274DD39A002ADAAF /* RoomDrawerMenuViewController.swift */; };
-		AE9951A9274DD3A1002ADAAF /* RoomDrawerMenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE9951A8274DD3A1002ADAAF /* RoomDrawerMenuViewController.storyboard */; };
+		AE9951AB274DF57A002ADAAF /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9951AA274DF57A002ADAAF /* UIViewController.swift */; };
+		AE9951AD274E0675002ADAAF /* CustomSideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9951AC274E0675002ADAAF /* CustomSideMenuNavigationController.swift */; };
+		AE9951AF274E0776002ADAAF /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9951AE274E0776002ADAAF /* SideMenuViewController.swift */; };
+		AE9951B1274E1076002ADAAF /* SideMenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE9951B0274E1076002ADAAF /* SideMenuViewController.storyboard */; };
+		AE9951B6274E2742002ADAAF /* UserExitMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9951B4274E2742002ADAAF /* UserExitMessageCell.swift */; };
+		AE9951B7274E2742002ADAAF /* UserExitMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9951B5274E2742002ADAAF /* UserExitMessageCell.xib */; };
 		AE998F9B273D5A4400F6767B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE998F9A273D5A4400F6767B /* ProfileViewController.swift */; };
 		AE998F9D273D5A5600F6767B /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */; };
 		AEA8BD222745FF5800038841 /* RoomUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8BD212745FF5800038841 /* RoomUsers.swift */; };
@@ -85,8 +89,12 @@
 		AE8DD077274B5BDD0023ADF3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchViewController.storyboard; sourceTree = "<group>"; };
 		AE90BA4D2743A4B500D04469 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Int.swift; path = ../../../Int.swift; sourceTree = "<group>"; };
-		AE9951A6274DD39A002ADAAF /* RoomDrawerMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomDrawerMenuViewController.swift; sourceTree = "<group>"; };
-		AE9951A8274DD3A1002ADAAF /* RoomDrawerMenuViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RoomDrawerMenuViewController.storyboard; sourceTree = "<group>"; };
+		AE9951AA274DF57A002ADAAF /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		AE9951AC274E0675002ADAAF /* CustomSideMenuNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSideMenuNavigationController.swift; sourceTree = "<group>"; };
+		AE9951AE274E0776002ADAAF /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		AE9951B0274E1076002ADAAF /* SideMenuViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenuViewController.storyboard; sourceTree = "<group>"; };
+		AE9951B4274E2742002ADAAF /* UserExitMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExitMessageCell.swift; sourceTree = "<group>"; };
+		AE9951B5274E2742002ADAAF /* UserExitMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserExitMessageCell.xib; sourceTree = "<group>"; };
 		AE998F9A273D5A4400F6767B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AE998F9C273D5A5600F6767B /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
 		AEA8BD212745FF5800038841 /* RoomUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomUsers.swift; sourceTree = "<group>"; };
@@ -184,6 +192,7 @@
 				AEA8BD232746027A00038841 /* String.swift */,
 				AEA8BD272746048C00038841 /* Array.swift */,
 				AEA8BD292746280200038841 /* UIImageView.swift */,
+				AE9951AA274DF57A002ADAAF /* UIViewController.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -220,7 +229,7 @@
 				AEAE17CA273DE9C800A44737 /* ChatingRoomListViewController.storyboard */,
 				AEAD438F2744C40500337B89 /* EditStateMessageViewController.storyboard */,
 				AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */,
-				AE9951A8274DD3A1002ADAAF /* RoomDrawerMenuViewController.storyboard */,
+				AE9951B0274E1076002ADAAF /* SideMenuViewController.storyboard */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";
@@ -240,7 +249,8 @@
 				AEB3A9DC273E3671008E7031 /* ChatingRoomViewController.swift */,
 				AEAE17C8273DE9BC00A44737 /* ChatingRoomListViewController.swift */,
 				AEAD438D2744C3F500337B89 /* EditStateMessageViewController.swift */,
-				AE9951A6274DD39A002ADAAF /* RoomDrawerMenuViewController.swift */,
+				AE9951AC274E0675002ADAAF /* CustomSideMenuNavigationController.swift */,
+				AE9951AE274E0776002ADAAF /* SideMenuViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -312,6 +322,8 @@
 				AEB19B2A274219AC007D649E /* MyMessageCell.xib */,
 				AEB19B3427421D6D007D649E /* OtherPersonMessageCell.swift */,
 				AEB19B3527421D6D007D649E /* OtherPersonMessageCell.xib */,
+				AE9951B4274E2742002ADAAF /* UserExitMessageCell.swift */,
+				AE9951B5274E2742002ADAAF /* UserExitMessageCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -381,10 +393,10 @@
 				AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */,
 				AEAD43902744C40500337B89 /* EditStateMessageViewController.storyboard in Resources */,
 				AEBE6BFB2739F61B008B0B61 /* FriendListViewController.storyboard in Resources */,
+				AE9951B1274E1076002ADAAF /* SideMenuViewController.storyboard in Resources */,
 				AEAE17CB273DE9C800A44737 /* ChatingRoomListViewController.storyboard in Resources */,
 				AEB19B3727421D6D007D649E /* OtherPersonMessageCell.xib in Resources */,
 				AEB97CFC27351C0E00DCDF77 /* Assets.xcassets in Resources */,
-				AE9951A9274DD3A1002ADAAF /* RoomDrawerMenuViewController.storyboard in Resources */,
 				AEB3A9DF273E368D008E7031 /* ChatingRoomViewController.storyboard in Resources */,
 				AEAF93FD273B530900BE2FF1 /* AddFriendViewController.storyboard in Resources */,
 				AE30D6FD273B99660058F06B /* SearchByEmailResultView.xib in Resources */,
@@ -398,6 +410,7 @@
 				AEB19B2C274219AC007D649E /* MyMessageCell.xib in Resources */,
 				AE44D06F2738A7CF007A567A /* SignUpViewController.storyboard in Resources */,
 				AEB1D4E12736DEEB00E1BD4F /* LoginViewController.storyboard in Resources */,
+				AE9951B7274E2742002ADAAF /* UserExitMessageCell.xib in Resources */,
 				AEAD438827448DF900337B89 /* youBubble.png in Resources */,
 				AEB97CFA27351C0D00DCDF77 /* Main.storyboard in Resources */,
 				AEBE6C05273A4AED008B0B61 /* ProfileCell.xib in Resources */,
@@ -467,17 +480,20 @@
 				AE5FA775273B7B1F00F211CE /* TextFieldCell.swift in Sources */,
 				AE8DD078274B5BDD0023ADF3 /* SearchViewController.swift in Sources */,
 				AEB19B3627421D6D007D649E /* OtherPersonMessageCell.swift in Sources */,
+				AE9951AB274DF57A002ADAAF /* UIViewController.swift in Sources */,
 				AEA8BD242746027A00038841 /* String.swift in Sources */,
-				AE9951A7274DD39A002ADAAF /* RoomDrawerMenuViewController.swift in Sources */,
 				AEAE17D3273DEF2E00A44737 /* Message.swift in Sources */,
 				AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */,
+				AE9951AD274E0675002ADAAF /* CustomSideMenuNavigationController.swift in Sources */,
 				AEA8BD222745FF5800038841 /* RoomUsers.swift in Sources */,
 				AEB19B2B274219AC007D649E /* MyMessageCell.swift in Sources */,
 				AEAE17D0273DEBCC00A44737 /* ChatingRoomCell.swift in Sources */,
 				AEBE6C04273A4AED008B0B61 /* ProfileCell.swift in Sources */,
 				AE998F9B273D5A4400F6767B /* ProfileViewController.swift in Sources */,
+				AE9951B6274E2742002ADAAF /* UserExitMessageCell.swift in Sources */,
 				AEAD438E2744C3F500337B89 /* EditStateMessageViewController.swift in Sources */,
 				AE524A10273528F60017F770 /* UIColor.swift in Sources */,
+				AE9951AF274E0776002ADAAF /* SideMenuViewController.swift in Sources */,
 				AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */,
 				AEB1D4E32736DEFF00E1BD4F /* LoginViewController.swift in Sources */,
 				AEBE6BFD2739F630008B0B61 /* FriendListViewController.swift in Sources */,

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Side Menu View Controller-->
+        <scene sceneID="FiY-NU-oKe">
+            <objects>
+                <viewController id="qUk-wM-jaB" customClass="SideMenuViewController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LGH-Jf-qlO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="채팅창 서랍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXf-Mh-DUp">
+                                <rect key="frame" x="0.0" y="44" width="414" height="33.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LoB-gF-LOq">
+                                <rect key="frame" x="0.0" y="77.5" width="414" height="735.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xi-V3-vXI">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem image="rectangle.portrait.and.arrow.right" catalog="system" id="v3M-xo-IEd">
+                                        <connections>
+                                            <action selector="clickExitButton:" destination="qUk-wM-jaB" id="OP9-y3-95E"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9qz-38-KfK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uXf-Mh-DUp" firstAttribute="leading" secondItem="9qz-38-KfK" secondAttribute="leading" id="1HT-as-kTr"/>
+                            <constraint firstItem="uXf-Mh-DUp" firstAttribute="top" secondItem="9qz-38-KfK" secondAttribute="top" id="86L-qC-Dzw"/>
+                            <constraint firstItem="9qz-38-KfK" firstAttribute="trailing" secondItem="uXf-Mh-DUp" secondAttribute="trailing" id="LR1-0E-8H7"/>
+                            <constraint firstItem="0xi-V3-vXI" firstAttribute="trailing" secondItem="9qz-38-KfK" secondAttribute="trailing" id="bte-3r-3NT"/>
+                            <constraint firstItem="9qz-38-KfK" firstAttribute="trailing" secondItem="LoB-gF-LOq" secondAttribute="trailing" id="fQh-eI-Frg"/>
+                            <constraint firstItem="0xi-V3-vXI" firstAttribute="bottom" secondItem="9qz-38-KfK" secondAttribute="bottom" id="jcH-Ns-hS6"/>
+                            <constraint firstItem="LoB-gF-LOq" firstAttribute="leading" secondItem="9qz-38-KfK" secondAttribute="leading" id="p4j-fg-qds"/>
+                            <constraint firstItem="0xi-V3-vXI" firstAttribute="leading" secondItem="9qz-38-KfK" secondAttribute="leading" id="q5t-x9-RdC"/>
+                            <constraint firstItem="0xi-V3-vXI" firstAttribute="top" secondItem="LoB-gF-LOq" secondAttribute="bottom" id="wLV-SB-pa6"/>
+                            <constraint firstItem="LoB-gF-LOq" firstAttribute="top" secondItem="uXf-Mh-DUp" secondAttribute="bottom" id="zEO-7O-Ghz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="m9N-oa-ojC"/>
+                    <connections>
+                        <outlet property="drawerTableView" destination="LoB-gF-LOq" id="Qnd-Pk-dww"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8jJ-yW-QEd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="971.01449275362324" y="-61.607142857142854"/>
+        </scene>
+        <!--Custom Side Menu Navigation Controller-->
+        <scene sceneID="yic-Vr-6hq">
+            <objects>
+                <navigationController storyboardIdentifier="CustomSideMenuNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="WaB-Da-YKu" customClass="CustomSideMenuNavigationController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iYt-pM-Apd">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qUk-wM-jaB" kind="relationship" relationship="rootViewController" id="q12-Sc-BJD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ID8-HH-EHS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="60.869565217391312" y="-61.607142857142854"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="108"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

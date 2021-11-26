@@ -27,18 +27,22 @@
                                             </connections>
                                         </barButtonItem>
                                         <rightBarButtonItems>
-                                            <barButtonItem image="line.3.horizontal" catalog="system" id="URB-Dz-gq5"/>
+                                            <barButtonItem image="line.3.horizontal" catalog="system" id="URB-Dz-gq5">
+                                                <connections>
+                                                    <action selector="clickMenuButton:" destination="Y6W-OH-hqX" id="QvJ-WD-B59"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem image="magnifyingglass" catalog="system" id="8Py-WW-LKL"/>
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                                 <navigationBarAppearance key="standardAppearance">
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" red="0.46313657811818176" green="0.33743844254371319" blue="0.44794152913961582" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </navigationBarAppearance>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="k5C-sx-KYw">
                                 <rect key="frame" x="0.0" y="88" width="414" height="714"/>
-                                <color key="backgroundColor" red="0.90388502039999996" green="0.74712472590000001" blue="0.9360449314" alpha="0.55955038270000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.46313657809999997" green="0.33743844249999999" blue="0.44794152910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OYY-qD-P3a">
                                 <rect key="frame" x="0.0" y="802" width="414" height="60"/>
@@ -82,11 +86,11 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.46313657809999997" green="0.33743844249999999" blue="0.44794152910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Gup-9A-y2W" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="JPo-b0-IMR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="k5C-sx-KYw" secondAttribute="trailing" id="YiG-8D-bD8"/>
-                            <constraint firstItem="Gup-9A-y2W" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="cbG-BN-eyI"/>
+                            <constraint firstItem="Gup-9A-y2W" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="44" id="cbG-BN-eyI"/>
                             <constraint firstItem="OYY-qD-P3a" firstAttribute="top" secondItem="k5C-sx-KYw" secondAttribute="bottom" id="cqk-oF-U14"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="OYY-qD-P3a" secondAttribute="trailing" id="cs1-mb-eAM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="OYY-qD-P3a" secondAttribute="bottom" id="e8y-zr-6VO"/>
@@ -96,6 +100,7 @@
                             <constraint firstItem="Gup-9A-y2W" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="zzE-y2-2VQ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="mMi-vl-CV7"/>
                     <connections>
                         <outlet property="chatingTableView" destination="k5C-sx-KYw" id="HwD-9a-NY5"/>
                         <outlet property="customNavigationItem" destination="E24-Ts-bRJ" id="FYq-Jp-gae"/>
@@ -107,7 +112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-17.39130434782609" y="67.633928571428569"/>
+            <point key="canvasLocation" x="1802.8985507246377" y="67.633928571428569"/>
         </scene>
     </scenes>
     <resources>

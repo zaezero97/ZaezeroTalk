@@ -15,7 +15,11 @@ class ConnectedUser {
         }
     }
     var uid = ""
-    var chatingRoomList: [(id: String, info: ChatingRoom)]?
+    var chatingRoomList: [(id: String, info: ChatingRoom)]? {
+        didSet{
+            print("didSet!!!!!!")
+        }
+    }
     private init() {
         
     }

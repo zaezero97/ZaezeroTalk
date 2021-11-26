@@ -19,39 +19,39 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youBubble.png" translatesAutoresizingMaskIntoConstraints="NO" id="hu7-45-PoH">
-                        <rect key="frame" x="5" y="0.0" width="179" height="84"/>
+                        <rect key="frame" x="5" y="10" width="261.5" height="64"/>
                         <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                     </imageView>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="751" verticalHuggingPriority="751" text="Lorem ipsum dolor sit er elit" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bwn-Mb-H3K">
-                        <rect key="frame" x="30" y="0.0" width="129" height="84"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="751" verticalHuggingPriority="751" scrollEnabled="NO" text="Lorem ipsum dolor sit er elit" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bwn-Mb-H3K">
+                        <rect key="frame" x="30" y="10" width="211.5" height="64"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021.11.15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4v-Ek-TER">
-                        <rect key="frame" x="189" y="67" width="66" height="17"/>
+                        <rect key="frame" x="271.5" y="57" width="66" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" systemColor="systemGray2Color"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a08-ic-vQl">
-                        <rect key="frame" x="189" y="41" width="42" height="21"/>
+                        <rect key="frame" x="271.5" y="31" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="bwn-Mb-H3K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="1gO-3F-zZK"/>
                     <constraint firstItem="bwn-Mb-H3K" firstAttribute="leading" secondItem="hu7-45-PoH" secondAttribute="leading" constant="25" id="2Xj-xh-MNC"/>
+                    <constraint firstItem="hu7-45-PoH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="3DH-zX-FZq"/>
                     <constraint firstItem="i4v-Ek-TER" firstAttribute="top" secondItem="a08-ic-vQl" secondAttribute="bottom" constant="5" id="AgC-5T-EWy"/>
                     <constraint firstItem="bwn-Mb-H3K" firstAttribute="trailing" secondItem="hu7-45-PoH" secondAttribute="trailing" constant="-25" id="Erd-79-1Il"/>
+                    <constraint firstAttribute="bottom" secondItem="bwn-Mb-H3K" secondAttribute="bottom" constant="10" id="GuK-lK-RHK"/>
                     <constraint firstItem="i4v-Ek-TER" firstAttribute="bottom" secondItem="hu7-45-PoH" secondAttribute="bottom" id="KA1-iN-W43"/>
-                    <constraint firstAttribute="bottom" secondItem="hu7-45-PoH" secondAttribute="bottom" id="KLq-zo-KIq"/>
                     <constraint firstItem="bwn-Mb-H3K" firstAttribute="bottom" secondItem="hu7-45-PoH" secondAttribute="bottom" id="Sf1-fW-oPp"/>
-                    <constraint firstItem="hu7-45-PoH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="UCk-8g-POn"/>
                     <constraint firstItem="i4v-Ek-TER" firstAttribute="leading" secondItem="hu7-45-PoH" secondAttribute="trailing" constant="5" id="cVV-lh-ta2"/>
                     <constraint firstItem="bwn-Mb-H3K" firstAttribute="top" secondItem="hu7-45-PoH" secondAttribute="top" id="dRp-R5-VJg"/>
-                    <constraint firstItem="hu7-45-PoH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="haE-XY-kUw"/>
                     <constraint firstItem="a08-ic-vQl" firstAttribute="leading" secondItem="hu7-45-PoH" secondAttribute="trailing" constant="5" id="qDY-q0-tet"/>
                 </constraints>
             </tableViewCellContentView>

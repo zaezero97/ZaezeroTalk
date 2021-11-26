@@ -19,4 +19,7 @@ target 'ZaezeroTalk' do
 
 	#ActivityIndicator
 	pod 'NVActivityIndicatorView'
+
+	#Side Menu
+	pod 'SideMenu'
 end
