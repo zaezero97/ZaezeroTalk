@@ -28,11 +28,9 @@ class DatabaseManager{
 extension DatabaseManager {
     func registerRoomListObserver(addCompletion: @escaping (String,ChatingRoom?) -> Void , removeCompletion: @escaping (String) -> Void) {
         
-        
         ref.child("UserRooms/\(ConnectedUser.shared.uid)").observe(.childAdded) { snapshot in
             let roomId = snapshot.key
             print("roomList Observer !!!! ->",snapshot)
-            
             self.roomListObserver[roomId] = self.ref.child("Rooms/\(roomId)").observe(.value) { snapshot in
                 guard snapshot.exists() else { return }
                 
@@ -105,7 +103,7 @@ extension DatabaseManager {
         let chatingRoom = ChatingRoom(userNames: participantNames.toFBString(), uids: participantUids.toFBString(), name: "", messages: [String: Message](), lastMessage: "", lastMessageTime: 0)
         
         ref.child("Rooms/\(roomId)").setValue(roomInfo,withCompletionBlock:
-        {
+                                                {
             _,_ in
             participantUids.forEach {
                 participants[$0] = "false"
@@ -130,7 +128,6 @@ extension DatabaseManager {
                 completion(nil, nil)
                 return
             }
-            
             do{
                 let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
                 let result = try JSONDecoder().decode(Message.self, from: data)
@@ -353,15 +350,17 @@ extension DatabaseManager {
 
 // MARK: - Register User Observer
 extension DatabaseManager {
-    func registerUserInfoObserver(forUid uid: String){
+    func registerUserInfoObserver(forUid uid: String, completion: @escaping (UserInfo) -> Void){
         ref.child("Users/\(uid)/userInfo").observe(.value, with: {
             snapshot in
-            let userInfo = snapshot.value as? [String: Any]
-            let email = userInfo?["email"] as? String ?? ""
-            let name = userInfo?["name"] as? String ?? ""
-            let stateMessage = userInfo?["stateMessage"] as? String ?? ""
-            let profileImageUrl = userInfo?["profileImageUrl"] as? String ?? ""
-            ConnectedUser.shared.user.userInfo = UserInfo(email: email, name: name, stateMessage: stateMessage, profileImageUrl: profileImageUrl)
+            do{
+                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
+                let result = try JSONDecoder().decode(UserInfo.self, from: data)
+                completion(result)
+                print("User Info JSONDecoder result!!! -> ",result)
+            } catch {
+                print("-> Error UserInfo Observer: \(error.localizedDescription)")
+            }
         })
     }
 }

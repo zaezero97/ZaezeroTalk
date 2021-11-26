@@ -92,7 +92,6 @@ extension ChatingRoomListViewController: UITableViewDelegate {
         chatingRoomVC.curRoomId = chatingRoomList[indexPath.row].id
         
         chatingRoomVC.participantUids = roomInfo.uids.toFBArray()
-        chatingRoomVC.participantNames = roomInfo.userNames.toFBArray()
         chatingRoomVC.modalPresentationStyle = .fullScreen
         
         

@@ -9,6 +9,8 @@ import UIKit
 
 class OtherPersonMessageCell: UITableViewCell {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var readCountLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var timeLabel: UILabel!

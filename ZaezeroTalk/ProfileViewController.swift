@@ -57,7 +57,6 @@ class ProfileViewController: UIViewController {
         let ChatingRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
         
         ChatingRoomVC.participantUids.append(contentsOf: [ConnectedUser.shared.uid,selectedUserUid])
-        ChatingRoomVC.participantNames.append(contentsOf: [ConnectedUser.shared.user.userInfo.name,selectedUserInfo.name])
         
         ChatingRoomVC.modalPresentationStyle = .fullScreen
         present(ChatingRoomVC, animated: true, completion: nil)

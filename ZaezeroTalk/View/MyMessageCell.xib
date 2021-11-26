@@ -19,23 +19,36 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meBubble.png" translatesAutoresizingMaskIntoConstraints="NO" id="DJv-ya-lNF">
-                        <rect key="frame" x="381" y="10" width="87" height="194"/>
+                        <rect key="frame" x="341" y="46.5" width="87" height="157.5"/>
                         <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="2021.11.15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7f-ju-vkE">
-                        <rect key="frame" x="314" y="188" width="62" height="16"/>
+                        <rect key="frame" x="274" y="188" width="62" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" systemColor="systemGray2Color"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="751" verticalHuggingPriority="751" scrollEnabled="NO" text="fsdaf" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0bj-zB-m6V">
-                        <rect key="frame" x="391" y="10" width="47" height="194"/>
+                        <rect key="frame" x="351" y="46.5" width="47" height="157.5"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLM-mO-za3">
-                        <rect key="frame" x="334" y="162" width="42" height="21"/>
+                        <rect key="frame" x="294" y="162" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="2Gk-nD-JIK">
+                        <rect key="frame" x="433" y="21.5" width="40" height="39"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="N9r-RE-yjc"/>
+                            <constraint firstAttribute="width" constant="40" id="fZt-pd-NDt"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5M-AZ-bd1">
+                        <rect key="frame" x="378.5" y="21" width="29.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -50,15 +63,21 @@
                     <constraint firstItem="0bj-zB-m6V" firstAttribute="trailing" secondItem="DJv-ya-lNF" secondAttribute="trailing" constant="-30" id="Dua-60-PdL"/>
                     <constraint firstItem="DJv-ya-lNF" firstAttribute="leading" secondItem="M7f-ju-vkE" secondAttribute="trailing" constant="5" id="GF8-iw-Zwk"/>
                     <constraint firstItem="M7f-ju-vkE" firstAttribute="top" secondItem="wLM-mO-za3" secondAttribute="bottom" constant="5" id="PRk-xx-syT"/>
-                    <constraint firstAttribute="trailing" secondItem="DJv-ya-lNF" secondAttribute="trailing" constant="5" id="Tae-P3-N5F"/>
-                    <constraint firstItem="0bj-zB-m6V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="eBG-bu-dxm"/>
+                    <constraint firstItem="W5M-AZ-bd1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="Q8P-XM-Lx1"/>
+                    <constraint firstItem="2Gk-nD-JIK" firstAttribute="top" secondItem="W5M-AZ-bd1" secondAttribute="top" id="VPp-4t-QC6"/>
+                    <constraint firstItem="0bj-zB-m6V" firstAttribute="top" secondItem="W5M-AZ-bd1" secondAttribute="bottom" constant="5" id="eBG-bu-dxm"/>
+                    <constraint firstItem="2Gk-nD-JIK" firstAttribute="leading" secondItem="DJv-ya-lNF" secondAttribute="trailing" constant="5" id="jd4-7w-Kdu"/>
+                    <constraint firstItem="2Gk-nD-JIK" firstAttribute="leading" secondItem="W5M-AZ-bd1" secondAttribute="trailing" constant="25" id="mZf-eq-fsj"/>
                     <constraint firstItem="0bj-zB-m6V" firstAttribute="leading" secondItem="DJv-ya-lNF" secondAttribute="leading" constant="10" id="ole-aa-9MJ"/>
                     <constraint firstItem="M7f-ju-vkE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="u50-6G-uxB"/>
+                    <constraint firstAttribute="trailing" secondItem="2Gk-nD-JIK" secondAttribute="trailing" id="vPk-sn-zAU"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="contentTextView" destination="0bj-zB-m6V" id="ToF-hf-y4I"/>
+                <outlet property="nameLabel" destination="W5M-AZ-bd1" id="Bfs-ET-etD"/>
+                <outlet property="profileImageView" destination="2Gk-nD-JIK" id="mTA-8A-132"/>
                 <outlet property="readCountLabel" destination="wLM-mO-za3" id="tsM-pl-t8g"/>
                 <outlet property="timeLabel" destination="M7f-ju-vkE" id="NN7-g3-1io"/>
             </connections>
@@ -67,6 +86,7 @@
     </objects>
     <resources>
         <image name="meBubble.png" width="178" height="148"/>
+        <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
