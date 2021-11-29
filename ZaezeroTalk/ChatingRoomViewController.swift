@@ -340,9 +340,15 @@ extension ChatingRoomViewController: Exitdelegate {
     
     ///  방 나가기 클릭시 실행 될 Exitdelegate 메소드
     /// - Parameter roomDismiss: 방나가기 로직이 실행된 후 실행 될 dismiss 로직
-    func roomExit(roomDismiss: @escaping (Error?, DatabaseReference) -> Void) {
-        guard let curRoomId = self.curRoomId , let curRoomInfo = self.curRoomInfo else { return }
-        DatabaseManager.shared.exitRoom(roomId: curRoomId, roomInfo: curRoomInfo,completion: roomDismiss)
+    func roomExit() {
+        guard let curRoomId = self.curRoomId , let curRoomInfo = self.curRoomInfo else {
+            print(self)
+            self.presentingViewController!.dismiss(animated: false, completion: nil)
+            return
+        }
+        DatabaseManager.shared.exitRoom(roomId: curRoomId, roomInfo: curRoomInfo) { _, _ in
+            self.presentingViewController!.dismiss(animated: false, completion: nil)
+        }
         self.curRoomId = nil
     }
     

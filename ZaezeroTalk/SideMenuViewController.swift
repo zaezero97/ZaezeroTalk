@@ -9,14 +9,13 @@ import UIKit
 import Firebase
 
 protocol Exitdelegate: AnyObject{
-    func roomExit(roomDismiss: @escaping (Error?, DatabaseReference) -> Void)
+    func roomExit()
 }
 
 class SideMenuViewController: UIViewController {
     weak var delegate: Exitdelegate?
     let exitMessage = "채팅방을 나가면 대화내용이 모두 삭제되고 채팅목록에서도 사라집니다."
     var participants = [(uid: String, info: UserInfo)]()
-    
     
     
     @IBOutlet weak var drawerTableView: UITableView! {
@@ -35,10 +34,8 @@ class SideMenuViewController: UIViewController {
     /// - Parameter sender: ToolBar Button
     @IBAction func clickExitButton(_ sender: Any) {
         let alert = UIAlertController(title: nil, message: exitMessage, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "나기기", style: .cancel, handler: { action in
-            self.delegate?.roomExit(roomDismiss: { _, _ in
-                self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-            })
+        alert.addAction(UIAlertAction(title: "나기기", style: .destructive, handler: { action in
+            self.delegate?.roomExit()
         }))
         present(alert, animated: true, completion: nil)
     }
