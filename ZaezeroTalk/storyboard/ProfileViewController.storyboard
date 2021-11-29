@@ -43,11 +43,14 @@
                                             <rect key="frame" x="65.5" y="43" width="115" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="message.fill" catalog="system" imagePlacement="top" title="1대1 채팅" imagePadding="10"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="message.fill" catalog="system" imagePlacement="top" title="1대1 채팅" imagePadding="10">
+                                                <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
                                             <connections>
                                                 <action selector="clickChatButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="rr9-ck-QV1"/>
                                             </connections>
                                         </button>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="clickChatButton:" destination="Y6W-OH-hqX" id="NFr-vf-qfv"/>
                                         </connections>
@@ -58,11 +61,14 @@
                                             <rect key="frame" x="246.5" y="43" width="102" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system" imagePlacement="top" title="프로필 편집" imagePadding="10"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system" imagePlacement="top" title="프로필 편집" imagePadding="10">
+                                                <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
                                             <connections>
                                                 <action selector="clickEditProfileButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="C5A-NH-EaF"/>
                                             </connections>
                                         </button>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="clickEditProfileButton:" destination="Y6W-OH-hqX" id="RVc-ac-aRE"/>
                                         </connections>

@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     func toFBArray() -> [String]{
         return self.components(separatedBy: "@spr@")
     }
+   
 }

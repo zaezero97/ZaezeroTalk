@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ConnectedUser {
     static let shared = ConnectedUser()
@@ -20,6 +21,7 @@ class ConnectedUser {
             print("didSet!!!!!!")
         }
     }
+    var profileImages = [String: UIImage]()
     private init() {
         
     }

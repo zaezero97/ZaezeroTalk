@@ -38,7 +38,8 @@ class ChatingRoomViewController: UIViewController {
         }
     }
     
-    var participantUids = [String]() // 나를 포함
+    /// 필수 데이터
+    var participantUids = [String]()
     var roomName: String?
     var participants = [String: UserInfo]() {
         didSet {
@@ -79,7 +80,7 @@ class ChatingRoomViewController: UIViewController {
         fetchCurrentRoom() ///동기
         fetchParticipantInfos() /// 비동기
         
-        roomName = curRoomInfo?.name
+        roomName = roomName ?? curRoomInfo?.name
         roomType = curRoomInfo?.type ?? ""
         
         setNavigationBarTitle()
@@ -352,7 +353,7 @@ extension ChatingRoomViewController {
         } else if roomType == "1:N" {
             customNavigationItem.title = "그룹채팅 " + String(participants.count)
         } else {
-            customNavigationItem.title = participants.values.map({$0.name}).first(where: {$0 != ConnectedUser.shared.user.userInfo.name
+            customNavigationItem.title = participants.values.map({$0.name}).sorted().first(where: {$0 != ConnectedUser.shared.user.userInfo.name
             })
         }
     }

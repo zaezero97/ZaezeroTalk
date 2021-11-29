@@ -80,6 +80,15 @@ class LoginViewController: UIViewController {
                     user in
                     ConnectedUser.shared.user = user
                     ConnectedUser.shared.uid = result.user.uid
+                    if let profileImageUrl = user!.userInfo.profileImageUrl, !profileImageUrl.isEmpty {
+                        let url = URL(string: profileImageUrl)
+                        DispatchQueue.global().async {
+                            let data = try? Data(contentsOf: url!)
+                            DispatchQueue.main.async { ConnectedUser.shared.profileImages[result.user.uid] = UIImage(data: data!) }
+                        }
+                    } else {
+                        ConnectedUser.shared.profileImages[result.user.uid] = UIImage(systemName: "person.crop.rectangle.fill")
+                    }
                     
                     DispatchQueue.main.async {
                         self.indicator.stopAnimating()

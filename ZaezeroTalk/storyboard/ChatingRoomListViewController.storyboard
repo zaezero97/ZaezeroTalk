@@ -19,12 +19,22 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3pt-3a-V7S">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <color key="barTintColor" red="1" green="1" blue="1" alpha="0.88656353480000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem id="HJp-qI-W41">
                                         <rightBarButtonItems>
-                                            <barButtonItem image="gear.circle" catalog="system" id="AIZ-9F-2uD"/>
-                                            <barButtonItem image="plus.message.fill" catalog="system" id="pVG-66-MWS"/>
-                                            <barButtonItem image="magnifyingglass" catalog="system" id="6ZZ-zA-xpy"/>
+                                            <barButtonItem image="gear.circle" catalog="system" id="AIZ-9F-2uD">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </barButtonItem>
+                                            <barButtonItem image="plus.message.fill" catalog="system" id="pVG-66-MWS">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="clickMakeChatingRoomButton:" destination="Y6W-OH-hqX" id="K1M-NJ-tan"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem image="magnifyingglass" catalog="system" id="6ZZ-zA-xpy">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </barButtonItem>
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
@@ -46,7 +56,9 @@
                             <constraint firstItem="jhY-Hz-tOP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="oro-RR-K7L"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="bubble.left.and.bubble.right.fill" catalog="system" id="Zyd-dj-vpa"/>
+                    <tabBarItem key="tabBarItem" title="" image="bubble.left.and.bubble.right.fill" catalog="system" id="Zyd-dj-vpa">
+                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="chatingRoomListTableView" destination="jhY-Hz-tOP" id="x2X-IZ-g2F"/>

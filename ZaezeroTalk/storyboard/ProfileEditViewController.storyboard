@@ -21,11 +21,13 @@
                                 <items>
                                     <navigationItem id="9N7-yF-Vvk">
                                         <barButtonItem key="leftBarButtonItem" title="취소" id="sml-jZ-nRV">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="clickCancleButton:" destination="bT6-fL-OUc" id="Yk7-EX-gaL"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="완료" id="pDQ-hn-8er">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="clickDoneButton:" destination="bT6-fL-OUc" id="Fah-m1-yMS"/>
                                             </connections>

@@ -27,13 +27,17 @@
                                 <items>
                                     <navigationItem id="ehs-li-chB">
                                         <rightBarButtonItems>
-                                            <barButtonItem image="gear.circle" catalog="system" id="B88-ct-76f"/>
+                                            <barButtonItem image="gear.circle" catalog="system" id="B88-ct-76f">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </barButtonItem>
                                             <barButtonItem image="person.crop.circle.badge.plus.fill" catalog="system" id="zj0-ND-Ne9">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <action selector="clickAddFriendButton:" destination="Y6W-OH-hqX" id="pun-tW-QHC"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem image="magnifyingglass" catalog="system" id="yqB-eD-VsZ">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <action selector="clickSearchButton:" destination="Y6W-OH-hqX" id="nIG-jI-jR7"/>
                                                 </connections>
@@ -58,7 +62,9 @@
                             <constraint firstItem="RIO-VR-quF" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="z0k-Sd-wOA"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="person.fill" catalog="system" id="1zv-mW-KSk"/>
+                    <tabBarItem key="tabBarItem" title="" image="person.fill" catalog="system" id="1zv-mW-KSk">
+                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="customNavigationBar" destination="7It-Hd-sPc" id="0Ld-wL-nrz"/>

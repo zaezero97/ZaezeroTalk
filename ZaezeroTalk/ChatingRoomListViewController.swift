@@ -42,6 +42,13 @@ class ChatingRoomListViewController: UIViewController {
         super.viewWillAppear(animated)
         chatingRoomListTableView.reloadData()
     }
+    @IBAction func clickMakeChatingRoomButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "MakeChatingRoomViewController", bundle: nil)
+        let makeChatingRoomNaviVC = storyboard.instantiateViewController(withIdentifier: "MakeChatingRoomNavigationController")
+        
+        makeChatingRoomNaviVC.modalPresentationStyle = .fullScreen
+        present(makeChatingRoomNaviVC, animated: true, completion: nil)
+    }
 }
 
 // MARK: - TableView Datasource

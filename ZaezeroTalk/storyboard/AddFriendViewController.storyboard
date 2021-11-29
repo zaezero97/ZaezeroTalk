@@ -23,6 +23,7 @@
                                 <items>
                                     <navigationItem id="3dQ-ei-0J4">
                                         <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="SWX-VM-1rb">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="clickXButton:" destination="Y6W-OH-hqX" id="EVQ-IM-eeM"/>
                                             </connections>

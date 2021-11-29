@@ -34,15 +34,20 @@ class FriendListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if let friendsDictionary = ConnectedUser.shared.user.friends {
-//            friends = friendsDictionary.map { (key,value) in
-//                (key,value)
-//            }
-//        }
         DatabaseManager.shared.registerFriendChangeObserver(completion: {
             friendId, friendInfo in
             print("friend change Oberser!!! -> ",friendId,friendInfo)
             ConnectedUser.shared.user.friends![friendId] = friendInfo
+            if let profileImageUrl = friendInfo.profileImageUrl, !profileImageUrl.isEmpty {
+                let url = URL(string: profileImageUrl)
+                DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: url!)
+                    DispatchQueue.main.async { ConnectedUser.shared.profileImages[friendId] = UIImage(data: data!) }
+                }
+            } else {
+                ConnectedUser.shared.profileImages[friendId] = UIImage(systemName: "person.crop.rectangle.fill")
+            }
+            
             var row = 0
             for index in self.friends.indices {
                 if self.friends[index].uid == friendId {
@@ -61,6 +66,15 @@ class FriendListViewController: UIViewController {
                 ConnectedUser.shared.user.friends![friendId] = friendInfo
             } else {
                 ConnectedUser.shared.user.friends = [friendId: friendInfo]
+            }
+            if let profileImageUrl = friendInfo.profileImageUrl, !profileImageUrl.isEmpty {
+                let url = URL(string: profileImageUrl)
+                DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: url!)
+                    DispatchQueue.main.async { ConnectedUser.shared.profileImages[friendId] = UIImage(data: data!) }
+                }
+            } else {
+                ConnectedUser.shared.profileImages[friendId] = UIImage(systemName: "person.crop.rectangle.fill")
             }
             self.friends.append((uid: friendId, info: friendInfo))
             self.friendListTableView.insertRows(at: [IndexPath(row: self.friends.count - 1, section: 1)], with: .bottom)
@@ -170,13 +184,13 @@ extension FriendListViewController: UITableViewDelegate{
     } // 친구 목록에서 친구 선택시 프로필 화면 present
 }
 
-extension FriendListViewController{
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0 {
-            customNavigationBar.standardAppearance.shadowColor = .gray
-        }else{
-            customNavigationBar.standardAppearance.shadowColor = .white
-        }
-    }
-}
+//extension FriendListViewController{
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView.contentOffset.y > 0 {
+//            customNavigationBar.standardAppearance.shadowColor = .gray
+//        }else{
+//            customNavigationBar.standardAppearance.shadowColor = .white
+//        }
+//    }
+//}
 
