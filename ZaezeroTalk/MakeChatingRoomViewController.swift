@@ -13,9 +13,21 @@ class MakeChatingRoomViewController: UIViewController {
     @IBOutlet weak var confirmBarButton: UIBarButtonItem! {
         didSet {
             confirmBarButton.isEnabled = false
+            let label = UILabel()
+            label.textAlignment = .left
+            label.font = .systemFont(ofSize: 18)
+            label.text = " 확인"
+            confirmBarButton.customView = label
         }
     }
     
+    lazy var confirmBarButtonLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 18)
+        
+        return label
+    }()
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "이름 검색"
@@ -36,7 +48,7 @@ class MakeChatingRoomViewController: UIViewController {
         }
         return friends
     }()
-   
+    
     
     var friendImages = [String: UIImage]()
     var selectedCount = 0
@@ -62,7 +74,7 @@ class MakeChatingRoomViewController: UIViewController {
     
     /// 확인 버튼 클릭 이벤트
     /// - Parameter sender: 확인 버튼
-    @IBAction func clickConfirmButton(_ sender: Any) {
+    @objc func clickConfirmButton(_ sender: Any) {
         print("confirm Button click!!!")
         let storyboard = UIStoryboard(name: "SetGroupChatingRoomInfoViewController", bundle: nil)
         let setGroupChationRoomInfoVC = storyboard.instantiateViewController(withIdentifier: "SetGroupChatingRoomInfoViewController") as! SetGroupChatingRoomInfoViewController
@@ -120,21 +132,23 @@ extension MakeChatingRoomViewController: UITableViewDelegate {
         friends[index!].isSelected.toggle()
         
         selectedCount += searchedFriends[indexPath.row].isSelected ? 1 : -1
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 18)
         if selectedCount > 0 {
             confirmBarButton.isEnabled = true
-            confirmBarButton.title = String(selectedCount) + " 확인"
-//            let attributedStr = NSMutableAttributedString(string: confirmButton.title!)
-//            attributedStr.addAttribute(.foregroundColor, value: UIColor.yellow, range: (confirmButton.title! as NSString).range(of: String(selectedCount)))
-//            confirmButton.title = String(attributedStr.mutableString)
-            
-            confirmBarButton.setTitleTextAttributes([.foregroundColor:UIColor.black], for: .normal)
-           
-            
+            label.text = String(selectedCount) + " 확인"
+            let attributedStr = NSMutableAttributedString(string: label.text!)
+            attributedStr.addAttribute(.foregroundColor, value: UIColor.yellow, range: (label.text! as NSString).range(of: String(selectedCount)))
+            label.attributedText = attributedStr
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(clickConfirmButton))
+            label.isUserInteractionEnabled = true
+            label.addGestureRecognizer(gesture)
         } else {
+            label.text = "확인"
             confirmBarButton.isEnabled = false
-            confirmBarButton.title =  "확인"
         }
-        
+        confirmBarButton.customView = label
         tableView.reloadRows(at: [indexPath], with: .automatic)
         navigationItem.titleView?.addSubview(UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 50)))
     }

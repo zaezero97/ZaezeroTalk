@@ -41,6 +41,7 @@ class ChatingRoomListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         chatingRoomListTableView.reloadData()
+
     }
     @IBAction func clickMakeChatingRoomButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "MakeChatingRoomViewController", bundle: nil)

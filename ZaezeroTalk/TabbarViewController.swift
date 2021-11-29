@@ -11,9 +11,7 @@ class TabbarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-      
         DatabaseManager.shared.registerRoomListObserver(addCompletion: {
             roomId,room in
             guard let room = room else { return }
@@ -38,5 +36,11 @@ class TabbarViewController: UITabBarController {
                 }
             }
         })
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+        sceneDelegate.window?.rootViewController = self
+        sceneDelegate.window?.makeKeyAndVisible()
     }
+    
+   
 }
+

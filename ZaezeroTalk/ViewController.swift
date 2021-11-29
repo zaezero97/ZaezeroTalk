@@ -38,7 +38,10 @@ class ViewController: UIViewController {
         let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         
         loginVC.modalPresentationStyle = .fullScreen
-        self.present(loginVC, animated: true, completion: nil)
+        
+        self.present(loginVC, animated: true, completion: {
+            self.removeFromParent()
+        })
     }
 }
 

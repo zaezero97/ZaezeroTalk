@@ -39,7 +39,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="확인" id="nrQ-ra-0WG">
                             <connections>
-                                <action selector="clickConfirmButton:" destination="GNZ-mq-yD7" id="ZUS-s4-e5n"/>
+                                <action selector="clickConfirmButton:" destination="GNZ-mq-yD7" id="gzs-AR-3RQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

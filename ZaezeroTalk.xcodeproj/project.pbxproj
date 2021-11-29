@@ -240,10 +240,10 @@
 				AEB3A9DE273E368D008E7031 /* ChatingRoomViewController.storyboard */,
 				AEAE17CA273DE9C800A44737 /* ChatingRoomListViewController.storyboard */,
 				AEAD438F2744C40500337B89 /* EditStateMessageViewController.storyboard */,
-				AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */,
 				AE9951B0274E1076002ADAAF /* SideMenuViewController.storyboard */,
 				AE8B0FE92750B63F0046D9A0 /* MakeChatingRoomViewController.storyboard */,
 				AE8AF57027545C5000F75F4B /* SetGroupChatingRoomInfoViewController.storyboard */,
+				AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";

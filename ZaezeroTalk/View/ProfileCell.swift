@@ -8,7 +8,9 @@
 import UIKit
 
 class ProfileCell: UITableViewCell {
-
+    
+    /// Default -> hidden
+    @IBOutlet weak var selfImageView: UIImageView!
     @IBOutlet weak var stateMessageLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView! {
         didSet {

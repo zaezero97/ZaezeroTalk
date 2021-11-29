@@ -54,12 +54,17 @@ class ProfileViewController: UIViewController {
         guard let selectedUserUid = selectedUserUid else { return }
         guard selectedUserUid != ConnectedUser.shared.uid else { return } // 자기 자신과의 채팅 막아놓는 코드
         let storyboard = UIStoryboard(name: "ChatingRoomViewController", bundle: nil)
-        let ChatingRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
+        let chatingRoomVC = storyboard.instantiateViewController(withIdentifier: "ChatingRoomViewController") as! ChatingRoomViewController
         
-        ChatingRoomVC.participantUids.append(contentsOf: [ConnectedUser.shared.uid,selectedUserUid])
+        chatingRoomVC.participantUids.append(contentsOf: [ConnectedUser.shared.uid,selectedUserUid])
         
-        ChatingRoomVC.modalPresentationStyle = .fullScreen
-        present(ChatingRoomVC, animated: true, completion: nil)
+        chatingRoomVC.modalPresentationStyle = .fullScreen
+        
+        let rootVC = view.window?.rootViewController
+        view.window?.rootViewController?.dismiss(animated: false, completion: {
+            rootVC!.present(chatingRoomVC, animated: true, completion: nil)
+        })
+        
     }
     
     @IBAction func clickEditProfileButton(_ sender: Any) {
@@ -78,9 +83,6 @@ class ProfileViewController: UIViewController {
     
 }
 
-// MARK: - Bar Button action func
-extension ProfileViewController {
-}
 
 // MARK: - 프로필 화면이 보여질 때 상태메시지와 프로필 이미지를 설정하는 함수
 extension ProfileViewController {

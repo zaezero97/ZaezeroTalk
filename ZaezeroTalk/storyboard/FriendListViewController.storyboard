@@ -45,9 +45,6 @@
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
-                                <navigationBarAppearance key="standardAppearance">
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </navigationBarAppearance>
                             </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>

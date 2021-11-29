@@ -62,7 +62,10 @@ class LoginViewController: UIViewController {
             loginButton.backgroundColor = UIColor(hex: color)
             signUpButton.backgroundColor = UIColor(hex: color)
         }
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     @IBAction func clicklLoginButton(_ sender: Any) {
         guard let email = emailTextField.text , let password = pwdTextField.text else { return }

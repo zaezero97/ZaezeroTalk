@@ -111,11 +111,14 @@ class ChatingRoomViewController: UIViewController {
         DatabaseManager.shared.leaveRoom(uid: ConnectedUser.shared.uid, roomId: curRoomId)
     }
     
+    ///  메뉴 버튼 클릭 이벤트 - 사이드 메뉴
+    /// - Parameter sender: 메뉴 바 버튼
     @IBAction func clickMenuButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "SideMenuViewController", bundle: nil)
         let sideMenuNavigationVC = storyboard.instantiateViewController(withIdentifier: "CustomSideMenuNavigationController") as! CustomSideMenuNavigationController
         let sideMenuVC = sideMenuNavigationVC.viewControllers.first as! SideMenuViewController
         sideMenuVC.delegate = self
+        sideMenuVC.participants = participants.map({ ($0.key,$0.value) })
         present(sideMenuNavigationVC, animated: true, completion: nil)
     }
     
