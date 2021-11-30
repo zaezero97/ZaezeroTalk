@@ -11,7 +11,12 @@ import SideMenu
 class CustomSideMenuNavigationController: SideMenuNavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        presentationStyle = .menuSlideIn
+        var set = SideMenuSettings()
+       
+        set.statusBarEndAlpha = 0
+        set.presentationStyle = .menuSlideIn
+        set.presentationStyle.presentingEndAlpha = 0.3
+        self.settings = set
         menuWidth = self.view.frame.width * 0.7
     }
 }
