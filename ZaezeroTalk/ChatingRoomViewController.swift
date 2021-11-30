@@ -9,7 +9,10 @@ import UIKit
 import Firebase
 
 
+
 class ChatingRoomViewController: UIViewController {
+    var optionFlag = false
+    var keyboardFrame: CGRect!
     @IBOutlet weak var inputTextViewBottomMargin: NSLayoutConstraint!
     @IBOutlet weak var inputTextViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var customNavigationItem: UINavigationItem!
@@ -37,6 +40,41 @@ class ChatingRoomViewController: UIViewController {
             chatingTableView.register(UINib(nibName: "OtherPersonMessageCell", bundle: nil), forCellReuseIdentifier: "otherPersonMessageCell")
         }
     }
+    
+    /// 첨부 버튼 클릭 시 보여 줄 TextView Input View
+    lazy var customInputView: CustomInputView = {
+        let inputView = Bundle.main.loadNibNamed("CustomInputView", owner: self, options: nil)?.first as! CustomInputView
+        
+        inputView.frame = keyboardFrame
+        inputView.scrollView.frame = inputView.bounds
+        inputView.scrollView.contentSize = CGSize(width: inputView.bounds.width * 2, height: inputView.bounds.height)
+        
+        let firstView = Bundle.main.loadNibNamed("CustomInputFirstView", owner: self, options: nil)?.first as! CustomInputFirstView
+        let secondView = Bundle.main.loadNibNamed("CustomInputSecondView", owner: self, options: nil)?.first as! UIView
+        
+        firstView.frame = inputView.bounds
+        secondView.frame = inputView.bounds
+        secondView.frame.origin.x = inputView.bounds.width
+        inputView.scrollView.addSubview(firstView)
+        inputView.scrollView.addSubview(secondView)
+        
+        firstView.galleryButton.addTarget(self, action: #selector(clickGalleryButton), for: .touchUpInside)
+        //firstView.cameraButton.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        
+        inputView.pageControll.currentPage = 0
+        inputView.pageControll.numberOfPages = 2
+        inputView.pageControll.pageIndicatorTintColor = .lightGray // 페이지를 암시하는 동그란 점의 색상
+        inputView.pageControll.currentPageIndicatorTintColor = .black
+        inputView.scrollView.showsHorizontalScrollIndicator = false
+        inputView.scrollView.showsVerticalScrollIndicator = false
+        inputView.scrollView.isScrollEnabled = true
+        inputView.scrollView.isPagingEnabled = true
+        inputView.scrollView.delegate = self // scroll범위에 따라 pageControl의 값을 바꾸어주기 위한 delegate
+        inputView.bringSubviewToFront(inputView.pageControll)
+        
+        return inputView
+    }()
+    
     
     /// 필수 데이터
     var participantUids = [String]()
@@ -73,10 +111,10 @@ class ChatingRoomViewController: UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        
+        //   inputTextView.inputView = customInputView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
-        
+    
         fetchCurrentRoom() ///동기
         fetchParticipantInfos() /// 비동기
         
@@ -153,6 +191,17 @@ class ChatingRoomViewController: UIViewController {
                 }
             })
         }// 방이 존재하면 메시지를 보내고 존재하지 않으면 새로 방을 만들고 room의 상태변화를 감지하는 옵저버를 등록한다.
+    }
+    @IBAction func clickSendOptionButton(_ sender: Any) {
+        optionFlag.toggle()
+        print("isFirstResponder !!! ->", inputTextView.isFirstResponder)
+        if inputTextView.isFirstResponder == false {
+            inputTextView.becomeFirstResponder()
+        } else {
+            inputTextView.inputView = optionFlag ? customInputView : nil
+            inputTextView.reloadInputViews()
+        }
+       
     }
 }
 
@@ -235,8 +284,6 @@ extension ChatingRoomViewController: UITextViewDelegate {
         } else {
             inputTextViewHeightConstraint.constant = textView.contentSize.height
         }
-        
-        
     }
 }
 
@@ -296,12 +343,15 @@ extension ChatingRoomViewController {
     
     @objc func keyboardWillShow(noti : Notification){
         let notiInfo = noti.userInfo!
-        let keyboardFrame = notiInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        keyboardFrame = notiInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
         let animationDuration = notiInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
         
-        
+        print("keyboardFrame!!! ->",keyboardFrame)
+    
         UIView.animate(withDuration: animationDuration) {
-            self.inputTextViewBottomMargin.constant = keyboardFrame.size.height - self.view.safeAreaInsets.bottom
+            self.inputTextView.inputView = self.optionFlag ? self.customInputView : nil
+            self.inputTextView.reloadInputViews()
+            self.inputTextViewBottomMargin.constant = self.keyboardFrame.size.height + 20
             self.view.layoutIfNeeded()
         }
     }
@@ -309,10 +359,10 @@ extension ChatingRoomViewController {
     @objc func keyboardDidHide(noti : Notification){
         let notiInfo = noti.userInfo!
         let animationDuration = notiInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
-        
+        optionFlag = false
         
         UIView.animate(withDuration: animationDuration) {
-            self.inputTextViewBottomMargin.constant = 5
+            self.inputTextViewBottomMargin.constant = 20
             self.view.layoutIfNeeded()
         }
     }
@@ -365,5 +415,20 @@ extension ChatingRoomViewController {
             customNavigationItem.title = participants.values.map({$0.name}).sorted().first(where: {$0 != ConnectedUser.shared.user.userInfo.name
             })
         }
+    }
+}
+
+// MARK: - Input View Scroll delegate
+extension ChatingRoomViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        customInputView.pageControll.currentPage = Int(floor(scrollView.contentOffset.x / customInputView.bounds.width))
+    }
+}
+
+// MARK: - Custom Input First View action methods
+extension ChatingRoomViewController {
+    
+    @objc func clickGalleryButton() {
+        
     }
 }

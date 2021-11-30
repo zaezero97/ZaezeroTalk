@@ -63,6 +63,11 @@
 		AEB1D4E32736DEFF00E1BD4F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB1D4E22736DEFF00E1BD4F /* LoginViewController.swift */; };
 		AEB3A9DD273E3671008E7031 /* ChatingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3A9DC273E3671008E7031 /* ChatingRoomViewController.swift */; };
 		AEB3A9DF273E368D008E7031 /* ChatingRoomViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB3A9DE273E368D008E7031 /* ChatingRoomViewController.storyboard */; };
+		AEB7784C2755B7A200743A99 /* CustomInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB7784B2755B7A200743A99 /* CustomInputView.xib */; };
+		AEB7784E2755BDDE00743A99 /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB7784D2755BDDE00743A99 /* CustomInputView.swift */; };
+		AEB778502755DC6300743A99 /* CustomInputFirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB7784F2755DC6300743A99 /* CustomInputFirstView.xib */; };
+		AEB778522755DE7200743A99 /* CustomInputSecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB778512755DE7200743A99 /* CustomInputSecondView.xib */; };
+		AEB77854275612FA00743A99 /* CustomInputFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB77853275612FA00743A99 /* CustomInputFirstView.swift */; };
 		AEB97CF327351C0D00DCDF77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */; };
 		AEB97CF527351C0D00DCDF77 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF427351C0D00DCDF77 /* SceneDelegate.swift */; };
 		AEB97CF727351C0D00DCDF77 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB97CF627351C0D00DCDF77 /* ViewController.swift */; };
@@ -137,6 +142,11 @@
 		AEB1D4E22736DEFF00E1BD4F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AEB3A9DC273E3671008E7031 /* ChatingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatingRoomViewController.swift; sourceTree = "<group>"; };
 		AEB3A9DE273E368D008E7031 /* ChatingRoomViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatingRoomViewController.storyboard; sourceTree = "<group>"; };
+		AEB7784B2755B7A200743A99 /* CustomInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomInputView.xib; sourceTree = "<group>"; };
+		AEB7784D2755BDDE00743A99 /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
+		AEB7784F2755DC6300743A99 /* CustomInputFirstView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomInputFirstView.xib; sourceTree = "<group>"; };
+		AEB778512755DE7200743A99 /* CustomInputSecondView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomInputSecondView.xib; sourceTree = "<group>"; };
+		AEB77853275612FA00743A99 /* CustomInputFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputFirstView.swift; sourceTree = "<group>"; };
 		AEB97CEF27351C0D00DCDF77 /* ZaezeroTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZaezeroTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEB97CF227351C0D00DCDF77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEB97CF427351C0D00DCDF77 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -342,6 +352,11 @@
 				AE9951B5274E2742002ADAAF /* UserExitMessageCell.xib */,
 				AE8B0FED2750C2190046D9A0 /* checkBoxProfileCell.swift */,
 				AE8B0FEE2750C2190046D9A0 /* checkBoxProfileCell.xib */,
+				AEB7784B2755B7A200743A99 /* CustomInputView.xib */,
+				AEB7784D2755BDDE00743A99 /* CustomInputView.swift */,
+				AEB7784F2755DC6300743A99 /* CustomInputFirstView.xib */,
+				AEB77853275612FA00743A99 /* CustomInputFirstView.swift */,
+				AEB778512755DE7200743A99 /* CustomInputSecondView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -418,8 +433,11 @@
 				AEB97CFC27351C0E00DCDF77 /* Assets.xcassets in Resources */,
 				AEB3A9DF273E368D008E7031 /* ChatingRoomViewController.storyboard in Resources */,
 				AEAF93FD273B530900BE2FF1 /* AddFriendViewController.storyboard in Resources */,
+				AEB778522755DE7200743A99 /* CustomInputSecondView.xib in Resources */,
 				AE30D6FD273B99660058F06B /* SearchByEmailResultView.xib in Resources */,
 				AE8DD07A274B5BE90023ADF3 /* SearchViewController.storyboard in Resources */,
+				AEB778502755DC6300743A99 /* CustomInputFirstView.xib in Resources */,
+				AEB7784C2755B7A200743A99 /* CustomInputView.xib in Resources */,
 				AE8AF57127545C5000F75F4B /* SetGroupChatingRoomInfoViewController.storyboard in Resources */,
 				AEAE17D1273DEBCC00A44737 /* ChatingRoomCell.xib in Resources */,
 				AEAD438C2744B4CB00337B89 /* ProfileEditViewController.storyboard in Resources */,
@@ -489,6 +507,7 @@
 			files = (
 				AEB3A9DD273E3671008E7031 /* ChatingRoomViewController.swift in Sources */,
 				AEAD438A2744B4BE00337B89 /* ProfileEditViewController.swift in Sources */,
+				AEB7784E2755BDDE00743A99 /* CustomInputView.swift in Sources */,
 				AE90BA4E2743A4B500D04469 /* Int.swift in Sources */,
 				AEAF93FF273B531700BE2FF1 /* AddFriendViewController.swift in Sources */,
 				AEFC6FF5273963E80092E037 /* TabbarViewController.swift in Sources */,
@@ -501,6 +520,7 @@
 				AEAE17D7273E070700A44737 /* UserInfo.swift in Sources */,
 				AE5FA775273B7B1F00F211CE /* TextFieldCell.swift in Sources */,
 				AE8DD078274B5BDD0023ADF3 /* SearchViewController.swift in Sources */,
+				AEB77854275612FA00743A99 /* CustomInputFirstView.swift in Sources */,
 				AEB19B3627421D6D007D649E /* OtherPersonMessageCell.swift in Sources */,
 				AE9951AB274DF57A002ADAAF /* UIViewController.swift in Sources */,
 				AEA8BD242746027A00038841 /* String.swift in Sources */,

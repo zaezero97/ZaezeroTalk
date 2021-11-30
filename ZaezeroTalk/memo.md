@@ -109,3 +109,14 @@ autoid = {
             underlayer.frame = CGRect(x: 0, y: stateMessageTextField.bounds.height + 5, width: stateMessageTextField.bounds.width, height: 1)
             underlayer.backgroundColor = UIColor.red.cgColor
             underlayer.cornerRadius = 1
+
+
+
+
+출처: https://rhammer.tistory.com/73 [고무망치의 Dev N Life]
+
+
+
+
+
+
