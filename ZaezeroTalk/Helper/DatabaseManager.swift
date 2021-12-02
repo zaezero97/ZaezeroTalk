@@ -54,26 +54,53 @@ extension DatabaseManager {
     
     func sendMessage(sendMessage: [String: Any], roomId: String) {
         let messageAutoId = ref.childByAutoId().key!
-        updateChildValues([messageAutoId: sendMessage], forPath: "Rooms/\(roomId)/messages")
-        updateChildValues(["lastMessage": sendMessage["content"]!,"lastMessageTime": sendMessage["time"]!], forPath: "Rooms/\(roomId)")
-        
-        ref.child("RoomUsers/\(roomId)").observeSingleEvent(of: .value, with: {
-            snapshot in
-            print("snapshot !!!",snapshot)
-            
-            let users = snapshot.value as! [String: String]
-            var readUsers = [String: String]()
-            print("users!!!",users)
-            users.forEach { (key,value) in
-                if value == "true" {
-                    readUsers[key] = "true"
-                }
+    
+        if sendMessage["type"] as! String == "image" {
+            print("content!!! ->",sendMessage["content"] as! UIImage)
+            uploadImage(image: sendMessage["content"] as! UIImage, uid: ConnectedUser.shared.uid, path: "\(roomId)/\(messageAutoId).png") { url in
+                var sendMessage = sendMessage
+                sendMessage["content"] = url
+                print("content!!! ->", url)
+                self.updateChildValues([messageAutoId: sendMessage], forPath: "Rooms/\(roomId)/messages")
+                self.updateChildValues(["lastMessage": "사진","lastMessageTime": sendMessage["time"]!], forPath: "Rooms/\(roomId)")
+                self.ref.child("RoomUsers/\(roomId)").observeSingleEvent(of: .value, with: {
+                    snapshot in
+                    
+                    let users = snapshot.value as! [String: String]
+                    var readUsers = [String: String]()
+                    users.forEach { (key,value) in
+                        if value == "true" {
+                            readUsers[key] = "true"
+                        }
+                    }
+                    //방에 참여하고 있는 유저(value == true) 를 readUsers 에다가 저장
+                    
+                    self.ref.child("Rooms/\(roomId)/messages/\(messageAutoId)/readUsers").setValue(readUsers)
+                    
+                })
             }
-            
-            //방에 참여하고 있는 유저(value == true) 를 readUsers 에다가 저장
-            self.ref.child("Rooms/\(roomId)/messages/\(messageAutoId)/readUsers").setValue(readUsers)
-            
-        })
+        } else {
+            self.updateChildValues([messageAutoId: sendMessage], forPath: "Rooms/\(roomId)/messages")
+            self.updateChildValues(["lastMessage": sendMessage["content"]!,"lastMessageTime": sendMessage["time"]!], forPath: "Rooms/\(roomId)")
+            self.ref.child("RoomUsers/\(roomId)").observeSingleEvent(of: .value, with: {
+                snapshot in
+                
+                let users = snapshot.value as! [String: String]
+                var readUsers = [String: String]()
+                users.forEach { (key,value) in
+                    if value == "true" {
+                        readUsers[key] = "true"
+                    }
+                }
+                //방에 참여하고 있는 유저(value == true) 를 readUsers 에다가 저장
+                
+                self.ref.child("Rooms/\(roomId)/messages/\(messageAutoId)/readUsers").setValue(readUsers)
+                
+            })
+        }
+        
+        
+       
         
         
     }
@@ -241,22 +268,22 @@ extension DatabaseManager {
 
 // MARK: - Image
 extension DatabaseManager {
-    func uploadImage(image: UIImage,uid: String, completion: @escaping (String) -> Void) {
+    func uploadImage(image: UIImage,uid: String,path: String, completion: @escaping (String) -> Void) {
         guard let data = image.jpegData(compressionQuality: 0.1) ?? image.pngData() else { return }
-        print("image Data!!!!", data)
         let metaData = StorageMetadata()
         metaData.contentType = "image/png"
-        Storage.storage().reference().child("profileImage/\(uid).png").putData(data, metadata: metaData) {
+        print("test")
+        Storage.storage().reference().child(path).putData(data, metadata: metaData) {
             (metaData,error) in
             if let error = error {
                 print("error ->", error)
                 print("error -> image upload error!!!",error.localizedDescription)
             } else {
-                Storage.storage().reference().child("profileImage/\(uid).png").downloadURL { (url, error) in
+                Storage.storage().reference().child(path).downloadURL { (url, error) in
                     if let error = error {
                         print("error -> download Image Error",error)
                     } else {
-                        self.ref.child("Users/\(uid)/userInfo").updateChildValues(["profileImageUrl": url?.absoluteString ?? ""])
+                        
                     }
                     completion(url?.absoluteString ?? "")
                 }
@@ -290,6 +317,7 @@ extension DatabaseManager {
             compltion(child.keys.first)
         }
     }
+    
     func fetchUser(email : String ,completion : @escaping (User?) -> Void){
         ref.child("Users").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value) { snapshot in
             do{

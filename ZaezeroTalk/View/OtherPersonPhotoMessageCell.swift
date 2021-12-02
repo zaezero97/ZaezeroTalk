@@ -1,20 +1,19 @@
 //
-//  MessageCell.swift
+//  OtherPersonPhotoMesageCell.swift
 //  ZaezeroTalk
 //
-//  Created by 재영신 on 2021/11/15.
+//  Created by 재영신 on 2021/12/02.
 //
 
 import UIKit
 
-class MyMessageCell: UITableViewCell {
+class OtherPersonPhotoMessageCell: UITableViewCell {
 
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var readCountLabel: UILabel!
     @IBOutlet weak var messageImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView! 
-    @IBOutlet weak var readCountLabel: UILabel!
-    @IBOutlet weak var contentTextView: UITextView!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,5 +25,4 @@ class MyMessageCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-
 }

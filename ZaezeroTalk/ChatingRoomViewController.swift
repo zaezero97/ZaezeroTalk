@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-
+import PhotosUI
 
 
 class ChatingRoomViewController: UIViewController {
@@ -30,6 +30,7 @@ class ChatingRoomViewController: UIViewController {
     }
     @IBOutlet weak var chatingTableView: UITableView! {
         didSet {
+            
             chatingTableView.delegate = self
             chatingTableView.dataSource = self
             chatingTableView.estimatedRowHeight = 10
@@ -38,6 +39,8 @@ class ChatingRoomViewController: UIViewController {
             chatingTableView.register(UINib(nibName: "UserExitMessageCell", bundle: nil), forCellReuseIdentifier: "UserExitMessageCell")
             chatingTableView.register(UINib(nibName: "MyMessageCell", bundle: nil), forCellReuseIdentifier: "myMessageCell")
             chatingTableView.register(UINib(nibName: "OtherPersonMessageCell", bundle: nil), forCellReuseIdentifier: "otherPersonMessageCell")
+            chatingTableView.register(UINib(nibName: "MyPhotoMessageCell", bundle: nil), forCellReuseIdentifier: "MyPhotoMessageCell")
+            chatingTableView.register(UINib(nibName: "OtherPersonPhotoMessageCell", bundle: nil), forCellReuseIdentifier: "OtherPersonPhotoMessageCell")
         }
     }
     
@@ -93,7 +96,7 @@ class ChatingRoomViewController: UIViewController {
     }()
     
     ///  key: uid, value: profileImage
-    /// didSet: 참가자의 프포필 이미지가 변경되어 옵저버로 감지하고 값이 변경되면 테이블을 reload한다.
+    /// didSet: 참가자의 프로필 이미지가 변경되어 옵저버로 감지하고 값이 변경되면 테이블을 reload한다.
     var participantImages = [String: UIImage]() {
         didSet {
             chatingTableView.reloadData()
@@ -114,7 +117,7 @@ class ChatingRoomViewController: UIViewController {
         //   inputTextView.inputView = customInputView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
-    
+        
         fetchCurrentRoom() ///동기
         fetchParticipantInfos() /// 비동기
         
@@ -165,43 +168,19 @@ class ChatingRoomViewController: UIViewController {
     }
     
     @IBAction func clickSendButton(_ sender: Any) {
-        let message : [String: Any] = [
-            "sender": ConnectedUser.shared.uid,
-            "time": ServerValue.timestamp(),
-            "type": "Text",
-            "content": inputTextView.text!
-        ]
+        send(type: "text", text: inputTextView.text!, image: nil)
         
-        if let curRoomId = curRoomId {
-            DatabaseManager.shared.sendMessage(sendMessage: message, roomId: curRoomId)
-        } else {
-            let type = participants.count > 2 ? "1:N" : "1:1"
-            DatabaseManager.shared.createRoom(message: message, participantUids: participantUids, participantNames: participants.values.map{$0.name}, name: roomName,type: type ,completion: {
-                roomId,roomInfo in
-                self.curRoomId = roomId
-                self.curRoomInfo = roomInfo
-                DatabaseManager.shared.registerMessageObserver(roomId: roomId) {
-                    fetchedMessages in
-                    guard let fetchedMessages = fetchedMessages else {
-                        return
-                    }
-                    self.messages = fetchedMessages
-                    self.chatingTableView.reloadData()
-                    self.chatingTableView.scrollToRow(at: IndexPath(row: self.messages.count - 1, section: 0), at: .bottom, animated: false)
-                }
-            })
-        }// 방이 존재하면 메시지를 보내고 존재하지 않으면 새로 방을 만들고 room의 상태변화를 감지하는 옵저버를 등록한다.
     }
     @IBAction func clickSendOptionButton(_ sender: Any) {
         optionFlag.toggle()
-        print("isFirstResponder !!! ->", inputTextView.isFirstResponder)
+        
         if inputTextView.isFirstResponder == false {
             inputTextView.becomeFirstResponder()
         } else {
             inputTextView.inputView = optionFlag ? customInputView : nil
             inputTextView.reloadInputViews()
         }
-       
+        
     }
 }
 
@@ -216,48 +195,18 @@ extension ChatingRoomViewController: UITableViewDataSource {
         guard curRoomId != nil else { return UITableViewCell() }
         let message = messages[indexPath.row]
         
-        if message.type == "exit" {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "UserExitMessageCell", for: indexPath) as! UserExitMessageCell
-            cell.userExitMessageLebel.text = messages[indexPath.row].content
-            
-            return cell
+        switch message.type {
+        case "exit": return makeExitCell(tableView: tableView, indexPath:indexPath, message: message)
+        case "image": return makePhotoMessageCell(tableView: tableView, indexPath:indexPath, message: message)
+        default : return makeMessageCell(tableView: tableView, indexPath:indexPath, message: message)
         }
         
-        guard let readUsers = message.readUsers else { return UITableViewCell() }
-        if message.sender == ConnectedUser.shared.uid {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "myMessageCell", for: indexPath) as! MyMessageCell
-            cell.contentTextView.text = message.content
-            cell.timeLabel.text = message.time?.toDayTime
-            cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
-            
-            if let profileImage = participantImages[message.sender!] {
-                cell.profileImageView.image = profileImage
-            } else {
-                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
-            }
-            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
-            cell.nameLabel.text = participants[message.sender!]?.name ?? ""
-            
-            cell.selectionStyle = .none
-            return cell
-            
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "otherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
-            cell.contentTextView.text = message.content
-            cell.timeLabel.text = message.time?.toDayTime
-            cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
-            if let profileImage = participantImages[message.sender!] {
-                cell.profileImageView.image = profileImage
-            } else {
-                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
-            }
-            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
-            cell.nameLabel.text = participants[message.sender!]?.name ?? ""
-            cell.selectionStyle = .none
-            return cell
-        }
+        
     }
+    
 }
+    
+    
 
 // MARK: - TableView Delegate
 extension ChatingRoomViewController: UITableViewDelegate {
@@ -277,8 +226,8 @@ extension ChatingRoomViewController: UITextViewDelegate {
             sendButton.tintColor = .darkGray
         }
         
-        if textView.contentSize.height <= 50{
-            inputTextViewHeightConstraint.constant = 50
+        if textView.contentSize.height <= 30{
+            inputTextViewHeightConstraint.constant = 30
         } else if textView.contentSize.height >= 100 {
             inputTextViewHeightConstraint.constant = 100
         } else {
@@ -286,6 +235,108 @@ extension ChatingRoomViewController: UITextViewDelegate {
         }
     }
 }
+
+// MARK: - Make Table View Cell method
+extension ChatingRoomViewController {
+    func makeExitCell(tableView: UITableView,indexPath: IndexPath, message: Message) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserExitMessageCell", for: indexPath) as! UserExitMessageCell
+        cell.userExitMessageLebel.text = messages[indexPath.row].content
+        
+        return cell
+    }
+    
+    func makeMessageCell(tableView: UITableView,indexPath: IndexPath, message: Message) -> UITableViewCell {
+        guard let readUsers = message.readUsers else { return UITableViewCell() }
+        if message.sender == ConnectedUser.shared.uid {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "myMessageCell", for: indexPath) as! MyMessageCell
+            cell.contentTextView.text = message.content
+            cell.timeLabel.text = message.time?.toDayTime
+            cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
+            
+            if let profileImage = participantImages[message.sender!] {
+                cell.profileImageView.image = profileImage
+            } else {
+                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+            }
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
+            cell.nameLabel.text = participants[message.sender!]?.name ?? ""
+            
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "otherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
+            cell.contentTextView.text = message.content
+            cell.timeLabel.text = message.time?.toDayTime
+            cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
+            if let profileImage = participantImages[message.sender!] {
+                cell.profileImageView.image = profileImage
+            } else {
+                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+            }
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
+            cell.nameLabel.text = participants[message.sender!]?.name ?? ""
+            cell.selectionStyle = .none
+            return cell
+        }
+    }
+    
+    func makePhotoMessageCell(tableView: UITableView,indexPath: IndexPath, message: Message) -> UITableViewCell {
+        guard let readUsers = message.readUsers else { return UITableViewCell() }
+        if message.sender == ConnectedUser.shared.uid {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MyPhotoMessageCell", for: indexPath) as! MyPhotoMessageCell
+            cell.messageImageView.image = UIImage(systemName: "rays")
+            DispatchQueue.main.async {
+                if let index: IndexPath = tableView.indexPath(for: cell) {
+                    if index.row == indexPath.row {
+                        cell.messageImageView.setImageUrl(message.content!)
+                        cell.messageImageView.layer.cornerRadius = 10
+                        cell.messageImageView.snp.makeConstraints { make in
+                            make.height.equalTo(200)
+                        }
+                    }
+                }
+            }
+            cell.timeLabel.text = message.time?.toDayTime
+            cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
+            
+            if let profileImage = participantImages[message.sender!] {
+                cell.profileImageView.image = profileImage
+            } else {
+                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+            }
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
+            cell.nameLabel.text = participants[message.sender!]?.name ?? ""
+            
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OtherPersonPhotoMessageCell", for: indexPath) as! OtherPersonPhotoMessageCell
+            cell.messageImageView.image = UIImage(systemName: "rays")
+            DispatchQueue.main.async {
+                if let index: IndexPath = tableView.indexPath(for: cell) {
+                    if index.row == indexPath.row {
+                        cell.messageImageView.setImageUrl(message.content!)
+                    }
+                }
+            }
+            cell.timeLabel.text = message.time?.toDayTime
+            cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
+            
+            if let profileImage = participantImages[message.sender!] {
+                cell.profileImageView.image = profileImage
+            } else {
+                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+            }
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
+            cell.nameLabel.text = participants[message.sender!]?.name ?? ""
+            
+            cell.selectionStyle = .none
+            return cell
+        }
+        
+    }
+}
+
 
 // MARK: - Fetch Data
 extension ChatingRoomViewController {
@@ -295,7 +346,6 @@ extension ChatingRoomViewController {
         guard let roomList = ConnectedUser.shared.chatingRoomList else { return }
         // 현재 사용자가 참여하고 있는 방 리스트
         
-        print("fetchCurrentRoom !!! -> ",roomList)
         if let curRoomId = curRoomId {
             for room in roomList {
                 if room.id == curRoomId {
@@ -346,8 +396,6 @@ extension ChatingRoomViewController {
         keyboardFrame = notiInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
         let animationDuration = notiInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
         
-        print("keyboardFrame!!! ->",keyboardFrame)
-    
         UIView.animate(withDuration: animationDuration) {
             self.inputTextView.inputView = self.optionFlag ? self.customInputView : nil
             self.inputTextView.reloadInputViews()
@@ -421,14 +469,107 @@ extension ChatingRoomViewController {
 // MARK: - Input View Scroll delegate
 extension ChatingRoomViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView != chatingTableView else { return }
+        
+        print("scrollView -> ",scrollView.description)
         customInputView.pageControll.currentPage = Int(floor(scrollView.contentOffset.x / customInputView.bounds.width))
     }
 }
 
 // MARK: - Custom Input First View action methods
 extension ChatingRoomViewController {
+    @objc func clickGalleryButton(imageView: UIImageView){
+        checkPermission()
+    }
     
-    @objc func clickGalleryButton() {
+    func checkPermission(){
+        if PHPhotoLibrary.authorizationStatus() == .authorized || PHPhotoLibrary.authorizationStatus() == .limited{ // authorized -> 사용자가 명시적으로 권한 부여 , limited -> 사용자가 이 앱에 제한된 권한을 승인 (선택한 몇개 만 사용 하겠다)
+            DispatchQueue.main.async {
+                self.showGallery()
+            }
+        }else if PHPhotoLibrary.authorizationStatus() == .denied{ //승인 거절 했을 경우
+            DispatchQueue.main.async {
+                self.showAuthorizationDeniedAlert()
+            }
+        }else if PHPhotoLibrary.authorizationStatus() == .notDetermined{ // 사용자가 앱의 인증상태를 설정하지 않은 경우 ex) 앱을 설치하고 처음 실행
+            PHPhotoLibrary.requestAuthorization { status in
+                self.checkPermission()
+            }
+        }
+    }
+    func showGallery(){
+        let library = PHPhotoLibrary.shared() //singleton pattern
+        var configuration = PHPickerConfiguration(photoLibrary: library)
+        configuration.selectionLimit = 1
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
+    func showAuthorizationDeniedAlert(){
+        let alert = UIAlertController(title: "포토라이브러리의 접근 권환을 활성화 해주세요.", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "설정으로 가기", style: .default, handler: { action in
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            if UIApplication.shared.canOpenURL(url){
+                UIApplication.shared.open(url, options: [:],completionHandler: nil)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: - PHPickerViewControllerDelegate
+extension ChatingRoomViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        let identifiers = results.map{ $0.assetIdentifier ?? ""}
+        let fetchedImage = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)[0]
+        fetchedImage.loadImage { image in
+            self.send(type: "image", text: nil, image: image)
+        }
         
+        self.dismiss(animated: true, completion: nil)
     }
 }
+
+
+// MARK: - Send Message (Image,Text)
+extension ChatingRoomViewController {
+    func send(type: String, text: String?, image: UIImage?) {
+        
+        var message : [String: Any] = [
+            "sender": ConnectedUser.shared.uid,
+            "time": ServerValue.timestamp(),
+            "type": type
+        ]
+        
+        if type == "text" {
+            message["content"] = text
+        } else if type == "image" {
+            message["content"] = image
+        }
+        
+        if let curRoomId = curRoomId {
+            DatabaseManager.shared.sendMessage(sendMessage: message, roomId: curRoomId)
+        } else {
+            let type = participants.count > 2 ? "1:N" : "1:1"
+            DatabaseManager.shared.createRoom(message: message, participantUids: participantUids, participantNames: participants.values.map{$0.name}, name: roomName,type: type ,completion: {
+                roomId,roomInfo in
+                self.curRoomId = roomId
+                self.curRoomInfo = roomInfo
+                DatabaseManager.shared.registerMessageObserver(roomId: roomId) {
+                    fetchedMessages in
+                    guard let fetchedMessages = fetchedMessages else {
+                        return
+                    }
+                    
+                    self.messages = fetchedMessages
+                    self.chatingTableView.reloadData()
+                    self.chatingTableView.scrollToRow(at: IndexPath(row: self.messages.count - 1, section: 0), at: .bottom, animated: false)
+                }
+            })
+        }// 방이 존재하면 메시지를 보내고 존재하지 않으면 새로 방을 만들고 room의 상태변화를 감지하는 옵저버를 등록한다.
+    }
+}
+
+

@@ -41,24 +41,24 @@
                                 </navigationBarAppearance>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="k5C-sx-KYw">
-                                <rect key="frame" x="0.0" y="88" width="414" height="733"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="753"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OYY-qD-P3a">
-                                <rect key="frame" x="0.0" y="821" width="414" height="75"/>
+                                <rect key="frame" x="0.0" y="841" width="414" height="55"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4Lc-Lx-1rd">
-                                        <rect key="frame" x="54" y="5" width="355" height="50"/>
+                                        <rect key="frame" x="54" y="5" width="355" height="30"/>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="9Nw-Cx-SEa"/>
+                                            <constraint firstAttribute="height" constant="30" id="9Nw-Cx-SEa"/>
                                         </constraints>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdS-a9-ces">
-                                        <rect key="frame" x="365" y="14.5" width="44" height="31"/>
+                                        <rect key="frame" x="365" y="4.5" width="44" height="31"/>
                                         <color key="tintColor" systemColor="systemGray2Color"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="arrow.up.circle.fill" catalog="system" title=""/>
@@ -67,7 +67,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfN-FG-TJX">
-                                        <rect key="frame" x="5" y="14.5" width="44" height="31"/>
+                                        <rect key="frame" x="5" y="4.5" width="44" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="plus.square" catalog="system" title=""/>
                                         <connections>

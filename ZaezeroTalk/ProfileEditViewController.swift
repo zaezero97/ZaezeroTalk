@@ -96,8 +96,9 @@ class ProfileEditViewController: UIViewController {
         indicator.startAnimating()
         var modifyUserInfo = ConnectedUser.shared.user.userInfo
         if fetchedImage != nil {
-            DatabaseManager.shared.uploadImage(image: profileImageView.image!, uid: ConnectedUser.shared.uid, completion: {
+            DatabaseManager.shared.uploadImage(image: profileImageView.image!, uid: ConnectedUser.shared.uid,path:"profileImage/\(ConnectedUser.shared.uid).png" , completion: {
                 url in
+                DatabaseManager.shared.ref.child("Users/\(ConnectedUser.shared.uid)/userInfo").updateChildValues(["profileImageUrl": url])
                 modifyUserInfo.profileImageUrl = url
                 if let newStateMessage = self.newStateMessage, newStateMessage.count > 0 {
                     if self.oldStateMessage != newStateMessage {
