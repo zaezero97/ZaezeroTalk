@@ -41,6 +41,8 @@
 		AE9B40F32758897900A99122 /* OtherPersonPhotoMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9B40F12758897900A99122 /* OtherPersonPhotoMessageCell.xib */; };
 		AE9B40F627588AE500A99122 /* MyPhotoMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9B40F427588AE500A99122 /* MyPhotoMessageCell.swift */; };
 		AE9B40F727588AE500A99122 /* MyPhotoMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9B40F527588AE500A99122 /* MyPhotoMessageCell.xib */; };
+		AE9B40F92758AD1E00A99122 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9B40F82758AD1E00A99122 /* PhotoDetailViewController.swift */; };
+		AE9B40FB2758AD2800A99122 /* PhotoDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE9B40FA2758AD2800A99122 /* PhotoDetailViewController.storyboard */; };
 		AE9E470B2757089D003B5865 /* PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E470A2757089D003B5865 /* PHAsset.swift */; };
 		AEA8BD222745FF5800038841 /* RoomUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8BD212745FF5800038841 /* RoomUsers.swift */; };
 		AEA8BD242746027A00038841 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8BD232746027A00038841 /* String.swift */; };
@@ -125,6 +127,8 @@
 		AE9B40F12758897900A99122 /* OtherPersonPhotoMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherPersonPhotoMessageCell.xib; sourceTree = "<group>"; };
 		AE9B40F427588AE500A99122 /* MyPhotoMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPhotoMessageCell.swift; sourceTree = "<group>"; };
 		AE9B40F527588AE500A99122 /* MyPhotoMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPhotoMessageCell.xib; sourceTree = "<group>"; };
+		AE9B40F82758AD1E00A99122 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
+		AE9B40FA2758AD2800A99122 /* PhotoDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoDetailViewController.storyboard; sourceTree = "<group>"; };
 		AE9E470A2757089D003B5865 /* PHAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAsset.swift; sourceTree = "<group>"; };
 		AEA8BD212745FF5800038841 /* RoomUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomUsers.swift; sourceTree = "<group>"; };
 		AEA8BD232746027A00038841 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 				AE8B0FE92750B63F0046D9A0 /* MakeChatingRoomViewController.storyboard */,
 				AE8AF57027545C5000F75F4B /* SetGroupChatingRoomInfoViewController.storyboard */,
 				AE8DD079274B5BE90023ADF3 /* SearchViewController.storyboard */,
+				AE9B40FA2758AD2800A99122 /* PhotoDetailViewController.storyboard */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				AE9951AE274E0776002ADAAF /* SideMenuViewController.swift */,
 				AE8B0FE72750B6330046D9A0 /* MakeChatingRoomViewController.swift */,
 				AE8AF56E27545C4700F75F4B /* SetGroupChatingRoomInfoViewController.swift */,
+				AE9B40F82758AD1E00A99122 /* PhotoDetailViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -444,6 +450,7 @@
 				AEB97D0727351F9A00DCDF77 /* GoogleService-Info.plist in Resources */,
 				AEAD43902744C40500337B89 /* EditStateMessageViewController.storyboard in Resources */,
 				AEBE6BFB2739F61B008B0B61 /* FriendListViewController.storyboard in Resources */,
+				AE9B40FB2758AD2800A99122 /* PhotoDetailViewController.storyboard in Resources */,
 				AE9951B1274E1076002ADAAF /* SideMenuViewController.storyboard in Resources */,
 				AEAE17CB273DE9C800A44737 /* ChatingRoomListViewController.storyboard in Resources */,
 				AEB19B3727421D6D007D649E /* OtherPersonMessageCell.xib in Resources */,
@@ -532,6 +539,7 @@
 				AEAF93FF273B531700BE2FF1 /* AddFriendViewController.swift in Sources */,
 				AEFC6FF5273963E80092E037 /* TabbarViewController.swift in Sources */,
 				AE30D701273BA02C0058F06B /* SearchByEmailResultView.swift in Sources */,
+				AE9B40F92758AD1E00A99122 /* PhotoDetailViewController.swift in Sources */,
 				AEAE17C9273DE9BC00A44737 /* ChatingRoomListViewController.swift in Sources */,
 				AE44D06D2738A7B3007A567A /* SignUpViewController.swift in Sources */,
 				AEA8BD2A2746280200038841 /* UIImageView.swift in Sources */,

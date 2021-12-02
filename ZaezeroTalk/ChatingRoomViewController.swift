@@ -213,6 +213,21 @@ extension ChatingRoomViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = .clear
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = messages[indexPath.row]
+        
+        if message.type == "image" {
+            let storyboard = UIStoryboard(name: "PhotoDetailViewController", bundle: nil)
+            let photoDetailVC = storyboard.instantiateViewController(withIdentifier: "PhotoDetailViewController") as! PhotoDetailViewController
+            photoDetailVC.modalTransitionStyle = .crossDissolve
+            photoDetailVC.modalPresentationStyle = .fullScreen
+            
+            present(photoDetailVC, animated: true, completion: {
+                photoDetailVC.photoImageView.setImageUrl(message.content!)
+            })
+        }
+    }
 }
 
 // MARK: - TextView Delegate
