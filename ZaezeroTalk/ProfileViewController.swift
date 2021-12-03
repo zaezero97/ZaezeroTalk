@@ -98,15 +98,6 @@ extension ProfileViewController {
         } else {
             profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
         }
-//        if let profileImageUrl = userInfo.profileImageUrl, !profileImageUrl.isEmpty {
-//            let url = URL(string: profileImageUrl)
-//            DispatchQueue.global().async {
-//                let data = try? Data(contentsOf: url!)
-//                DispatchQueue.main.async { self.profileImageView.image = UIImage(data: data!) }
-//            }
-//        } else {
-//            profileImageView.image  = UIImage(systemName: "person.crop.rectangle.fill")
-//        }
-        
+
     }
 }

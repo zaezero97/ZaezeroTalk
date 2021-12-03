@@ -262,6 +262,8 @@ extension ChatingRoomViewController {
                         } else {
                             cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
                         }
+                        cell.profileImageView.isUserInteractionEnabled = true
+                        cell.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapProfileImage)))
                     }
                 }
             }
@@ -283,6 +285,8 @@ extension ChatingRoomViewController {
                         } else {
                             cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
                         }
+                        cell.profileImageView.isUserInteractionEnabled = true
+                        cell.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapProfileImage)))
                     }
                 }
             }
@@ -310,6 +314,8 @@ extension ChatingRoomViewController {
                         }
                         cell.messageImageView.isUserInteractionEnabled = true
                         cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapPhotoMessage)))
+                        cell.profileImageView.isUserInteractionEnabled = true
+                        cell.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapProfileImage)))
                     }
                 }
             }
@@ -334,6 +340,8 @@ extension ChatingRoomViewController {
                         }
                         cell.messageImageView.isUserInteractionEnabled = true
                         cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapPhotoMessage)))
+                        cell.profileImageView.isUserInteractionEnabled = true
+                        cell.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapProfileImage)))
                     }
                 }
             }
@@ -585,7 +593,7 @@ extension ChatingRoomViewController {
 }
 
 
-// MARK: - Tap Photo Message Action Method
+// MARK: - Tap Message Action Method
 extension ChatingRoomViewController {
     @objc func tapPhotoMessage(_ sender: UITapGestureRecognizer){
         let storyboard = UIStoryboard(name: "PhotoDetailViewController", bundle: nil)
@@ -599,5 +607,18 @@ extension ChatingRoomViewController {
         present(photoDetailVC, animated: true, completion: {
             photoDetailVC.photoImageView.setImageUrl(message.content!)
         })
+    }
+    
+    @objc func tapProfileImage(_ sender: UITapGestureRecognizer) {
+        let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        let cell = sender.view!.superview!.superview as! UITableViewCell
+        let message = messages[chatingTableView.indexPath(for: cell)!.row]
+        
+        profileVC.selectedUserInfo = participants[message.sender!]
+        profileVC.selectedUserUid = message.sender
+        profileVC.modalPresentationStyle = .fullScreen
+        
+        present(profileVC, animated: true, completion: nil)
     }
 }
