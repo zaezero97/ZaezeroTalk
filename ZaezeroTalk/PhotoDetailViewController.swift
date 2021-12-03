@@ -11,7 +11,19 @@ import NVActivityIndicatorView
 import SnapKit
 
 class PhotoDetailViewController: UIViewController {
+    var statusBarHidden = false
+    var statusBarStyle: UIStatusBarStyle = .lightContent
     
+    override var prefersStatusBarHidden: Bool {
+        return statusBarHidden
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBarStyle
+    }
+    
+    @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var customNavigationBar: UINavigationBar!
     lazy var indicator : NVActivityIndicatorView = {
         let frame = CGRect(x:0, y:0, width: 100, height: 100)
         let indicatiorView = NVActivityIndicatorView(frame: frame, type: .ballClipRotatePulse, color: .purple, padding: 0)
@@ -23,10 +35,16 @@ class PhotoDetailViewController: UIViewController {
         return indicatiorView
     }()
     
-    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var photoImageView: UIImageView! {
+        didSet {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(tapPhotoImageView))
+            photoImageView.isUserInteractionEnabled = true
+            photoImageView.addGestureRecognizer(gesture)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     @IBAction func clickDownloadButton(_ sender: Any) {
@@ -37,7 +55,7 @@ class PhotoDetailViewController: UIViewController {
     }
 }
 
-
+// MARK: - SaveImaga method
 extension PhotoDetailViewController {
     func saveImage() {
         indicator.startAnimating()
@@ -54,5 +72,16 @@ extension PhotoDetailViewController {
             }
         }
         
+    }
+}
+
+// MARK: - Photo Image View Tap Gesture Action Method
+extension PhotoDetailViewController {
+    @objc func tapPhotoImageView() {
+        print("Tapped")
+        self.customNavigationBar.isHidden.toggle()
+        self.toolBar.isHidden.toggle()
+        statusBarHidden.toggle()
+        setNeedsStatusBarAppearanceUpdate()
     }
 }

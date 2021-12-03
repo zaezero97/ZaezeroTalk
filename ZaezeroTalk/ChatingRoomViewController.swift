@@ -305,9 +305,6 @@ extension ChatingRoomViewController {
                     if index.row == indexPath.row {
                         cell.messageImageView.setImageUrl(message.content!)
                         cell.messageImageView.layer.cornerRadius = 10
-                        cell.messageImageView.snp.makeConstraints { make in
-                            make.height.equalTo(200)
-                        }
                     }
                 }
             }

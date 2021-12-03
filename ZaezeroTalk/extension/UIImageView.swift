@@ -44,7 +44,6 @@ extension UIImageView {
             /// cache된 이미지가 존재하면 그 이미지를 사용 (API 호출안하는 형태)
             if let cachedImage = ImageCacheManager.shared.object(forKey: cachedKey) {
                 DispatchQueue.main.async {
-                    print("cachedImage !!! ->", cachedImage.size)
                     self.image = cachedImage
                 }
                 return
@@ -62,8 +61,6 @@ extension UIImageView {
                 DispatchQueue.main.async { [weak self] in
                     if let data = data, let image = UIImage(data: data) {
                         /// 캐싱
-                        print("device size!!! ->", UIScreen.main.bounds)
-                        print("fetch Image !!! ->",image)
                         ImageCacheManager.shared.setObject(image, forKey: cachedKey)
                         self?.image = image
                     }

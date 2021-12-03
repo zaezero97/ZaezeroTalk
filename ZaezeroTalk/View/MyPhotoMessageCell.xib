@@ -19,14 +19,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ol4-g6-8TH">
-                        <rect key="frame" x="452" y="10" width="30" height="20.5"/>
+                        <rect key="frame" x="452" y="10" width="30" height="33"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rays" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Jae-RB-1nG">
-                        <rect key="frame" x="302" y="40" width="200" height="213"/>
+                        <rect key="frame" x="302" y="52.5" width="200" height="200.5"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="200" id="R9S-Se-4cD"/>
                             <constraint firstAttribute="width" constant="200" id="vGq-rI-2Ra"/>
                         </constraints>
                     </imageView>
