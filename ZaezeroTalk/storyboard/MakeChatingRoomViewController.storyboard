@@ -33,6 +33,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="대화상대 선택" id="kTR-5d-Lpb">
                         <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="eL8-OF-hvu">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="clickCancleButton:" destination="GNZ-mq-yD7" id="IsV-M3-lgN"/>
                             </connections>

@@ -214,21 +214,6 @@ extension ChatingRoomViewController: UITableViewDelegate {
         cell.backgroundColor = .clear
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let message = messages[indexPath.row]
-        
-        if message.type == "image" {
-            let storyboard = UIStoryboard(name: "PhotoDetailViewController", bundle: nil)
-            let photoDetailVC = storyboard.instantiateViewController(withIdentifier: "PhotoDetailViewController") as! PhotoDetailViewController
-            photoDetailVC.modalTransitionStyle = .crossDissolve
-            photoDetailVC.modalPresentationStyle = .fullScreen
-            photoDetailVC.messageSender = participants[message.sender!]!.name
-            
-            present(photoDetailVC, animated: true, completion: {
-                photoDetailVC.photoImageView.setImageUrl(message.content!)
-            })
-        }
-    }
 }
 
 // MARK: - TextView Delegate
@@ -269,14 +254,20 @@ extension ChatingRoomViewController {
             cell.timeLabel.text = message.time?.toDayTime
             cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
             
-            if let profileImage = participantImages[message.sender!] {
-                cell.profileImageView.image = profileImage
-            } else {
-                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+            DispatchQueue.main.async {
+                if let index: IndexPath = tableView.indexPath(for: cell) {
+                    if index.row == indexPath.row {
+                        if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl {
+                            cell.profileImageView.setImageUrl(profileImageUrl)
+                        } else {
+                            cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+                        }
+                    }
+                }
             }
+        
             cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
             cell.nameLabel.text = participants[message.sender!]?.name ?? ""
-            
             cell.selectionStyle = .none
             return cell
         } else {
@@ -284,10 +275,16 @@ extension ChatingRoomViewController {
             cell.contentTextView.text = message.content
             cell.timeLabel.text = message.time?.toDayTime
             cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
-            if let profileImage = participantImages[message.sender!] {
-                cell.profileImageView.image = profileImage
-            } else {
-                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+            DispatchQueue.main.async {
+                if let index: IndexPath = tableView.indexPath(for: cell) {
+                    if index.row == indexPath.row {
+                        if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl {
+                            cell.profileImageView.setImageUrl(profileImageUrl)
+                        } else {
+                            cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+                        }
+                    }
+                }
             }
             cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
             cell.nameLabel.text = participants[message.sender!]?.name ?? ""
@@ -306,17 +303,18 @@ extension ChatingRoomViewController {
                     if index.row == indexPath.row {
                         cell.messageImageView.setImageUrl(message.content!)
                         cell.messageImageView.layer.cornerRadius = 10
+                        if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl {
+                            cell.profileImageView.setImageUrl(profileImageUrl)
+                        } else {
+                            cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+                        }
+                        cell.messageImageView.isUserInteractionEnabled = true
+                        cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapPhotoMessage)))
                     }
                 }
             }
             cell.timeLabel.text = message.time?.toDayTime
             cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
-            
-            if let profileImage = participantImages[message.sender!] {
-                cell.profileImageView.image = profileImage
-            } else {
-                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
-            }
             cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
             cell.nameLabel.text = participants[message.sender!]?.name ?? ""
             
@@ -329,17 +327,18 @@ extension ChatingRoomViewController {
                 if let index: IndexPath = tableView.indexPath(for: cell) {
                     if index.row == indexPath.row {
                         cell.messageImageView.setImageUrl(message.content!)
+                        if let profileImageUrl = self.participants[message.sender!]!.profileImageUrl {
+                            cell.profileImageView.setImageUrl(profileImageUrl)
+                        } else {
+                            cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+                        }
+                        cell.messageImageView.isUserInteractionEnabled = true
+                        cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapPhotoMessage)))
                     }
                 }
             }
             cell.timeLabel.text = message.time?.toDayTime
             cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
-            
-            if let profileImage = participantImages[message.sender!] {
-                cell.profileImageView.image = profileImage
-            } else {
-                cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
-            }
             cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
             cell.nameLabel.text = participants[message.sender!]?.name ?? ""
             
@@ -586,3 +585,19 @@ extension ChatingRoomViewController {
 }
 
 
+// MARK: - Tap Photo Message Action Method
+extension ChatingRoomViewController {
+    @objc func tapPhotoMessage(_ sender: UITapGestureRecognizer){
+        let storyboard = UIStoryboard(name: "PhotoDetailViewController", bundle: nil)
+        let photoDetailVC = storyboard.instantiateViewController(withIdentifier: "PhotoDetailViewController") as! PhotoDetailViewController
+        photoDetailVC.modalTransitionStyle = .crossDissolve
+        photoDetailVC.modalPresentationStyle = .fullScreen
+        
+        let cell = sender.view!.superview!.superview as! UITableViewCell
+        let message = messages[chatingTableView.indexPath(for: cell)!.row]
+        photoDetailVC.messageSender = participants[message.sender!]?.name ?? ""
+        present(photoDetailVC, animated: true, completion: {
+            photoDetailVC.photoImageView.setImageUrl(message.content!)
+        })
+    }
+}

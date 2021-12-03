@@ -38,16 +38,6 @@ class FriendListViewController: UIViewController {
             friendId, friendInfo in
             print("friend change Oberser!!! -> ",friendId,friendInfo)
             ConnectedUser.shared.user.friends![friendId] = friendInfo
-            if let profileImageUrl = friendInfo.profileImageUrl, !profileImageUrl.isEmpty {
-                let url = URL(string: profileImageUrl)
-                DispatchQueue.global().async {
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async { ConnectedUser.shared.profileImages[friendId] = UIImage(data: data!) }
-                }
-            } else {
-                ConnectedUser.shared.profileImages[friendId] = UIImage(systemName: "person.crop.rectangle.fill")
-            }
-            
             var row = 0
             for index in self.friends.indices {
                 if self.friends[index].uid == friendId {
@@ -62,19 +52,13 @@ class FriendListViewController: UIViewController {
         DatabaseManager.shared.registerAddFriendObserver {
             friendId, friendInfo in
             print("friend add Oberser!!! -> ",friendId,friendInfo)
-            if let friends = ConnectedUser.shared.user.friends {
+            if ConnectedUser.shared.user.friends != nil {
                 ConnectedUser.shared.user.friends![friendId] = friendInfo
             } else {
                 ConnectedUser.shared.user.friends = [friendId: friendInfo]
             }
             if let profileImageUrl = friendInfo.profileImageUrl, !profileImageUrl.isEmpty {
-                let url = URL(string: profileImageUrl)
-                DispatchQueue.global().async {
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async { ConnectedUser.shared.profileImages[friendId] = UIImage(data: data!) }
-                }
-            } else {
-                ConnectedUser.shared.profileImages[friendId] = UIImage(systemName: "person.crop.rectangle.fill")
+                
             }
             self.friends.append((uid: friendId, info: friendInfo))
             self.friendListTableView.insertRows(at: [IndexPath(row: self.friends.count - 1, section: 1)], with: .bottom)
@@ -138,26 +122,18 @@ extension FriendListViewController: UITableViewDataSource{
         if indexPath.section == 0 {
             cell.nameLabel.text = ConnectedUser.shared.user.userInfo.name
             cell.stateMessageLabel.text = ConnectedUser.shared.user.userInfo.stateMessage ?? ""
-            if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl, !profileImageUrl.isEmpty {
-                let url = URL(string: profileImageUrl)
-                DispatchQueue.global().async {
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async { cell.profileImageView.image = UIImage(data: data!) }
-                }
-                
+
+            if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl {
+                cell.profileImageView.setImageUrl(profileImageUrl)
             } else {
                 cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
             }
-            
         } else {
             cell.nameLabel.text = friends[indexPath.row].info.name
             cell.stateMessageLabel.text = friends[indexPath.row].info.stateMessage ?? ""
-            if let profileImageUrl = friends[indexPath.row].info.profileImageUrl, !profileImageUrl.isEmpty {
-                let url = URL(string: profileImageUrl)
-                DispatchQueue.global().async {
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async { cell.profileImageView.image = UIImage(data: data!) }
-                }
+
+            if let profileImageUrl = friends[indexPath.row].info.profileImageUrl {
+                cell.profileImageView.setImageUrl(profileImageUrl)
             } else {
                 cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
             }

@@ -28,6 +28,7 @@ class MakeChatingRoomViewController: UIViewController {
         
         return label
     }()
+    
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "이름 검색"
@@ -49,7 +50,6 @@ class MakeChatingRoomViewController: UIViewController {
         return friends
     }()
     
-    
     var friendImages = [String: UIImage]()
     var selectedCount = 0
     
@@ -68,6 +68,7 @@ class MakeChatingRoomViewController: UIViewController {
         self.navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -132,9 +133,11 @@ extension MakeChatingRoomViewController: UITableViewDelegate {
         friends[index!].isSelected.toggle()
         
         selectedCount += searchedFriends[indexPath.row].isSelected ? 1 : -1
+        
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 18)
+        
         if selectedCount > 0 {
             confirmBarButton.isEnabled = true
             label.text = String(selectedCount) + " 확인"
