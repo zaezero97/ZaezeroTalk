@@ -169,8 +169,8 @@ class ChatingRoomViewController: UIViewController {
     
     @IBAction func clickSendButton(_ sender: Any) {
         send(type: "text", text: inputTextView.text!, image: nil)
-        
     }
+    
     @IBAction func clickSendOptionButton(_ sender: Any) {
         optionFlag.toggle()
         
@@ -222,6 +222,7 @@ extension ChatingRoomViewController: UITableViewDelegate {
             let photoDetailVC = storyboard.instantiateViewController(withIdentifier: "PhotoDetailViewController") as! PhotoDetailViewController
             photoDetailVC.modalTransitionStyle = .crossDissolve
             photoDetailVC.modalPresentationStyle = .fullScreen
+            photoDetailVC.messageSender = participants[message.sender!]!.name
             
             present(photoDetailVC, animated: true, completion: {
                 photoDetailVC.photoImageView.setImageUrl(message.content!)

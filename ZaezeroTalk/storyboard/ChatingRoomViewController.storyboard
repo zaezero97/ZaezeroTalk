@@ -22,17 +22,21 @@
                                 <items>
                                     <navigationItem title="채팅방 이름" id="E24-Ts-bRJ">
                                         <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="jps-jH-M8w">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="clickBackButton:" destination="Y6W-OH-hqX" id="OuR-TK-wvX"/>
                                             </connections>
                                         </barButtonItem>
                                         <rightBarButtonItems>
                                             <barButtonItem image="line.3.horizontal" catalog="system" id="URB-Dz-gq5">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <action selector="clickMenuButton:" destination="Y6W-OH-hqX" id="QvJ-WD-B59"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem image="magnifyingglass" catalog="system" id="8Py-WW-LKL"/>
+                                            <barButtonItem image="magnifyingglass" catalog="system" id="8Py-WW-LKL">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </barButtonItem>
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
@@ -69,7 +73,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfN-FG-TJX">
                                         <rect key="frame" x="5" y="4.5" width="44" height="31"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="plus.square" catalog="system" title=""/>
+                                        <buttonConfiguration key="configuration" style="plain" image="plus.square" catalog="system" title="">
+                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="clickSendOptionButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="D06-sj-rSW"/>
                                         </connections>

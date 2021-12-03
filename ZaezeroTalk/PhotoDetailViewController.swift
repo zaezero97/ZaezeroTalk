@@ -13,6 +13,7 @@ import SnapKit
 class PhotoDetailViewController: UIViewController {
     var statusBarHidden = false
     var statusBarStyle: UIStatusBarStyle = .lightContent
+    var messageSender = ""
     
     override var prefersStatusBarHidden: Bool {
         return statusBarHidden
@@ -21,7 +22,11 @@ class PhotoDetailViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyle
     }
-    
+    @IBOutlet weak var navigationTitle: UINavigationItem! {
+        didSet {
+            navigationTitle.title = messageSender
+        }
+    }
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var customNavigationBar: UINavigationBar!
     lazy var indicator : NVActivityIndicatorView = {

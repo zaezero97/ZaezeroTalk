@@ -67,6 +67,7 @@
                     </view>
                     <connections>
                         <outlet property="customNavigationBar" destination="ZWq-Le-eOf" id="9cr-En-cT6"/>
+                        <outlet property="navigationTitle" destination="b28-yM-Jda" id="ew2-k8-OwS"/>
                         <outlet property="photoImageView" destination="g91-pY-QZe" id="gRW-kQ-IwP"/>
                         <outlet property="toolBar" destination="qWp-03-5xQ" id="m1N-Tf-iLD"/>
                     </connections>
