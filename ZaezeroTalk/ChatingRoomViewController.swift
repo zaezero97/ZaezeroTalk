@@ -13,6 +13,7 @@ import PhotosUI
 class ChatingRoomViewController: UIViewController {
     var optionFlag = false
     var keyboardFrame: CGRect!
+    private let imagePickerController = UIImagePickerController()
     @IBOutlet weak var inputTextViewBottomMargin: NSLayoutConstraint!
     @IBOutlet weak var inputTextViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var customNavigationItem: UINavigationItem!
@@ -62,7 +63,7 @@ class ChatingRoomViewController: UIViewController {
         inputView.scrollView.addSubview(secondView)
         
         firstView.galleryButton.addTarget(self, action: #selector(clickGalleryButton), for: .touchUpInside)
-        //firstView.cameraButton.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        firstView.cameraButton.addTarget(self, action: #selector(clickCameraButton), for: .touchUpInside)
         
         inputView.pageControll.currentPage = 0
         inputView.pageControll.numberOfPages = 2
@@ -114,13 +115,16 @@ class ChatingRoomViewController: UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        imagePickerController.delegate = self
+        
         //   inputTextView.inputView = customInputView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         
         fetchCurrentRoom() ///동기
         fetchParticipantInfos() /// 비동기
-        
+        print("curRoom", curRoomInfo)
+        ConnectedUser.shared.roomId = curRoomId
         roomName = roomName ?? curRoomInfo?.name
         roomType = curRoomInfo?.type ?? ""
         
@@ -143,8 +147,8 @@ class ChatingRoomViewController: UIViewController {
         // 방에 입장 시 방이 존재하면 방의 정보를 가져오고 방의 상태 변경을 감지하는 옵저버를 등록한다,
     }
     
+    
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
         DatabaseManager.shared.removeMessageObserver()
         guard let curRoomId = curRoomId else {
             return
@@ -152,6 +156,10 @@ class ChatingRoomViewController: UIViewController {
         DatabaseManager.shared.leaveRoom(uid: ConnectedUser.shared.uid, roomId: curRoomId)
     }
     
+    deinit {
+        ConnectedUser.shared.roomId = nil
+        
+    }
     ///  메뉴 버튼 클릭 이벤트 - 사이드 메뉴
     /// - Parameter sender: 메뉴 바 버튼
     @IBAction func clickMenuButton(_ sender: Any) {
@@ -196,7 +204,7 @@ extension ChatingRoomViewController: UITableViewDataSource {
         let message = messages[indexPath.row]
         
         switch message.type {
-        case "exit": return makeExitCell(tableView: tableView, indexPath:indexPath, message: message)
+        case "system","exit": return makeExitCell(tableView: tableView, indexPath:indexPath, message: message)
         case "image": return makePhotoMessageCell(tableView: tableView, indexPath:indexPath, message: message)
         default : return makeMessageCell(tableView: tableView, indexPath:indexPath, message: message)
         }
@@ -205,8 +213,8 @@ extension ChatingRoomViewController: UITableViewDataSource {
     }
     
 }
-    
-    
+
+
 
 // MARK: - TableView Delegate
 extension ChatingRoomViewController: UITableViewDelegate {
@@ -267,7 +275,7 @@ extension ChatingRoomViewController {
                     }
                 }
             }
-        
+            
             cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
             cell.nameLabel.text = participants[message.sender!]?.name ?? ""
             cell.selectionStyle = .none
@@ -363,9 +371,8 @@ extension ChatingRoomViewController {
     
     /// 방이 존재하면 방의 정보를 가져오는 함수
     func fetchCurrentRoom() {
-        guard let roomList = ConnectedUser.shared.chatingRoomList else { return }
+        let roomList = ConnectedUser.shared.chatingRoomList
         // 현재 사용자가 참여하고 있는 방 리스트
-        
         if let curRoomId = curRoomId {
             for room in roomList {
                 if room.id == curRoomId {
@@ -502,6 +509,16 @@ extension ChatingRoomViewController {
         checkPermission()
     }
     
+    @objc func clickCameraButton() {
+        print("\n---------- [ takePicture ] ----------\n")
+        
+        //카메라 사용가능한지 체크
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
+        imagePickerController.sourceType = .camera
+        imagePickerController.allowsEditing = true // 촬영 후 편집할 수 있는 부분이 나온다.
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
     func checkPermission(){
         if PHPhotoLibrary.authorizationStatus() == .authorized || PHPhotoLibrary.authorizationStatus() == .limited{ // authorized -> 사용자가 명시적으로 권한 부여 , limited -> 사용자가 이 앱에 제한된 권한을 승인 (선택한 몇개 만 사용 하겠다)
             DispatchQueue.main.async {
@@ -542,6 +559,7 @@ extension ChatingRoomViewController {
 // MARK: - PHPickerViewControllerDelegate
 extension ChatingRoomViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        guard results.isEmpty else { return }
         let identifiers = results.map{ $0.assetIdentifier ?? ""}
         let fetchedImage = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)[0]
         fetchedImage.loadImage { image in
@@ -576,6 +594,7 @@ extension ChatingRoomViewController {
             DatabaseManager.shared.createRoom(message: message, participantUids: participantUids, participantNames: participants.values.map{$0.name}, name: roomName,type: type ,completion: {
                 roomId,roomInfo in
                 self.curRoomId = roomId
+                ConnectedUser.shared.roomId = roomId
                 self.curRoomInfo = roomInfo
                 DatabaseManager.shared.registerMessageObserver(roomId: roomId) {
                     fetchedMessages in
@@ -620,5 +639,19 @@ extension ChatingRoomViewController {
         profileVC.modalPresentationStyle = .fullScreen
         
         present(profileVC, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Image Picker Controller Delegate
+extension ChatingRoomViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let originalImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+        let selectedImage = editedImage ?? originalImage // editedImage가 nil이면 originalImage를 넣으라는 뜻
+        DatabaseManager.shared.enterRoom(uid: ConnectedUser.shared.uid, roomId: curRoomId!)
+        
+        send(type: "image", text: nil, image: selectedImage)
+        // Delegate 메서드가 구현되어 있지 않을 때는 기본적으로 선택시 종료되도록 기본 구현이 되어있음. ( 그래서 dismiss를 해주어야된다. )
+        picker.dismiss(animated: true, completion: nil)
     }
 }

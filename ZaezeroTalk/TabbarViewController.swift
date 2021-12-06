@@ -11,24 +11,19 @@ class TabbarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        /// RoomList Observer 등록
         DatabaseManager.shared.registerRoomListObserver(addCompletion: {
             roomId,room in
             guard let room = room else { return }
-            guard ConnectedUser.shared.chatingRoomList != nil else {
-                ConnectedUser.shared.chatingRoomList = [(id: roomId, info: room)]
-                return
-            }
-            ConnectedUser.shared.chatingRoomList?.removeAll(where: {
+            ConnectedUser.shared.chatingRoomList.removeAll(where: {
                 id, _ in
                 id == roomId
             })
-            ConnectedUser.shared.chatingRoomList!.append((id: roomId, info: room))
-            
+            ConnectedUser.shared.chatingRoomList.append((id: roomId, info: room))
         },removeCompletion: {
             roomId in
-            guard ConnectedUser.shared.chatingRoomList != nil else { return }
-            ConnectedUser.shared.chatingRoomList!.removeAll { id,room in
+            ConnectedUser.shared.chatingRoomList.removeAll { id,room in
                 if (id == roomId) {
                     return true
                 } else {
@@ -36,11 +31,10 @@ class TabbarViewController: UITabBarController {
                 }
             }
         })
+        
+        /// TabbarController를 rootViewController로 지정
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
         sceneDelegate.window?.rootViewController = self
-        sceneDelegate.window?.makeKeyAndVisible()
     }
-    
-   
 }
 

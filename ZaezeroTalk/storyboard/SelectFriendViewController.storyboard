@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--대화상대 선택-->
+        <!--abvc-->
         <scene sceneID="bhU-0v-bAS">
             <objects>
-                <viewController id="GNZ-mq-yD7" customClass="MakeChatingRoomViewController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="GNZ-mq-yD7" customClass="SelectFriendViewController" customModule="ZaezeroTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xUD-YG-f6X">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,7 +31,7 @@
                             <constraint firstItem="Dm8-i2-EcU" firstAttribute="trailing" secondItem="uiC-Jl-ERK" secondAttribute="trailing" id="iZ1-1t-1eW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="대화상대 선택" id="kTR-5d-Lpb">
+                    <navigationItem key="navigationItem" title="abvc" id="kTR-5d-Lpb">
                         <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="eL8-OF-hvu">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -39,6 +39,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="확인" id="nrQ-ra-0WG">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="clickConfirmButton:" destination="GNZ-mq-yD7" id="gzs-AR-3RQ"/>
                             </connections>
@@ -46,6 +47,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="confirmBarButton" destination="nrQ-ra-0WG" id="HeP-jc-EXp"/>
+                        <outlet property="customNavigationItem" destination="kTR-5d-Lpb" id="RiD-SQ-2jj"/>
                         <outlet property="searchedfriendListTableView" destination="uiC-Jl-ERK" id="BV5-bP-1tb"/>
                     </connections>
                 </viewController>
@@ -56,7 +58,7 @@
         <!--Navigation Controller-->
         <scene sceneID="d3d-2l-vLO">
             <objects>
-                <navigationController storyboardIdentifier="MakeChatingRoomNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="5E9-Lx-SmV" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SelectFriendViewController" automaticallyAdjustsScrollViewInsets="NO" id="5E9-Lx-SmV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fO1-gY-Olc">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

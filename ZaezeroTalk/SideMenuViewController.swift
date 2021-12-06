@@ -53,17 +53,25 @@ extension SideMenuViewController: UITableViewDataSource {
         return "대화 상대"
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return participants.count
+        return participants.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
+        if indexPath.section == 0 ,indexPath.row == 0 {
+            return makeInvitationCell(tableView: tableView, indexPath: indexPath)
+        }
         
-        cell.nameLabel.text = participants[indexPath.row].info.name
-        cell.profileImageView.image = ConnectedUser.shared.profileImages[participants[indexPath.row].uid]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
+        cell.nameLabel.text = participants[indexPath.row - 1].info.name
+        if let profileImageUrl = participants[indexPath.row - 1].info.profileImageUrl {
+            cell.profileImageView.setImageUrl(profileImageUrl)
+        } else {
+            cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+        }
+        
         cell.stateMessageLabel.text = ""
         
-        cell.selfImageView.isHidden = participants[indexPath.row].uid != ConnectedUser.shared.uid
+        cell.selfImageView.isHidden = participants[indexPath.row - 1].uid != ConnectedUser.shared.uid
         return cell
     }
 }
@@ -72,12 +80,36 @@ extension SideMenuViewController: UITableViewDataSource {
 extension SideMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == 0, indexPath.row == 0 {
+            let storyboard = UIStoryboard(name: "SelectFriendViewController", bundle: nil)
+            let selectFriendVC = storyboard.instantiateViewController(withIdentifier: "SelectFriendViewController")
+            
+            selectFriendVC.modalPresentationStyle = .fullScreen
+            present(selectFriendVC, animated: true, completion: nil)
+            return
+        }
+        
         let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
         let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-        profileVC.selectedUserUid = participants[indexPath.row].uid
-        profileVC.selectedUserInfo = participants[indexPath.row].info
+        profileVC.selectedUserUid = participants[indexPath.row - 1].uid
+        profileVC.selectedUserInfo = participants[indexPath.row - 1].info
         
         profileVC.modalPresentationStyle = .fullScreen
         self.present(profileVC, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Make invitation Cell
+extension SideMenuViewController {
+    func makeInvitationCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
+        cell.profileImageView.image = UIImage(systemName: "plus.circle")
+        cell.profileImageView.tintColor = .label
+        cell.nameLabel.text = "대화 상대 초대"
+        cell.nameLabel.textColor = .label
+        cell.stateMessageLabel.text = ""
+        
+        return cell
     }
 }

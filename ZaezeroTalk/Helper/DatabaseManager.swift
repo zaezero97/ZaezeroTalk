@@ -9,6 +9,10 @@ import Foundation
 import Firebase
 import FirebaseStorage
 
+enum InviteType {
+    case create
+    case append
+}
 
 class DatabaseManager{
     static let shared = DatabaseManager()
@@ -54,7 +58,7 @@ extension DatabaseManager {
     
     func sendMessage(sendMessage: [String: Any], roomId: String) {
         let messageAutoId = ref.childByAutoId().key!
-    
+        
         if sendMessage["type"] as! String == "image" {
             print("content!!! ->",sendMessage["content"] as! UIImage)
             uploadImage(image: sendMessage["content"] as! UIImage, uid: ConnectedUser.shared.uid, path: "\(roomId)/\(messageAutoId).png") { url in
@@ -100,7 +104,7 @@ extension DatabaseManager {
         }
         
         
-       
+        
         
         
     }
@@ -133,15 +137,22 @@ extension DatabaseManager {
         
         let chatingRoom = ChatingRoom(userNames: participantNames.toFBString(), uids: participantUids.toFBString(),name: name, messages: [String: Message](), lastMessage: "", lastMessageTime: 0, type: type)
         
+        ConnectedUser.shared.chatingRoomList.append((roomId,chatingRoom))
+        
         ref.child("Rooms/\(roomId)").setValue(roomInfo,withCompletionBlock:
-                                                {
+        {
             _,_ in
             participantUids.forEach {
-                participants[$0] = "false"
-                self.ref.child("UserRooms/\($0)").updateChildValues([roomId: "채팅룸"])
+                uid in
+                participants[uid] = "false"
+                self.ref.child("UserRooms/\(uid)").updateChildValues([roomId: "채팅룸"],withCompletionBlock: {
+                    _,_ in
+                    if uid == ConnectedUser.shared.uid {
+                        completion(roomId,chatingRoom)
+                    }
+                })
             }
             participants[ConnectedUser.shared.uid] = "true"
-            completion(roomId,chatingRoom)
             
             self.ref.child("RoomUsers/\(roomId)").setValue(participants) { error, _ in
                 if error != nil {
@@ -150,6 +161,7 @@ extension DatabaseManager {
                     self.sendMessage(sendMessage: message,roomId: roomId)
                 }
             }
+            
         })
     }
     
@@ -264,6 +276,57 @@ extension DatabaseManager {
         ref.child("Users/\(ConnectedUser.shared.uid)/userInfo").removeAllObservers()
     }
     
+    
+    func inviteUsers(users:[(uid:String,info:UserInfo)], completion: @escaping (InviteType) -> Void) {
+        guard let roomId = ConnectedUser.shared.roomId else {
+            print("Current Room Id null !!!")
+            return
+        }
+        ref.child("Rooms/\(roomId)").observeSingleEvent(of: .value) {
+            snapshot in
+            guard snapshot.exists() else { return }
+            do{
+                let data = try JSONSerialization.data(withJSONObject: snapshot.value!, options: .prettyPrinted)
+                let result = try JSONDecoder().decode(ChatingRoom.self, from: data)
+                var newUidArrays = result.uids.toFBArray()
+                newUidArrays.append(contentsOf: users.map({$0.uid}))
+                var newUserNameArrays = result.userNames.toFBArray()
+                newUserNameArrays.append(contentsOf: users.map({$0.info.name}))
+                
+                
+                let invitedUserNames = users.map({$0.info.name}).joined(separator: ",")
+                
+                // 1대1 채팅방 이면 방을 새로 생성
+                if result.type == "1:1" {
+                    let message: [String: Any] = [
+                        "sender" : ConnectedUser.shared.uid,
+                        "time": ServerValue.timestamp(),
+                        "type": "system",
+                        "content": "\(ConnectedUser.shared.user.userInfo.name)님이 \(invitedUserNames)을 초대 했습니다."
+                    ]
+                    self.createRoom(message: message, participantUids: newUidArrays, participantNames: newUserNameArrays, name: nil, type: "1:N") { _, _ in
+                        completion(.create)
+                    }
+                } else {
+                    self.ref.child("Rooms/\(roomId)").updateChildValues(["uids": newUidArrays.toFBString(), "userNames": newUserNameArrays.toFBString()]) {
+                        _, _ in
+                        let message: [String:Any] = [
+                            "sender" : ConnectedUser.shared.uid,
+                            "time": ServerValue.timestamp(),
+                            "type": "system",
+                            "content": "\(ConnectedUser.shared.user!)님이 \(invitedUserNames)을 초대 했습니다."
+                        ]
+                        self.sendMessage(sendMessage: message, roomId: ConnectedUser.shared.roomId!)
+                        completion(.append)
+                    }
+                }
+                
+            } catch {
+                print("-> Error inviteUsers: \(error.localizedDescription)")
+                
+            }
+        }
+    }
 }
 
 // MARK: - Image

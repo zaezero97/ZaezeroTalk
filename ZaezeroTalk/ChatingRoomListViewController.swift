@@ -44,11 +44,11 @@ class ChatingRoomListViewController: UIViewController {
 
     }
     @IBAction func clickMakeChatingRoomButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "MakeChatingRoomViewController", bundle: nil)
-        let makeChatingRoomNaviVC = storyboard.instantiateViewController(withIdentifier: "MakeChatingRoomNavigationController")
+        let storyboard = UIStoryboard(name: "SelectFriendViewController", bundle: nil)
+        let selectFriendVC = storyboard.instantiateViewController(withIdentifier: "SelectFriendViewController")
         
-        makeChatingRoomNaviVC.modalPresentationStyle = .fullScreen
-        present(makeChatingRoomNaviVC, animated: true, completion: nil)
+        selectFriendVC.modalPresentationStyle = .fullScreen
+        present(selectFriendVC, animated: true, completion: nil)
     }
 }
 
@@ -58,11 +58,11 @@ extension ChatingRoomListViewController: UITableViewDataSource {
         return 80
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ConnectedUser.shared.chatingRoomList?.count ?? 0
+        return ConnectedUser.shared.chatingRoomList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let chatingRoomList = ConnectedUser.shared.chatingRoomList else { return UITableViewCell() }
+        let chatingRoomList = ConnectedUser.shared.chatingRoomList
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatingRoomCell", for: indexPath) as! ChatingRoomCell
         let roomInfo = chatingRoomList[indexPath.row].info
         
@@ -89,7 +89,7 @@ extension ChatingRoomListViewController: UITableViewDataSource {
 // MARK: - TableView Delegate
 extension ChatingRoomListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let chatingRoomList = ConnectedUser.shared.chatingRoomList else { return }
+        let chatingRoomList = ConnectedUser.shared.chatingRoomList 
         let roomInfo = chatingRoomList[indexPath.row].info
         
         tableView.deselectRow(at: indexPath, animated: true)

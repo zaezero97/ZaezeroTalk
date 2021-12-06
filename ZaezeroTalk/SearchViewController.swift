@@ -32,7 +32,7 @@ class SearchViewController: UIViewController {
     
     var searchResultFriends: [(uid: String,info: UserInfo)]?
     
-    var friends: [(uid: String,info: UserInfo)] = {
+    lazy var friends: [(uid: String,info: UserInfo)] = {
         var friends = [(uid: String,info: UserInfo)]()
         if let friendsDictionary = ConnectedUser.shared.user.friends {
             friends = friendsDictionary.map { (key,value) in
@@ -41,6 +41,7 @@ class SearchViewController: UIViewController {
         }
         return friends
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

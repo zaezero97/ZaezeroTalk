@@ -16,12 +16,12 @@ class ConnectedUser {
         }
     }
     var uid = ""
-    var chatingRoomList: [(id: String, info: ChatingRoom)]? {
-        didSet{
-            print("didSet!!!!!!")
+    var chatingRoomList = [(id: String, info: ChatingRoom)]()
+    var roomId: String? {
+        didSet {
+            print("roomId Change!!! -> ",roomId)
         }
     }
-    var profileImages = [String: UIImage]()
     private init() {
         
     }

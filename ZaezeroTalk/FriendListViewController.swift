@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+
 class FriendListViewController: UIViewController {
     
     var friends = [(uid: String,info: UserInfo)]()
@@ -24,6 +25,8 @@ class FriendListViewController: UIViewController {
             friendListTableView.delegate = self
         }
     }
+
+    /// Navigation 좌측 Title Label
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "친구"
@@ -34,11 +37,12 @@ class FriendListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /// 친구 정보 변경 Observer 등록
         DatabaseManager.shared.registerFriendChangeObserver(completion: {
             friendId, friendInfo in
-            print("friend change Oberser!!! -> ",friendId,friendInfo)
             ConnectedUser.shared.user.friends![friendId] = friendInfo
-            var row = 0
+            var row: Int?
             for index in self.friends.indices {
                 if self.friends[index].uid == friendId {
                     self.friends[index].uid = friendId
@@ -47,11 +51,13 @@ class FriendListViewController: UIViewController {
                     break
                 }
             }
+            guard let row = row else { return }
             self.friendListTableView.reloadRows(at: [IndexPath(row: row, section: 1)], with: .automatic)
         })
+        
+        /// 초기 친구 목록 가져오고 친구가 새로 추가 될떄마다 정보를 가져오는 Observer등록
         DatabaseManager.shared.registerAddFriendObserver {
             friendId, friendInfo in
-            print("friend add Oberser!!! -> ",friendId,friendInfo)
             if ConnectedUser.shared.user.friends != nil {
                 ConnectedUser.shared.user.friends![friendId] = friendInfo
             } else {
@@ -72,6 +78,8 @@ class FriendListViewController: UIViewController {
     }
     
     
+    /// 친구 추가 화면 이동  버튼 클릭 이벤트
+    /// - Parameter sender: 친구 추가 화면 이동 버튼
     @IBAction func clickAddFriendButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "AddFriendViewController", bundle: nil)
         let addFriendVC = storyboard.instantiateViewController(withIdentifier: "AddFriendViewController") as! AddFriendViewController
@@ -79,6 +87,9 @@ class FriendListViewController: UIViewController {
         present(addFriendVC, animated: true, completion: nil)
     }
     
+    
+    /// 친구 검색 이동 버튼 클릭 이벤트
+    /// - Parameter sender: 친구 검색 이동 버튼
     @IBAction func clickSearchButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "SearchViewController", bundle: nil)
         let searchVC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
@@ -119,6 +130,8 @@ extension FriendListViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
+        
+        // 자신의 프로필
         if indexPath.section == 0 {
             cell.nameLabel.text = ConnectedUser.shared.user.userInfo.name
             cell.stateMessageLabel.text = ConnectedUser.shared.user.userInfo.stateMessage ?? ""
@@ -128,6 +141,7 @@ extension FriendListViewController: UITableViewDataSource{
             } else {
                 cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
             }
+        //친구의 프로필
         } else {
             cell.nameLabel.text = friends[indexPath.row].info.name
             cell.stateMessageLabel.text = friends[indexPath.row].info.stateMessage ?? ""

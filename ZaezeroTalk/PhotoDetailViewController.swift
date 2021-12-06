@@ -83,7 +83,6 @@ extension PhotoDetailViewController {
 // MARK: - Photo Image View Tap Gesture Action Method
 extension PhotoDetailViewController {
     @objc func tapPhotoImageView() {
-        print("Tapped")
         self.customNavigationBar.isHidden.toggle()
         self.toolBar.isHidden.toggle()
         statusBarHidden.toggle()

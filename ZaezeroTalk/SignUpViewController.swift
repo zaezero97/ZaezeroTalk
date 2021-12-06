@@ -55,7 +55,10 @@ class SignUpViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true) // 외부 뷰 클릭 시 키보드 내리기
     }
+    /// 확인 버튼 -> 회원가입
+    /// - Parameter sender: confirm 버튼
     @IBAction func touchConfirmButton(_ sender: Any) {
+        ///error label 이 하나라도 보여지고 있는 상태이면 회원가입을 진행 할 수 없으므로 return
         if isShownErrorLabel() == true {
             return
         }
@@ -97,6 +100,9 @@ class SignUpViewController: UIViewController {
 
 // MARK: - valid text verify func
 extension SignUpViewController{
+    /// 유효한 이름 입력 검증 메소드
+    /// - Parameter name: nameTextField.text
+    /// - Returns: enum ValidType
     func isValidName(name: String?) -> ValidType{
         guard let name = name else { return .invalid }
         
@@ -107,6 +113,10 @@ extension SignUpViewController{
         }
         return .invalid
     }
+    
+    /// 유효한 이메일 입력 검증 메소드
+    /// - Parameter email: emailTextField.text
+    /// - Returns: enum ValidType
     func isValidEmail(email:String?) -> ValidType{
         guard let email = email else { return .invalid }
         
@@ -122,6 +132,10 @@ extension SignUpViewController{
             return .invalid
         }
     }
+    
+    /// 유효한 비밀번호 입력 검증 메소드
+    /// - Parameter password: pwdTextField.text
+    /// - Returns: enum ValidType
     func isValidPassword(password:String?) -> ValidType{
         guard let password = password else { return .invalid }
         
@@ -132,6 +146,11 @@ extension SignUpViewController{
         }
         return .invalid
     }
+    
+    
+    /// 비밀번호 일치 확인 메소드
+    /// - Parameter checkPassword: pwdCheckTextField.text
+    /// - Returns: enum ValidType
     func isMatchedPwd(with checkPassword : String?) -> ValidType{
         guard let checkPassword = checkPassword else { return .invalid }
         
@@ -145,6 +164,10 @@ extension SignUpViewController{
         }
         return .invalid
     }
+    
+    
+    /// Error Label이 보여지고 있는지 확인하는 메소드
+    /// - Returns: 보여지고 있으면 true 아니면 false
     func isShownErrorLabel() -> Bool {
         guard let emailErrorLabelConstraint = labelHeightConstraints[emailErrorLabel] ,
               let nameErrorLabelConstraint = labelHeightConstraints[nameErrorLabel] ,
@@ -159,14 +182,19 @@ extension SignUpViewController{
         
         return false
     }
+    
 }
 
 // MARK: - TextFieldDelegate
 extension SignUpViewController : UITextFieldDelegate{
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() // textField의 현재상태를 포기한다 즉 올라와 있는 상태를 포기 한다.
         return true
     }
+    
+    /// TextField 입력이 끝났을 때 값이 유효한지 테스트
+    /// - Parameter textField: 입력한 TextField
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField{
         case emailTextField:
