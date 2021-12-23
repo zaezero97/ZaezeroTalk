@@ -13,14 +13,10 @@ class ProfileEditViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView! {
         didSet {
-            if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl, !profileImageUrl.isEmpty {
-                let url = URL(string: profileImageUrl)
-                DispatchQueue.global().async {
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async { self.profileImageView.image = UIImage(data: data!) }
-                }
+            if let profileImage = ImageCacheManager.shared.object(forKey: NSString(string: ConnectedUser.shared.user.userInfo.profileImageUrl ?? "")) {
+                profileImageView.image = profileImage
             } else {
-                profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+                profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
             }
             let gesture = UITapGestureRecognizer(target: self, action: #selector(clickProfileImageView(imageView:)))
             profileImageView.addGestureRecognizer(gesture)
@@ -100,11 +96,13 @@ class ProfileEditViewController: UIViewController {
                 url in
                 DatabaseManager.shared.ref.child("Users/\(ConnectedUser.shared.uid)/userInfo").updateChildValues(["profileImageUrl": url])
                 modifyUserInfo.profileImageUrl = url
+                ImageCacheManager.cachingImage(url: url)
                 if let newStateMessage = self.newStateMessage, newStateMessage.count > 0 {
                     if self.oldStateMessage != newStateMessage {
                         DatabaseManager.shared.updateChildValues(["stateMessage": newStateMessage],forPath: "Users/\(ConnectedUser.shared.uid)/userInfo") {
                             _, _ in
                             modifyUserInfo.stateMessage = newStateMessage
+                            print("배고파")
                             self.doneCallback(ConnectedUser.shared.uid,modifyUserInfo)
                             self.indicator.stopAnimating()
                             self.dismiss(animated: false, completion: nil)

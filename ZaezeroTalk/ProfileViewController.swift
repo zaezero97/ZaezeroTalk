@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView! {
         didSet {
-            profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+            profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         }
     }
     @IBOutlet weak var toolBar: UIToolbar! {
@@ -72,6 +72,8 @@ class ProfileViewController: UIViewController {
         let profileEditVC = storyboard.instantiateViewController(withIdentifier: "ProfileEditViewController") as! ProfileEditViewController
         profileEditVC.doneCallback = {
             uid,userInfo in
+            print("test")
+            print(userInfo)
             self.setProfile(uid: uid, userInfo: userInfo)
             ConnectedUser.shared.user.userInfo = userInfo
             DatabaseManager.shared.notiProfileChangeToFriends()
@@ -88,15 +90,17 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController {
     func setProfile(uid: String?, userInfo: UserInfo?){
         
-        guard let _ = uid, let userInfo = userInfo else { return }
+        guard let _ = uid else { return }
         
-        profileNameLabel.text = userInfo.name
-        stateMessageLabel.text = userInfo.stateMessage
+        profileNameLabel.text = userInfo?.name ?? ""
+        stateMessageLabel.text = userInfo?.stateMessage ?? ""
         
-        if let profileImage = ImageCacheManager.shared.object(forKey: NSString(string: userInfo.profileImageUrl ?? "")) {
+        if let profileImage = ImageCacheManager.shared.object(forKey: NSString(string: userInfo?.profileImageUrl ?? "")) {
             profileImageView.image = profileImage
+        } else if let urlString = userInfo?.profileImageUrl , let url = URL(string: urlString) , let data = try? Data(contentsOf: url) {
+            profileImageView.image = UIImage(data: data)
         } else {
-            profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+            profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
         }
 
     }

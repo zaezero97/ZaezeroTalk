@@ -37,8 +37,16 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton! {
+        didSet {
+            loginButton.backgroundColor = .black
+        }
+    }
+    @IBOutlet weak var signUpButton: UIButton! {
+        didSet {
+            loginButton.backgroundColor = .black
+        }
+    }
     
     let remoteConfig = RemoteConfig.remoteConfig()
     var emailErrorLabelHeight : NSLayoutConstraint!
@@ -61,10 +69,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         try! Auth.auth().signOut() //test 코드 실제에선 자동 로그인으로 구현할 생각
         
-        if let color = remoteConfig["app_color"].stringValue{
-            loginButton.backgroundColor = UIColor(hex: color)
-            signUpButton.backgroundColor = UIColor(hex: color)
-        }
+     
     }
     
     override func viewDidAppear(_ animated: Bool) {

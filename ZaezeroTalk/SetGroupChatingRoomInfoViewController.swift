@@ -40,7 +40,7 @@ extension SetGroupChatingRoomInfoViewController {
         })
         chatingRoomVC.participantUids.append(ConnectedUser.shared.uid)
         
-        chatingRoomVC.roomName = roomNameTextField.text
+        chatingRoomVC.roomName = roomNameTextField.text!.isEmpty ? selectedFriends.map{$0.info.name}.joined() : roomNameTextField.text
         chatingRoomVC.modalPresentationStyle = .fullScreen
         weak var presentingVC = presentingViewController
         dismiss(animated: true, completion: {

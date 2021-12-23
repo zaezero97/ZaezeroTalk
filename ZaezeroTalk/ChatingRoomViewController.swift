@@ -31,7 +31,6 @@ class ChatingRoomViewController: UIViewController {
     }
     @IBOutlet weak var chatingTableView: UITableView! {
         didSet {
-            
             chatingTableView.delegate = self
             chatingTableView.dataSource = self
             chatingTableView.estimatedRowHeight = 10
@@ -39,7 +38,7 @@ class ChatingRoomViewController: UIViewController {
             chatingTableView.separatorStyle = .none
             chatingTableView.register(UINib(nibName: "UserExitMessageCell", bundle: nil), forCellReuseIdentifier: "UserExitMessageCell")
             chatingTableView.register(UINib(nibName: "MyMessageCell", bundle: nil), forCellReuseIdentifier: "myMessageCell")
-            chatingTableView.register(UINib(nibName: "OtherPersonMessageCell", bundle: nil), forCellReuseIdentifier: "otherPersonMessageCell")
+            chatingTableView.register(UINib(nibName: "OtherPersonMessageCell", bundle: nil), forCellReuseIdentifier: "OtherPersonMessageCell")
             chatingTableView.register(UINib(nibName: "MyPhotoMessageCell", bundle: nil), forCellReuseIdentifier: "MyPhotoMessageCell")
             chatingTableView.register(UINib(nibName: "OtherPersonPhotoMessageCell", bundle: nil), forCellReuseIdentifier: "OtherPersonPhotoMessageCell")
         }
@@ -117,13 +116,14 @@ class ChatingRoomViewController: UIViewController {
         
         imagePickerController.delegate = self
         
-        //   inputTextView.inputView = customInputView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         
         fetchCurrentRoom() ///동기
         fetchParticipantInfos() /// 비동기
+        
         print("curRoom", curRoomInfo)
+        
         ConnectedUser.shared.roomId = curRoomId
         roomName = roomName ?? curRoomInfo?.name
         roomType = curRoomInfo?.type ?? ""
@@ -158,7 +158,6 @@ class ChatingRoomViewController: UIViewController {
     
     deinit {
         ConnectedUser.shared.roomId = nil
-        
     }
     ///  메뉴 버튼 클릭 이벤트 - 사이드 메뉴
     /// - Parameter sender: 메뉴 바 버튼
@@ -268,7 +267,7 @@ extension ChatingRoomViewController {
                         if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl {
                             cell.profileImageView.setImageUrl(profileImageUrl)
                         } else {
-                            cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+                            cell.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
                         }
                         cell.profileImageView.isUserInteractionEnabled = true
                         cell.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapProfileImage)))
@@ -281,17 +280,17 @@ extension ChatingRoomViewController {
             cell.selectionStyle = .none
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "otherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OtherPersonMessageCell", for: indexPath) as! OtherPersonMessageCell
             cell.contentTextView.text = message.content
             cell.timeLabel.text = message.time?.toDayTime
             cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
             DispatchQueue.main.async {
                 if let index: IndexPath = tableView.indexPath(for: cell) {
                     if index.row == indexPath.row {
-                        if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl {
+                        if let profileImageUrl = self.participants[message.sender!]?.profileImageUrl {
                             cell.profileImageView.setImageUrl(profileImageUrl)
                         } else {
-                            cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+                            cell.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
                         }
                         cell.profileImageView.isUserInteractionEnabled = true
                         cell.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapProfileImage)))
@@ -318,7 +317,7 @@ extension ChatingRoomViewController {
                         if let profileImageUrl = ConnectedUser.shared.user.userInfo.profileImageUrl {
                             cell.profileImageView.setImageUrl(profileImageUrl)
                         } else {
-                            cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+                            cell.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
                         }
                         cell.messageImageView.isUserInteractionEnabled = true
                         cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapPhotoMessage)))
@@ -341,10 +340,11 @@ extension ChatingRoomViewController {
                 if let index: IndexPath = tableView.indexPath(for: cell) {
                     if index.row == indexPath.row {
                         cell.messageImageView.setImageUrl(message.content!)
-                        if let profileImageUrl = self.participants[message.sender!]!.profileImageUrl {
+                        cell.messageImageView.layer.cornerRadius = 10
+                        if let profileImageUrl = self.participants[message.sender!]?.profileImageUrl {
                             cell.profileImageView.setImageUrl(profileImageUrl)
                         } else {
-                            cell.profileImageView.image = UIImage(systemName: "person.crop.rectangle.fill")
+                            cell.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
                         }
                         cell.messageImageView.isUserInteractionEnabled = true
                         cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapPhotoMessage)))
@@ -356,6 +356,7 @@ extension ChatingRoomViewController {
             cell.timeLabel.text = message.time?.toDayTime
             cell.readCountLabel.text = calReadUserCount(readUsers: readUsers) == 0 ? "" : String(calReadUserCount(readUsers: readUsers))
             cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
+            print(cell.profileImageView.frame)
             cell.nameLabel.text = participants[message.sender!]?.name ?? ""
             
             cell.selectionStyle = .none
@@ -407,7 +408,9 @@ extension ChatingRoomViewController {
                     let url = URL(string: profileImageUrl)
                     DispatchQueue.global().async {
                         let data = try? Data(contentsOf: url!)
-                        DispatchQueue.main.async { self.participantImages[uid] = UIImage(data: data!) }
+                        DispatchQueue.main.async {
+                            self.participantImages[uid] = UIImage(data: data!)
+                        }
                     }
                 }
             }
@@ -559,7 +562,10 @@ extension ChatingRoomViewController {
 // MARK: - PHPickerViewControllerDelegate
 extension ChatingRoomViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        guard results.isEmpty else { return }
+        guard !results.isEmpty else {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
         let identifiers = results.map{ $0.assetIdentifier ?? ""}
         let fetchedImage = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)[0]
         fetchedImage.loadImage { image in

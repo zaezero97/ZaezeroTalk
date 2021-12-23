@@ -22,13 +22,13 @@
                                 <items>
                                     <navigationItem title="상태메시지" id="3qN-Wx-TSp">
                                         <barButtonItem key="leftBarButtonItem" title="취소" id="WJL-To-wHB">
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="clickCancleButton:" destination="Y6W-OH-hqX" id="TfF-Sm-kkB"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="확인" id="jgO-Gl-ePx">
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="clickDoneButton:" destination="Y6W-OH-hqX" id="Fwp-oO-060"/>
                                             </connections>

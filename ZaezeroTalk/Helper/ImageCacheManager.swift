@@ -16,7 +16,7 @@ class ImageCacheManager {
     }
     
     static func cachingImage(url: String) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.main.async {
             let cachedKey = NSString(string: url)
             if ImageCacheManager.shared.object(forKey: cachedKey) != nil {
                 return
@@ -30,6 +30,7 @@ class ImageCacheManager {
                     if let data = data, let image = UIImage(data: data) {
                         /// 캐싱
                         ImageCacheManager.shared.setObject(image, forKey: cachedKey)
+                        
                     }
                 }
             }.resume()

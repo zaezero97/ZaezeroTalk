@@ -140,7 +140,7 @@ extension DatabaseManager {
         ConnectedUser.shared.chatingRoomList.append((roomId,chatingRoom))
         
         ref.child("Rooms/\(roomId)").setValue(roomInfo,withCompletionBlock:
-        {
+                                                {
             _,_ in
             participantUids.forEach {
                 uid in
@@ -491,22 +491,26 @@ extension DatabaseManager {
         }
     }
     func notiProfileChangeToFriends() {
-        ref.child("Users").observeSingleEvent(of: .value)
+        ref.child("Users/\(ConnectedUser.shared.uid)").observeSingleEvent(of: .value)
         {
             snapshot in
+            print("real Test", snapshot)
             
-            for child in snapshot.children { // child -> User
-                let child = child as! DataSnapshot
-                let user = child.value as! [String: Any]
-                let friends = user["friends"] as! [String: Any]
-                
-                for key in friends.keys {
-                    if key == ConnectedUser.shared.uid {
-                        self.ref.child("Users/\(child.key)/friends/\(ConnectedUser.shared.uid)").setValue(ConnectedUser.shared.user.userInfo.toDictionary())
-                        break
-                    }
+            
+            
+            let user = snapshot.value as! [String: Any]
+            if user["friends"] == nil {
+                return
+            }
+            let friends = user["friends"] as! [String: Any]
+            
+            for key in friends.keys {
+                if key == ConnectedUser.shared.uid {
+                    self.ref.child("Users/\(ConnectedUser.shared.uid)/friends/\(ConnectedUser.shared.uid)").setValue(ConnectedUser.shared.user.userInfo.toDictionary())
+                    break
                 }
             }
+            
         }
     }
 }

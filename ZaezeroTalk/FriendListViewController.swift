@@ -74,7 +74,7 @@ class FriendListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        self.friendListTableView.reloadData()
     }
     
     
